@@ -13,6 +13,7 @@ public class User {
 	private String hostel = "";
 	private String year = "";
 	private String branch = "";
+	private String email = "";
 	
 	public Long getUserId() {
 		return userId;
@@ -73,6 +74,12 @@ public class User {
 	}
 	public void setBranch(String branch) {
 		this.branch = branch;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

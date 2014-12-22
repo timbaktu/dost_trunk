@@ -70,6 +70,7 @@ public class SignupController {
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(request.getParameter("password"));
 		user.setAvatarId(request.getParameter("avatarinput"));
+		user.setEmail(request.getParameter("email"));
 		Map<String, Boolean> output = new HashMap<String, Boolean>();
 		if(user.getUsername() == null) {
 			output.put("status", false);
@@ -148,6 +149,9 @@ public class SignupController {
 		securityQuestions.add(question1);
 		securityQuestions.add(question2);
 		dbUser.setUserSecurities(securityQuestions);
+		
+		//adding email
+		dbUser.setEmail(user.getEmail());
 		return dbUser;
 	}
 	

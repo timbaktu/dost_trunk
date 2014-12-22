@@ -70,7 +70,8 @@ public class DbUser extends DbGeneric implements Serializable {
 	private String year;
 	@Column(name = "branch")
 	private String branch;
-	
+	@Column(name = "email")
+	private String email;	
 	
 	public Long getUserId() {
 		return userId;
@@ -149,6 +150,12 @@ public class DbUser extends DbGeneric implements Serializable {
 	}
 	public void setBranch(String branch) {
 		this.branch = branch;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

@@ -129,7 +129,7 @@
 					<div class="alert alert-success" role="alert"></div>
 					<div id="signindiv" class="col-md-offset-1">
 						
-						</div><label class="chooseAvatar">Choose your avatar <span>(This is how I will know you)</span></label>
+						</div><label class="chooseAvatar">Choose your avatar* <span>(This is how I will know you)</span></label>
 
 						<div id="avatarId" class="avatarHolder">
 							<img class="avatar" src="avatar/avatar1.png" id="avatar1"/>
@@ -143,14 +143,18 @@
 						</div>
 						<br/>
 						<input id="avatarinput" type="hidden" name="avatarinput">
-						<label>Username</label>
+						<label>Username*</label>
 						<input id="username"  name="username" required type="text" class="form-control input-block-level" placeholder="Create a username">
                         <!-- <div id="usernameError" class="errorMsg">Username should contain atleast one alphabet</div> -->
 						<br/>
 						
-						<label>Password</label>
+						<label>Password*</label>
 
 						<input id="password" name="password"  type="password" class="form-control input-block-level" placeholder="Set a password">
+						
+						<br/>
+						<label>Email</label>
+						<input id="email" name="email" type="text" class="form-control input-block-level" placeholder="Set a email">
 					
 					   <!-- <div id="passwordError" class="errorMsg">Invalid Password</div> -->
 						<br>
