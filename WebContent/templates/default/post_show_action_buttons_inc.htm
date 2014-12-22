@@ -2,7 +2,7 @@
 	<span class="date pull-right">
 		<#assign startStr = ""/>
 		<#if (start > 0)><#assign startStr = "${start}/"/></#if>
-		<a href="${JForumContext.encodeURL("/posts/list/${startStr}${post.topicId}")}#${post.id}">
+		<a href="${JForumContext.encodeURL("/posts/list/${startStr}${post.topicId}")}#${post.id}"></a>
 		${post.formatedTime}
 	</span>
 	<!-- Subject Not Required Now

@@ -887,7 +887,9 @@ div.medical_warning{
       font-size: 0.94em;
 }
 
-
+.TOSContent li{
+	margin-bottom:30px;
+}
 .more-link {
 /*end of styling for more*/
 
