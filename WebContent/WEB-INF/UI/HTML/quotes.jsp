@@ -9,7 +9,31 @@
 		<meta charset="utf-8">
 		<title>Quotes - DOST</title>
 	</head>
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<style>
+		body, html { width:100% ;
+		height:100% ;
+		overflow:hidden ;
+		}
+		
+		iframe { width:100% ;
+		    height:100% ;
+		border:none ;
+		}
+	</style>
+	<body>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+		
+		<body class="theme-default theme-default-counselor" >
+		</sec:authorize>
+		<sec:authorize access="!hasRole('ROLE_ADMIN')">
+		<body class="theme-default">
+		</sec:authorize>
+		<jsp:include page="includes/header.jsp"></jsp:include>					
+		
+		<iframe src="http://quotesdost.blogspot.com/" height="100%"></iframe>
+	
+	</body>
+	<!--<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<body class="theme-default theme-default-counselor" >
 	</sec:authorize>
 	<sec:authorize access="!hasRole('ROLE_ADMIN')">
@@ -36,8 +60,6 @@
 			<sec:authorize ifNotGranted="ROLE_USER">
 				<jsp:include page="includes/signUp.jsp"></jsp:include>
 			</sec:authorize>
-		</div>
+		</div>-->
 		
-	<jsp:include page="includes/commonFooter.jsp"></jsp:include>
-	</body>
 </html>

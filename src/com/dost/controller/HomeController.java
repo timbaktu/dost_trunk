@@ -15,6 +15,11 @@ public class HomeController {
 		return new ModelAndView("index"); 
 	}
 	
+	@RequestMapping("team")  
+	public ModelAndView team() {
+		return new ModelAndView("team"); 
+	}
+	
 	@RequestMapping(value="/forgotPassword", method=RequestMethod.GET)  
 	public ModelAndView forgotPassword(HttpServletRequest request) {
 		String username = request.getParameter("username");
@@ -27,6 +32,7 @@ public class HomeController {
 	public ModelAndView horoscope() {
 		return new ModelAndView("horoscope"); 
 	}
+	
 	
 	@RequestMapping("quotes")  
 	public ModelAndView quotes() {

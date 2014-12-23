@@ -231,7 +231,14 @@
 					click : function() {
 							$(".error").html("");
 							$(".error").hide();
-							
+							debugger;
+							var messageTo = $("#recipient").val();
+							if(messageTo === null) {
+								var receipient = 'all' ; /*to go as receipientID*/
+							}
+							else {
+								receipient = messageTo;
+							}
 							var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+receipient+'&senderId=' + userid;
 							 
 							if($("#recipient").val()== '' || $("#subject").val()== '' || $("#messageContent").val() =='') {

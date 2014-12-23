@@ -27,6 +27,6 @@ border:none ;
 	<jsp:include page="includes/header.jsp"></jsp:include>					
 	
 	<iframe src="http://blog.yourdost.com/" height="100%"></iframe>
-
+	
 </body>
 </html>
