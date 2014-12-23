@@ -19,7 +19,7 @@ public class ForumDAOImpl implements ForumDAO {
 	
 	public List<DbForumTopic> getLastNTopics(int count) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from DbForumTopic ft order by ft.topicId desc");
+		Query query = session.createQuery("select ft from DbForumTopic ft inner join ft.forumPosts fp group by ft.topicId order by max(fp.postTime) desc");
 		query.setMaxResults(count);
 		
 		List<DbForumTopic> topics = query.list();
