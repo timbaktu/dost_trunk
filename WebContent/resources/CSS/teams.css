@@ -1,0 +1,121 @@
+	.pageMainContainer .listOuterContainer{
+		height: 330px;
+		position:relative;
+		display: inline-block;
+		float: none;
+		padding:0;
+	}
+	
+	.pageMainContainer .listOuterContainer>div {
+		border: 1px solid #FECA12;
+		padding-bottom: 20px;
+		width:100%;
+		padding:0;
+		background-color: #ffcc33;
+		-webkit-transition-property: background-color; /* Safari */
+    	-webkit-transition-duration: 2s; /* Safari */
+    	transition-property: background-color;
+    	transition-duration: 2s;
+	}
+	.pageMainContainer .listOuterContainer:hover>div{
+		position:absolute;
+		z-index:10;
+		-webkit-box-shadow: -4px 2px 22px -4px rgba(0,0,0,0.8);
+		-moz-box-shadow: -4px 2px 22px -4px rgba(0,0,0,0.8));
+		box-shadow: -4px 2px 22px -4px rgba(0,0,0,0.8);
+		background-color: #ffffff;	
+		
+	}
+	.pageMainContainer .details{
+		text-align:center;
+	}
+	.teamsCategoryHeading{
+		font-size : 20px ;
+		color : #666 ;
+		margin-bottom: 10px;
+		margin-top: 20px;
+	}
+	.listFooter{
+		background: #FFEDB5;
+		height:32px;
+	}
+	.listFooter a{
+		color: #000000;
+	}
+	.linkedin{
+		background: url("../img/linkedin.png") no-repeat scroll 10px 0  transparent;
+		text-transform:uppercase;
+		padding:7px 0 5px 47px;
+		text-align:left;
+	}
+	.twitter{
+		background: url("../img/twitter.png") no-repeat scroll  10px 0 transparent;
+		text-transform:uppercase;
+		padding:7px 0 5px 47px;
+		text-align:left;
+	}
+	#Tarun, #Kishlay{
+		display:none;
+	}
+	.pageMainContainer .listheading {
+		height: 21px;
+		text-align : center ;
+		font-weight : 600 ;
+		text-transform: uppercase;
+		background-color: #000000;
+		color : #FFFFFF ;
+		font-size:1.1em
+	}
+	.pageMainContainer .listOuterContainer:hover .listheading {
+		background-color: #FECA12;
+		color : #000000 ;
+	}
+	.pageMainContainer .listImage {
+		width: 100px;
+		height: 100px;
+		-moz-border-radius: 50px;
+		-webkit-border-radius: 50px;
+		border-radius: 50px;	
+		margin-top   : 20px ;
+		margin-bottom: 40px;
+	}
+	
+	.pageMainContainer .listOuterContainer .listContent{
+		  display: -webkit-box;
+		  text-align:left;
+		  /*-webkit-line-clamp: 5;
+		  -webkit-box-orient: vertical;
+		  overflow: hidden;
+		  text-overflow: ellipsis;*/
+		  overflow: hidden;
+		  position:relative;
+		  padding:0 10px;
+		  line-height:1.5;
+		  max-height:7.5em;
+		  /*-webkit-transition: max-height 0.8s;
+	      transition: max-height 0.8s;
+	      -moz-transition: max-height 0.8s;*/
+	}
+	.pageMainContainer .listOuterContainer .listContent:after{
+			content:"...";
+    		position:absolute;
+		    bottom:0;
+		    right:0;
+		    padding:0 20px 1px 45px;
+		    
+	}
+	
+	.pageMainContainer .listOuterContainer:hover .listContent{
+		   max-height: 500px;
+		  /*-webkit-line-clamp: initial;
+		  -webkit-box-orient: vertical;
+		  text-overflow: inherit;*/
+	}
+	
+	.pageMainContainer .listOuterContainer:hover .listContent:after{
+			content:"";
+	}
+	#volunteers{
+		margin-top : 30px 
+	}
+	

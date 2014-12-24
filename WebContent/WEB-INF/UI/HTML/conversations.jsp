@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/jquery.more.css"> 
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.plugin.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.more.js" type="text/javascript"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script>
 	/*Manipulating json for messages*/
 	$( document ).ready(function() {
@@ -25,11 +26,21 @@
 		
 		/*Sent messages and inbox toggle active class*/
 		$(".sentItems").click(function(){
-			$(".inbox").removeClass("active");
+			$(".sentItems").removeClass("active");
 			$(this).addClass("active");
 			UrlForData = '/dost/api/user/'+userid+'/sentmessages';
+			
 			showData(UrlForData);
 		});
+		
+		$(".chats").click(function(){
+			$(".chats").removeClass("active");
+			$(this).addClass("active");
+			UrlForData = '/dost/api/chathistory/user/' + userid ;
+			
+			showData(UrlForData);
+		});
+
 		$(".inbox").click(function(){
 			$(".sentItems").removeClass("active");
 			$(this).addClass("active");
@@ -67,6 +78,9 @@
 			
 			if(messages.length>0){
 					for (var i = 0 ; i < messages.length; i++) {
+						
+						if( messages[i].recipients.length == 0 ) continue ;
+						
 						var ismessagenew = messages[i].recipients[0].viewed;
 						var messageHeading = '';
 						
@@ -99,6 +113,7 @@
 						'</li>');
 						
 						<!-- open the conversation detail for user -->
+						
 						$(".each_conversation").click(function(){
 							var link = $(this).attr("id");
 							window.open(link,"_self");
@@ -173,38 +188,39 @@
 			return split( term ).pop();
 		}
 
-		
-		$(".autocomplete" ).autocomplete({
+		/*
+		$("#recipient" ).autocomplete({
 			source: function( request, response ) {
 	                $.ajax({
 	                    url: "/dost/api/users",
 	                    dataType: "json",
 	                    data: {term: request.term},
 	                    success: function(data) {
-	                                response($.map(data, function(users) {
-	                                	return {
-	                                    label: users.username,
-	                                    name: users.userId,
-	                                    
-	                                    };                              	
-	                            }));
+	                    	var arr =  $.map(data, function(users) {
+                            	return {
+                                label: users.username,
+                                name: users.userId,
+                                };
+                            });   
+	                    	console.log( arr ) ;	
+	                    	response( arr );
 	                        }
 	                    });
 	                },
-	         minLength: 0,
+	         minLength: 2,
 	         select: function( event, ui ) {
-					/*var terms = split( this.value );
+					var terms = split( this.value );
 					// remove the current input
 					terms.pop();
 					// add the selected item
 					terms.push( ui.item.value );
 					// add placeholder to get the comma-and-space at the end
-					terms.push( "" );*/
-					receipient = ui.item.name;
-					/*this.value = terms.join( ", " );*/
+					terms.push( "" );
+					receipient = ui.item.label;
+					this.value = terms.join( ", " );
 					return false;
 				}
-		});
+		});*/
 		
 		/*end of populating users*/
 		
@@ -231,14 +247,7 @@
 					click : function() {
 							$(".error").html("");
 							$(".error").hide();
-							debugger;
-							var messageTo = $("#recipient").val();
-							if(messageTo === null) {
-								var receipient = 'all' ; /*to go as receipientID*/
-							}
-							else {
-								receipient = messageTo;
-							}
+							
 							var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+receipient+'&senderId=' + userid;
 							 
 							if($("#recipient").val()== '' || $("#subject").val()== '' || $("#messageContent").val() =='') {
@@ -246,18 +255,18 @@
 							}
 							else{
 								
-								$.post('http://localhost:8800/dost/api/user/message', datatosend, function(response) {							
+								$.post('/dost/api/user/message', datatosend, function(response) {							
 									if(response = ""){
 											$(".status").show().html("sending..");
 									}
 								});
 								
 								setTimeout(function(){
-									location.reload(function(){
+									/*location.reload(function(){
 										
 										
 										
-									});
+									});*/
 									$(".status").show().html("sent");
 								}, 1000);
 								receipient = 'all';
@@ -318,6 +327,7 @@
 						<li><a class="leaveMessage" href="#">Compose</a><br/><br/></li>
 						<li class="active inbox"><a id="count" href="#">Inbox</a></li>
 						<li class="sentItems"><a href="#">Sent Items</a></li>
+						<li class="chats"><a href="#">Chats</a></li>
 						<!-- <li><a href="#">Drafts</a><br/><br/></li>
 						<li><a href="#">Label 1</a></li>
 						<li><a href="#">Label 2</a></li>  -->
@@ -353,7 +363,17 @@
 						<div class="clearfix"></div>
 					</div>
 					<!-- each conversation-->
-					<ul class="conversationsUser conversations">
+					<ul class="pull-left col-md-2 left_nav">
+						<li><a class="leaveMessage" href="#">Compose</a><br/><br/></li>
+						<li class="active inbox"><a id="count" href="#">Inbox</a></li>
+						<li class="sentItems"><a href="#">Sent Items</a></li>
+						<li class="chats"><a href="#">Chats</a></li>
+						<!-- <li><a href="#">Drafts</a><br/><br/></li>
+						<li><a href="#">Label 1</a></li>
+						<li><a href="#">Label 2</a></li>  -->
+					</ul>
+					
+					<ul class="pull-right conversationsUser conversations col-md-10">
 						<li class="loading" id="loading">
 							<img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" />
 						</li>				
@@ -366,5 +386,36 @@
 		
 		<jsp:include page="includes/popupEmail.jsp"></jsp:include>
 		<jsp:include page="includes/commonFooter.jsp"></jsp:include>
+		
+		<script>
+		
+		$.ajax({
+            url: "/dost/api/users",
+            dataType: "json",
+            success: function(data) {
+            	console.log(1) ;
+            	var arr =  $.map(data, function(users) {
+                  return {
+                    label: users.username,
+                    name: users.userId,
+                    };
+                });   
+            	console.log( arr ) ;	
+            	$("#recipient" ).autocomplete({
+        			source: arr,
+        			minLength: 0,
+        			select: function( event, ui ) {
+        				$("#recipient").val( ui.item.label ) ; 
+        			}
+            	});            	
+            	
+                }
+            });
+		
+		/*end of populating users*/
+		
+		</script>
+		
+		
 	</body>
 </html>
