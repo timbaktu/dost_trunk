@@ -10,7 +10,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>DOST Team</title>
 	<jsp:include page="includes/commonHeader.jsp"></jsp:include>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/jquery.more.css"> 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/teams.css"> 
 		
 	<script>
@@ -91,6 +90,7 @@
 									'<div class="listFooter">'+
 										'<div class="col-md-6 linkedin"><a target="_blank" href="#">LinkedIn</a></div>'+
 										'<div class="col-md-6 twitter" ><a target="_blank"href="#">Twitter</a></div>'+
+										'<div class="clearfix"></div>'+
 									'</div>'+
 								'</div>'+
 							'</div>'+
@@ -110,18 +110,18 @@
 	
 		<div id="coreTeam" class="row">	
 			<div class="row">
-				<div class="col-md-3 teamsCategoryHeading">
+				<h2 class="col-md-3 pageHeading">
 					CORE TEAM
-				</div>
+				</h2>
 			</div>
 			<div class="details well"></div>
 		</div>
 			
 		<div id="volunteers" class="row">
 			<div class="row">
-				<div class="col-md-8 teamsCategoryHeading">
+				<h2 class="col-md-8 pageHeading">
                     VOLUNTEERS <em>(People who make this work seamlessly)</em>
-				</div>
+				</h2>
 			</div>
 			<div class="details well"></div>
 			

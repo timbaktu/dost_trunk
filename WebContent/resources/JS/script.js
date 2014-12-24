@@ -39,12 +39,19 @@ $( document ).ready(function() {
 					
 			});
 			
+			$("iframe.talkToFriendChatBox ").find(".box").css({
+				'font-family': '"Open Sans", Arial,sans-serif',
+				'font-size': '12px',
+			});
+			
+			
 			$("iframe.popularDiscussions").contents().find("a").css({
 				'color':'#333333',
 				'font-family': 'Arial,Helvetica,sans-serif',
 				'font-size':'12px',
 				'text-decoration': 'none',
 			});
+			
 			$("iframe.popularDiscussions").contents().find("a").attr('target','_blank');
 			
 			$("iframe.popularDiscussions").contents().find("a:hover").css({

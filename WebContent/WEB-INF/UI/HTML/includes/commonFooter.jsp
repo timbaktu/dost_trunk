@@ -1,5 +1,7 @@
 <footer>
 	Copyright 2014, Dost. All rights reserved | Contact us at <strong><a title="Contact for enquiries" target="_blank" href="mailto:customersupport@yourdost.com">customersupport@yourdost.com</a></strong> for any queries, we respond really fast!
+	<br/>
+	<a href="termsOfService">Terms of Service</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="team">Our Team</a>
 </footer>
 
 <link href="${pageContext.request.contextPath}/resources/CSS/openSansFont.css" rel="stylesheet" type="text/css">

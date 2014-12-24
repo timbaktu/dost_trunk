@@ -34,10 +34,10 @@
 		color : #666 ;
 		margin-bottom: 10px;
 		margin-top: 20px;
+		margin: 20px auto 10px;
 	}
 	.listFooter{
 		background: #FFEDB5;
-		height:32px;
 	}
 	.listFooter a{
 		color: #000000;
@@ -45,13 +45,13 @@
 	.linkedin{
 		background: url("../img/linkedin.png") no-repeat scroll 10px 0  transparent;
 		text-transform:uppercase;
-		padding:7px 0 5px 47px;
+		padding:7px 0 7px 47px;
 		text-align:left;
 	}
 	.twitter{
 		background: url("../img/twitter.png") no-repeat scroll  10px 0 transparent;
 		text-transform:uppercase;
-		padding:7px 0 5px 47px;
+		padding:7px 0 7px 47px;
 		text-align:left;
 	}
 	#Tarun, #Kishlay{
