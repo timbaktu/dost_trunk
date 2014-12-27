@@ -1,8 +1,30 @@
 <footer>
-	Copyright 2014, Dost. All rights reserved | Contact us at <strong><a title="Contact for enquiries" target="_blank" href="mailto:customersupport@yourdost.com">customersupport@yourdost.com</a></strong> for any queries, we respond really fast!
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+	<div class="addthis_horizontal_follow_toolbox"></div>
+
+	<a href="termsOfService" class="footer_link">Terms of Service</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="team"  class="footer_link">Our Team</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="contact"  class="footer_link">Contact Us</a>
 	<br/>
-	<a href="termsOfService">Terms of Service</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="team">Our Team</a>
+	Copyright 2014, D.O.S.T. All rights reserved | Contact us at <strong><a title="Contact for enquiries" target="_blank" href="mailto:customersupport@yourdost.com">customersupport@yourdost.com</a></strong> for any queries, we respond really fast!
 </footer>
+
+<script src="http://d2g9qbzl5h49rh.cloudfront.net/static/feedback2.js?3.2.4748" type="text/javascript">
+  new JotformFeedback({
+     formId		: "43353828159462",
+     buttonText	: "Feedback",
+     base		: "http://jotform.me/",
+     background	: "#000000",
+     fontColor	: "#FFFFFF",
+     buttonSide	: "right",
+     buttonAlign	: "center",
+     type		: 1,
+     width		: 700,
+     height		: 500
+  });
+</script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-549e8fe81b2546da" async="async"></script>
+
 
 <link href="${pageContext.request.contextPath}/resources/CSS/openSansFont.css" rel="stylesheet" type="text/css">
 <!-- <script>

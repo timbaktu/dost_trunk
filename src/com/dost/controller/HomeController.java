@@ -20,6 +20,11 @@ public class HomeController {
 		return new ModelAndView("team"); 
 	}
 	
+	@RequestMapping("contact")  
+	public ModelAndView contact() {
+		return new ModelAndView("contact"); 
+	}
+	
 	@RequestMapping(value="/forgotPassword", method=RequestMethod.GET)  
 	public ModelAndView forgotPassword(HttpServletRequest request) {
 		String username = request.getParameter("username");
