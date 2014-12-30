@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.dost.hibernate.DbForumForum;
 import com.dost.hibernate.DbForumTopic;
 
 @Repository("forumDAO")
@@ -27,6 +28,17 @@ public class ForumDAOImpl implements ForumDAO {
 			topics = new ArrayList<DbForumTopic>();
 		}
 		return topics;
+	}
+	
+	public List<DbForumForum> getForumList() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select ff from DbForumForum ff ");
+		
+		List<DbForumForum> forums = query.list();
+		if(forums == null) {
+			forums = new ArrayList<DbForumForum>();
+		}
+		return forums;		
 	}
 
 }

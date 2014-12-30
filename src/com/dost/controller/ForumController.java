@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dost.hibernate.DbForumForum;
 import com.dost.hibernate.DbForumPost;
 import com.dost.hibernate.DbForumTopic;
 import com.dost.service.ForumService;
@@ -50,6 +51,14 @@ public class ForumController {
 			topic.setForumPosts(outputPosts);
 		}
 		return topics;
+	}
+	
+	@RequestMapping(value = "/forums/all", method = RequestMethod.GET)
+	@ResponseBody
+	public List<DbForumForum> getForumList() {
+		List<DbForumForum> forumList = new ArrayList<DbForumForum>();
+		forumList = forumService.getForumList();
+		return forumList;
 	}
 
 	private String latestDate(List<String> postDates) {

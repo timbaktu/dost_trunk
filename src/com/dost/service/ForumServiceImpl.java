@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dost.dao.ForumDAO;
+import com.dost.hibernate.DbForumForum;
 import com.dost.hibernate.DbForumTopic;
 
 @Service("forumService")
@@ -19,6 +20,10 @@ public class ForumServiceImpl implements ForumService {
 	
 	public List<DbForumTopic> getLastNTopics(int count) {
 		return forumDAO.getLastNTopics(count);
+	}
+	
+	public List<DbForumForum> getForumList() {
+		return forumDAO.getForumList();
 	}
 
 }
