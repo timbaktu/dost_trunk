@@ -47,4 +47,49 @@ public class MessageUtil {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static void sendEmailToUsers(DbUser sender, DbUser toUser) {
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.port", "465");
+
+		Session session = Session.getDefaultInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(
+								"customersupport@yourdost.com", "T9iK)TF$YF");
+					}
+				});
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("customersupport@yourdost.com"));
+			message.setRecipients(Message.RecipientType.CC,
+					InternetAddress.parse(toUser.getEmail()));
+			message.setSubject("Response from D.O.S.T Team");
+			message.setContent("<html>\n" +
+                    "<body>\n" +
+                    "\n" +
+                    "Hi " + toUser.getUsername() + "," + 
+                    "<br><br>Thank you for visiting www.yourdost.com. One of your D.O.S.T has left a message for you. Please log into www.yourdost.com to see the response." +
+                    "<br><br>If there is anything bothering you, just reply to mail or " +
+                    "<a href=\"http://www.yourdost.com/talkToFriend\">\n" +
+                    "talk to your friend</a> online\n" +
+                    "<br><br>Be stress free! " +
+                    "<br><br> --<br>Regards, <br>D.O.S.T Team <br>www.yourdost.com" +
+                    "</body>\n" +
+                    "</html>", "text/html");
+
+			Transport.send(message);
+			System.out.println("Done");
+		} catch (MessagingException e) {
+			//throw new RuntimeException(e);
+			System.out.println("Eating exception..DO not want to fail only when their is some problem with sending email..");
+		}
+	}
 }

@@ -20,7 +20,7 @@ import com.dost.hibernate.DbMessageRecipient;
 import com.dost.hibernate.DbUser;
 import com.dost.model.Faq;
 import com.dost.model.Message;
-import com.dost.service.ChatHistoryService;
+//import com.dost.service.ChatHistoryService;
 import com.dost.service.MessageService;
 import com.dost.service.UserService;
 import com.dost.util.MessageUtil;
@@ -35,9 +35,9 @@ public class MessageController {
 	
 	@Autowired
 	UserService userService;
-	
-	@Autowired
-	ChatHistoryService chatHistoryService;
+//	
+//	@Autowired
+//	ChatHistoryService chatHistoryService;
 	
 	@RequestMapping(value="/user/{id}/unreadcount", method=RequestMethod.GET)  
 	@ResponseBody
@@ -196,7 +196,28 @@ public class MessageController {
 	@RequestMapping(value="/user/message", method=RequestMethod.POST)  
 	@ResponseBody
 	public void sendMessage(Message message) {
-		messageService.sendMessage(populateDbMessage(message));
+		DbMessage messageToSend = populateDbMessage(message);
+		messageService.sendMessage(messageToSend);
+		
+		DbUser sender = messageToSend.getSender();
+		// Send email to customersupport if message is sent from user
+		if(sender.getDbUserRole().getRole().equals("ROLE_USER")) {
+			System.out.println("Sending email to counselors..");
+			MessageUtil.sendEmail(sender);
+		}
+		
+		// Send email to user that they have got response
+		List<DbMessageRecipient> recipientList = messageToSend.getRecipients();
+		for(DbMessageRecipient recipient : recipientList) {
+			DbUser user = recipient.getRecipient();
+			// Send email only if recipient is ROLE_USER
+			if(user.getDbUserRole().getRole().equals("ROLE_USER")) {
+				// If user has provided his email while sign up then send email to their gmail/yahoo account
+				if(user.getEmail() != null && user.getEmail().length() > 0) {
+					MessageUtil.sendEmailToUsers(sender, user);
+				}				
+			}
+		}
 	}
 	@RequestMapping(value="/messages/add", method=RequestMethod.POST)  
 	@ResponseBody
@@ -230,8 +251,8 @@ public class MessageController {
 		}
 		// If msgId is null then create new..Using bad way of doing it for now
 		else {
-//			Long maxMsgId = messageService.getMaxMsgId();
-			Long maxMsgId = chatHistoryService.getMaxMsgId();
+			Long maxMsgId = messageService.getMaxMsgId();
+//			Long maxMsgId = chatHistoryService.getMaxMsgId();
 			dbMessage.setMsgId(maxMsgId + 1);
 		}
 		dbMessage.setRecipients(createRecipientList(message, dbMessage));
@@ -239,11 +260,7 @@ public class MessageController {
 			message.setSenderId(102l);
 		}
 		DbUser sender = userService.getUser(message.getSenderId());
-		// Send email if message is sent from user
-		if(sender.getDbUserRole().getRole().equals("ROLE_USER")) {
-			System.out.println("Sending email to counselors..");
-			MessageUtil.sendEmail(sender);
-		}
+
 		dbMessage.setSender(sender);
 		dbMessage.setSentDateDb(new Date());
 		return dbMessage;
