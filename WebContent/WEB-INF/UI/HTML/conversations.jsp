@@ -11,6 +11,9 @@
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.more.js" type="text/javascript"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script>
+	
+	var selected_recepient = "" ;
+	
 	/*Manipulating json for messages*/
 	$( document ).ready(function() {
 		$(".loading").show();
@@ -248,8 +251,13 @@
 							$(".error").html("");
 							$(".error").hide();
 							
-							var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+receipient+'&senderId=' + userid;
-							 
+							var selected_recipient = $("#selected_recipient").val() ;
+							if( selected_recipient == undefined || selected_recipient == '' || !selected_recipient ){
+								selected_recipient = "all" ;
+							}
+														
+							var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+ selected_recipient +'&senderId=' + userid;
+							//alert(datatosend);						 
 							if($("#recipient").val()== '' || $("#subject").val()== '' || $("#messageContent").val() =='') {
 								$(".error").show().text("Please fill in details");
 							}
@@ -268,6 +276,8 @@
 										
 									});*/
 									$(".status").show().html("sent");
+									$("#dialogMessage").dialog("close");
+									$('.ui-widget-overlay').hide() ;
 								}, 1000);
 								receipient = 'all';
 							}
@@ -339,6 +349,7 @@
 					</ul>
 						
 				</div>
+				<div class="status col-md-11"></div>
 			</div>
 		 </sec:authorize>
 		 
@@ -405,7 +416,9 @@
         			source: arr,
         			minLength: 0,
         			select: function( event, ui ) {
-        				$("#recipient").val( ui.item.label ) ; 
+        				console.log( ui ) ;
+        				$("#recipient").val( ui.item.label ) ;
+        				$("#selected_recipient").val( ui.item.name ) ;
         			}
             	});            	
             	
