@@ -27,7 +27,7 @@ public class MessageUtil {
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(
-								"customersupport@yourdost.com", "T9iK)TF$YF");
+								"customersupport@yourdost.com", "D0$t4321");
 					}
 				});
 
@@ -61,7 +61,7 @@ public class MessageUtil {
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(
-								"customersupport@yourdost.com", "T9iK)TF$YF");
+								"customersupport@yourdost.com", "D0$t4321");
 					}
 				});
 
