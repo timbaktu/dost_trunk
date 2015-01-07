@@ -74,7 +74,7 @@ public class SignupController {
 		Map<String, Boolean> output = new HashMap<String, Boolean>();
 		if(user.getUsername() == null) {
 			output.put("status", false);
-			return "signupNow"; 
+			return "redirect:/signupNow"; 
 		}
 		DbUser existingUser = userService.getUserByUsername(user.getUsername());
 		// User does not exists
@@ -103,7 +103,7 @@ public class SignupController {
 		// User already exists with same username
 		else {
 			output.put("status", false);
-			return "signupNow"; 
+			return "redirect:/signupNow"; 
 		}
 		return "redirect:/conversations";
 	}
