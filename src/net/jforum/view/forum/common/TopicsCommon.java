@@ -102,7 +102,9 @@ public class TopicsCommon
 			if (topics.size() == 0 || !TopicRepository.isLoaded(forumId)) {
 				synchronized (MUTEXT) {
 					if (topics.size() == 0 || !TopicRepository.isLoaded(forumId)) {
-						topics = tm.selectAllByForumByLimit(forumId, start, topicsPerPage);
+				//		topics = tm.selectAllByForumByLimit(forumId, start, topicsPerPage);
+						topics = tm.selectAllByForum(forumId);
+
 						TopicRepository.addAll(forumId, topics);
 					}
 				}
@@ -110,8 +112,7 @@ public class TopicsCommon
 		}
 		else {
 			topics = tm.selectAllByForumByLimit(forumId, start, topicsPerPage);
-		}
-		
+		}		
 		return topics;
 	}
 	
