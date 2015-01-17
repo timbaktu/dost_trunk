@@ -10,6 +10,26 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+	@RequestMapping("chat")  
+	public ModelAndView chat() {
+		return new ModelAndView("chat"); 
+	}
+	
+	@RequestMapping("online")  
+	public ModelAndView online() {
+		return new ModelAndView("online"); 
+	}
+	
+//	@RequestMapping("chat1")  
+//	public ModelAndView chat1() {
+//		return new ModelAndView("chat1"); 
+//	}
+//	
+//	@RequestMapping("chat2")  
+//	public ModelAndView chat2() {
+//		return new ModelAndView("chat2"); 
+//	}
+	
 	@RequestMapping("index")  
 	public ModelAndView index() {
 		return new ModelAndView("index"); 
