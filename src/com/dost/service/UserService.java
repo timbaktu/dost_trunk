@@ -12,7 +12,7 @@ public interface UserService {
 	
 	public DbUser getUser(Long userId);
 	
-	public List<DbUser> getAllUsers();
+	public List<DbUser> getAllUsers(String role);
 	
 	public List<DbUser> getAllCounselors();
 	
@@ -23,5 +23,6 @@ public interface UserService {
 	
 	public DbUser updateUser(DbUser dbUser);
 	
+	public int getUsersCount();
 	
 }

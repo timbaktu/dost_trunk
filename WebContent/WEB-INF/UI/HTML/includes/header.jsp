@@ -60,6 +60,9 @@
 				  <sec:authorize access="hasRole('ROLE_USER')">
 				  	<li style="" id="talkToFriend"><a href="talkToFriend">Talk To a Friend</a></li>
 				  </sec:authorize>
+				  <sec:authorize access="hasRole('ROLE_USER')">
+				  	<li style="" id="talkToSpecificFriend"><a href="chat2">Talk To Specific Friend</a></li>
+				  </sec:authorize>				  
 				  <li id="faqs"><a href="faqs">FAQs</a></li>
 				  <li style="" id="quotes"><a href="quotes">Quotes</a></li>
 				  <!-- <li id="blogs"><a href="http://blog.yourdost.com" target="_blank">Blog</a></li>-->

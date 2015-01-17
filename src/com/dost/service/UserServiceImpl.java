@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUser(userId);
 	}
 
-	public List<DbUser> getAllUsers() {
-		return userDAO.getAllUsers();
+	public List<DbUser> getAllUsers(String role) {
+		return userDAO.getAllUsers(role);
 	}
 
 	public List<DbUser> getAllCounselors() {
@@ -54,6 +54,8 @@ public class UserServiceImpl implements UserService {
 	public DbUser updateUser(DbUser dbUser) {
 		return userDAO.updateUser(dbUser);
 	}
-	
-	
+
+	public int getUsersCount() {
+		return userDAO.getUsersCount();
+	}
 }

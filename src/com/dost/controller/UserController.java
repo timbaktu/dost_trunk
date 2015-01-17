@@ -1,6 +1,10 @@
 package com.dost.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +28,12 @@ public class UserController {
 	/*messages received*/
 	@RequestMapping(value="/users", method=RequestMethod.GET)  
 	@ResponseBody
-	public List<DbUser> getAllUsers() {
-		return userService.getAllUsers();
+	public List<DbUser> getAllUsers(HttpServletRequest request) {
+		String role = request.getParameter("role");
+		if(role == null || role.length() == 0) {
+			role = "ROLE_USER";
+		}
+		return userService.getAllUsers(role);
 	}
 	
 	@RequestMapping(value="/user/{username}", method=RequestMethod.GET)  
@@ -50,12 +58,14 @@ public class UserController {
 		return userToReturn;
 	}
 	
-	@RequestMapping(value="user/{userId}/userdetail", method=RequestMethod.GET)  
+	@RequestMapping(value="users/count", method=RequestMethod.GET)  
 	@ResponseBody
-	public User getUserDetail(@PathVariable String userId) {
-		DbUser dbUser = userService.getUser(Long.parseLong(userId));
-		User userToReturn = new User();
-		UserPopulator.populateUser(userToReturn, dbUser);
-		return userToReturn;
+	public Map<String, Integer> getUserDetail() {
+		int usersCount = userService.getUsersCount();
+		Map<String, Integer> countMap = new HashMap<String, Integer>();
+		countMap.put("count", usersCount);
+		return countMap;
 	}
+	
+	
 }
