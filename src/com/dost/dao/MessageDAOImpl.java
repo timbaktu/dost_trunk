@@ -68,7 +68,8 @@ public class MessageDAOImpl implements MessageDAO {
 	public List<DbMessage> getSentUserMessages(Long userId) {
 		Session session = sessionFactory.getCurrentSession();
 //		String hql = "select m from DbMessage m left outer join fetch m.recipients r where m.sender.userId = ? and m.deleted = 0";
-		String hql = "select m from DbMessage m left outer join fetch m.recipients r where m.sender.userId = ?";
+//		String hql = "select m from DbMessage m left outer join fetch m.recipients r where m.sender.userId = ?";
+		String hql = "select m from DbMessage m where m.sender.userId = ? order by m.messageId desc";
 
         Query query = session.createQuery(hql);
         query.setParameter(0, userId);

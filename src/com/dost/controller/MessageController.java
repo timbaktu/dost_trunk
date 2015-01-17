@@ -20,7 +20,7 @@ import com.dost.hibernate.DbMessageRecipient;
 import com.dost.hibernate.DbUser;
 import com.dost.model.Faq;
 import com.dost.model.Message;
-//import com.dost.service.ChatHistoryService;
+import com.dost.service.ChatHistoryService;
 import com.dost.service.MessageService;
 import com.dost.service.UserService;
 import com.dost.util.MessageUtil;
@@ -35,9 +35,9 @@ public class MessageController {
 	
 	@Autowired
 	UserService userService;
-//	
-//	@Autowired
-//	ChatHistoryService chatHistoryService;
+	
+	@Autowired
+	ChatHistoryService chatHistoryService;
 	
 	@RequestMapping(value="/user/{id}/unreadcount", method=RequestMethod.GET)  
 	@ResponseBody
@@ -168,7 +168,7 @@ public class MessageController {
 	public List<DbMessage> getSentUserMessages(@PathVariable Long id) {
 		List<DbMessage> messages =  messageService.getSentUserMessages(id);
 		for(DbMessage msg : messages) {
-//			msg.setSentDate(Utils.formatDate(msg.getSentDateDb()));
+			msg.setSentDate(Utils.formatDate(msg.getSentDateDb()));
 		}
 		return messages;
 	}
@@ -251,8 +251,8 @@ public class MessageController {
 		}
 		// If msgId is null then create new..Using bad way of doing it for now
 		else {
-			Long maxMsgId = messageService.getMaxMsgId();
-//			Long maxMsgId = chatHistoryService.getMaxMsgId();
+//			Long maxMsgId = messageService.getMaxMsgId();
+			Long maxMsgId = chatHistoryService.getMaxMsgId();
 			dbMessage.setMsgId(maxMsgId + 1);
 		}
 		dbMessage.setRecipients(createRecipientList(message, dbMessage));
