@@ -14,6 +14,9 @@
 		margin: auto;
 		margin-bottom: 10px;
 	}
+	.like_box{
+		margin: 10px auto; 
+	}
 	.footer_link{
 		font-size:1.2em;
 	}
@@ -147,14 +150,58 @@
 	ul	li{
 		list-style:none;
 	}
-	.exploration_option:first-child{
-		margin-top:	20px;
+	body.theme-default.welcome{
+		background: #fff;
 	}
-	.exploration_option:nth-child(odd){
+	.theme-default div.banner{
+		margin-top: 20px;
+		background: #ffff99;
+	}
+	.details_box h4.coming_soon{
+		margin-top: 90px;
+		font-size: 1.2em;
+		text-align: center;
+		line-height:24px;
+	}
+	
+	.counter{
+		text-align:center;
+	}
+	.counter mark{
+		font-size: 1.8em;
+	}
+	.counter a{
+		font-size:1.5em;
+	}
+	.banner p{
+		font-size:1.1em;
+	}
+	.banner em{
+		font-size:0.9em;
+		color: #999999;
+	}
+	.welcomePage ul{
+		padding:0;
+		margin:0;
+	}
+	.exploration_option{
+		margin-top: 10px;
+		height: 300px;
 		border-top: 3px solid #FECA12;
 	}
+	.exploration_option:hover{
+		-webkit-box-shadow: -4px 2px 22px -4px rgba(0,0,0,0.8);
+		-moz-box-shadow: -4px 2px 22px -4px rgba(0,0,0,0.8));
+		box-shadow: -4px 2px 22px -4px rgba(0,0,0,0.8);
+	}
+	.exploration_option:first-child{
+		margin-top:	10px;
+	}
+	.exploration_option:nth-child(odd){
+		
+	}
 	.welcomePage .right_unit {
-		margin-top: 20px;
+		margin-top: 10px;
 	}
 	.exploration_option a{
 		color:#333;
@@ -170,6 +217,26 @@
 	.details_box h4{
 		font-size: 13px;
 	}
+	#discussion .details_box, #faqs .details_box{
+		overflow: hidden;
+		line-height: 1.5;
+		max-height: 18em;
+		position:relative;
+	}
+	#discussions x.details_box:after, #faqs .details_box:after {
+			content:"...";
+    		position:absolute;
+		    bottom:0;
+		    right:0;		    
+	}
+	#signupNow_index h4{
+		text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+	}
+	#signupNow_index{
+		background: #f7f7f7;
+		
+	}
+	
 	a:hover{
 		text-decration:none;
 	}
@@ -191,6 +258,7 @@
 		margin-top: 70px;
 		border-radius: 4px;
 	}
+	
 	.signupNowText{
 		margin-right: 20px;
     	margin-top: 5px;
@@ -237,11 +305,7 @@
 	.avatarHolder{
 		margin-bottom:5px;
 	}
-	.signupLoginOption{
-		margin: auto;
-		width:220px;
-		text-align:center;
-	}
+	
 	.breadcrumbContainer{
 		margin-top:20px;
 	}
@@ -351,17 +415,31 @@
 	}
 	.login_unit{
 		padding-top: 10px;
-		background: url("../img/callingImage.png") no-repeat scroll -20px 120px #FECA12;
+		background: url("../img/callingImage.png") no-repeat scroll 0px 135px #FECA12 !important;
 	}
 	.login_unit p{
 		font-weight: 600;
 		color: #ffffff;
+		
+	}
+	.login_unit p.header_message{
+		font-size: 1.1em;
+	}
+	.login_unit p.message_signup{
+		font-size: 1em;
+		color:#000000;
+		font-weight:600;
+		font-style:italic;
 	}
 	.login_unit p:first-child{
 		color:#000000;
 	}
 	.signupLoginOption{
-		margin-top: 120px;
+		margin-top: 150px;
+		padding: 10px 40px;
+		font-size:15px;
+		width:220px;
+		text-align:center;
 	}
 	.categoryName{
 		font-size: 14px;
@@ -501,6 +579,7 @@
 		padding: 10px 40px;
 		border:1px solid #000;
 		margin-top: 4px;
+		width:100%;
 	}
 	.theme-default a.signup_now:hover{
 		background: #C71B1B;	
