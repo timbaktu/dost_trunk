@@ -318,7 +318,12 @@ public class UserSession implements Serializable
 	 * @return
 	 */
 	public boolean isSuperAdmin() {
-		return (username.equalsIgnoreCase("prashant") || username.equalsIgnoreCase("aarti"));
+		if(username == null) {
+			return false;
+		}
+		else {
+			return (username.equalsIgnoreCase("prashant") || username.equalsIgnoreCase("aarti"));			
+		}
 	}
 
 	/**
