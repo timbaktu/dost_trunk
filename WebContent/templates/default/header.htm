@@ -5,6 +5,7 @@
 <#setting datetime_format = dateTimeFormat/>
 <#assign logged = logged?default(false)/>
 <#assign counselor = session.isAdmin()/>
+<#assign superAdmin = session.isSuperAdmin()/>
 <#assign language = language?default("en_US")/>
 <#assign hasCodeBlock = hasCodeBlock?default(false)/>
 <html>
@@ -59,7 +60,9 @@ Modifications by JForum Team
 									<li><a href="dost/j_spring_security_logout" class="navbar-link">Logout</a></li>
 								</ul>
 								<ul class="nav navbar-nav pull-left menuItems">
-									  <li id="conversations"><a href="http://localhost:8800/dost/conversations">Conversations</a></li>
+									  <#if superAdmin>
+											<li id="conversations"><a href="http://localhost:8800/dost/conversations">Conversations</a></li>									  
+									  </#if>
 									  <li id="patientList"><a href="http://localhost:8800/dost/patientList">Client History</a></li>
 									  <!-- <li id="onlineCounseling"><a href="http://localhost:8800/dost/onlineCounseling">Online Counseling</a></li> -->
 									  <li id="discussions"><a href="http://localhost:8800/dost/forums/show/1.page">Dicussions</a></li>

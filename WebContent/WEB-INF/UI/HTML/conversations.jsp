@@ -1,3 +1,4 @@
+<%@page import="com.dost.util.Utils"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -35,15 +36,15 @@
 			
 			showData(UrlForData);
 		});
-		
+		/**
 		$(".chats").click(function(){
 			$(".chats").removeClass("active");
 			$(this).addClass("active");
 			UrlForData = '/dost/api/chathistory/user/' + userid ;
 			
-			showData(UrlForData);
+			showChatData(UrlForData);
 		});
-
+		*/
 		$(".inbox").click(function(){
 			$(".sentItems").removeClass("active");
 			$(this).addClass("active");
@@ -84,7 +85,14 @@
 						
 						if( messages[i].recipients.length == 0 ) continue ;
 						
-						var ismessagenew = messages[i].recipients[0].viewed;
+						var ismessagenew = 0;
+						debugger;
+						if(messages[i].recipients == 'undefined') {
+							ismessagenew = 0;
+						}
+						else {
+							ismessagenew = messages[i].recipients[0].viewed;
+						}
 						var messageHeading = '';
 						
 						// 1 means viewed
@@ -126,7 +134,15 @@
 					}
 			
 					for (var j = 0 ; j < messages.length; j++) {
-						var ismessagenew = messages[j].recipients[0].viewed;
+						var ismessagenew = 0;
+						debugger;
+						if(messages[j].recipients == 'undefined') {
+							ismessagenew = 0;
+						}
+						else {
+							ismessagenew = messages[j].recipients[0].viewed;
+						}
+						//var ismessagenew = messages[j].recipients[0].viewed;
 						var messageHeading = '';
 						
 						// 1 means viewed
@@ -170,6 +186,91 @@
 				});
 		}
 		
+		
+		$(".chats").click(function(){
+			$(".chats").removeClass("active");
+			$(this).addClass("active");
+			var chatMessageLength = 0;
+			$.getJSON('/dost/api/chathistory/user/' + userid, function(messages) {	
+				$(".loading").hide();
+				$(".conversationsUser").html("");
+				$(".conversationsCounselor").html("");
+				
+				$.each(messages, function( index, value ) {
+
+					// Setting chatMessage length
+					chatMessageLength = messages.length;
+					var inner = value;
+						
+					var chatLinesToShowForMainPage = '';
+					var chatLength = inner.userChats.length; // We want to show 3-4-5 lines of chat
+					if(chatLength < 3) {
+						for(var k in inner.userChats) {
+							debugger;
+							chatLinesToShowForMainPage = chatLinesToShowForMainPage + '<br>';
+							chatLinesToShowForMainPage = chatLinesToShowForMainPage + inner.userChats[k].body;
+						}						
+					}
+					else {
+						if(inner.userChats.length >= 6) {
+							chatLength = 6;
+						}
+						else {
+							chatLength = inner.userChats.length;
+						}
+						for(var k = 3; k < chatLength; k++) { // I think this will fail but m not sure
+							chatLinesToShowForMainPage = chatLinesToShowForMainPage + '<br>';
+							chatLinesToShowForMainPage = chatLinesToShowForMainPage + inner.userChats[k].body;
+						}
+					}
+
+					$(".conversationsUser").append('<li class="well media conversation_topic">'+
+							'<div class="each_conversation" id="conversationsExpanded?='+index+'">'+
+								'<div class="pull-left col-md-2" href="#">'+
+									'<div class="friend_name"><img class="avatar" id='+value.user.avatar+' src=avatar/'+value.user.avatar+'.png name='+value.user.avatar+ '/></div>'+
+									'<div class="friend_name">'+value.user.username+'</div>'+
+									'<div class="date_of_conversation">'+ timeConverter(value.userChats[0].sentDate) +'</div>'+
+								'</div>'+
+								'<div class="media-body col-md-8">'+
+										'CHAT ON ' + timeConverter(value.userChats[0].sentDate) +
+										'<div class="wrapperConversations">'+ chatLinesToShowForMainPage +'</div>'+
+								'</div>'+
+								'<div class="pull-right col-md-1">'+
+									'<div title="view complete conversation" href="conversationsExpanded?='+123+'">View'+
+										'<span class="glyphicon glyphicon-chevron-right"></span>'+
+									'</div>'+
+								'</div>'+
+								'<div class="clearfix"></div>'+
+							'</div>'+
+						'</li>');
+					
+					$(".conversationsCounselor").append('<li class="well media conversation_topic">'+
+							'<div class="each_conversation" id="conversationsExpanded?='+index+'">'+
+								'<div class="pull-left col-md-2" href="#">'+
+									'<div class="friend_name"><img class="avatar" id='+value.user.avatar+' src=avatar/'+value.user.avatar+'.png name='+value.user.avatar+ '/></div>'+
+									'<div class="friend_name">'+value.user.username+'</div>'+
+									'<div class="date_of_conversation">'+ timeConverter(value.userChats[0].sentDate) +'</div>'+
+								'</div>'+
+								'<div class="media-body col-md-8">'+
+										'CHAT ON ' + timeConverter(value.userChats[0].sentDate) +
+										'<div class="wrapperConversations">'+ chatLinesToShowForMainPage +'</div>'+
+								'</div>'+
+								'<div class="pull-right col-md-1">'+
+									'<div title="view complete conversation" href="conversationsExpanded?='+123+'">View'+
+										'<span class="glyphicon glyphicon-chevron-right"></span>'+
+									'</div>'+
+								'</div>'+
+								'<div class="clearfix"></div>'+
+							'</div>'+
+						'</li>');
+				});
+				if(chatMessageLength == 0) {
+					$(".conversations").html('<div class="noConversationsText">There are no chats <br/> <a class="leaveMessageLink">Leave a message</a></div>');
+				}
+			});
+		});
+
+		
 		$(".conversations").on("click",".leaveMessageLink", function(){
 			$( ".leaveMessage" ).trigger( "click" );	
 		});
@@ -190,7 +291,6 @@
 		function extractLast( term ) {
 			return split( term ).pop();
 		}
-
 		/*
 		$("#recipient" ).autocomplete({
 			source: function( request, response ) {
@@ -301,6 +401,19 @@
 		
 	});
 	/*End of manipulating json for messages*/	
+	
+		function timeConverter(UNIX_timestamp){
+			  var a = new Date(UNIX_timestamp * 1);
+			  var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+			  var year = a.getFullYear();
+			  var month = months[a.getMonth()];
+			  var date = a.getDate();
+			  var hour = a.getHours();
+			  var min = a.getMinutes();
+			  var sec = a.getSeconds();
+			  var time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec ;
+			  return time;
+		}
 	
 	</script>
 	

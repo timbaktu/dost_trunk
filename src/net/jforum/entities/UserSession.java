@@ -44,15 +44,22 @@ package net.jforum.entities;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import net.jforum.ControllerUtils;
 import net.jforum.JForumExecutionContext;
 import net.jforum.SessionFacade;
+import net.jforum.exceptions.DatabaseException;
 import net.jforum.repository.SecurityRepository;
 import net.jforum.security.PermissionControl;
 import net.jforum.security.SecurityConstants;
 import net.jforum.util.Captcha;
+import net.jforum.util.DbUtils;
 import net.jforum.util.I18n;
 import net.jforum.util.preferences.ConfigKeys;
 import net.jforum.util.preferences.SystemGlobals;
@@ -301,6 +308,22 @@ public class UserSession implements Serializable
 	public boolean isAdmin()
 	{
 		return SecurityRepository.canAccess(this.userId, SecurityConstants.PERM_ADMINISTRATION);
+	}
+	
+	/**
+	 * This is added by Satya to handle feature where we want to show Conversations only to Prashant and Aarti counselor
+	 * This is used in header.htm file for showing/hiding conversations tab after clicking discussion tab.
+	 * header.jsp handles tabs for non-discussion
+	 * header.htm handles tabs from discussion
+	 * @return
+	 */
+	public boolean isSuperAdmin() {
+		if(username == null) {
+			return false;
+		}
+		else {
+			return (username.equalsIgnoreCase("prashant") || username.equalsIgnoreCase("aarti"));			
+		}
 	}
 
 	/**

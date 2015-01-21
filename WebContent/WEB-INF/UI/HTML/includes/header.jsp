@@ -6,7 +6,7 @@
 	<header id="main-navbar" class="navbar navbar-default navbar-fixed-top">
 	  <div class="navbar-inner">
 		<div>
-		   <a class="navbar-brand" href="index" >
+		  <a class="navbar-brand" href="index" >
 			  	<img src="${pageContext.request.contextPath}/resources/img/logoSmall.jpg" height="47px"/>
 		  </a>
 		  <div class="nav-collapse nav-collapse navbar-collapse">
@@ -20,7 +20,15 @@
 					<li><a href="dost/j_spring_security_logout" class="navbar-link">Logout</a></li>
 				</ul>
 				<ul class="nav navbar-nav pull-left menuItems">
+					  <!-- Adding this after talking to Richa, conversation link should appear only for Prashant and Aarti -->
+					  <%
+					  if(request.getUserPrincipal().getName().equalsIgnoreCase("prashant") || request.getUserPrincipal().getName().equalsIgnoreCase("aarti")) {
+					  %>
 					  <li id="conversations"><a href="conversations">Conversations</a></li>
+					  <%
+					  }
+					  %>
+					  
 					  <li id="patientHistory"><a href="patientList">Client History</a></li>
 					  <!-- <li id="onlineCounseling"><a href="onlineCounseling">Online Counseling</a></li> -->
 					  <li id="forums"><a href="forums/show/1.page">Discussions</a></li>
