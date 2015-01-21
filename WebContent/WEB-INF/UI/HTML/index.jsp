@@ -79,12 +79,15 @@
 		<div class="container row-fluid welcomePage">
 			<div  class="col-md-12 banner well"> 
 				<div class="col-md-8 testimonial" >
-					<p>i was thinking to personally meet a professional life coach or something because i was getting overwhelmed with my recursive thoughts but since i have you guys helping me... i think my search has ended here</p>
+					<h5>What users say about us?</h5>
+					<p><strong>&ldquo;</strong>i was thinking to personally meet a professional life coach or something because i was getting overwhelmed with my recursive thoughts but since i have you guys helping me... i think my search has ended here</p>
 					<em>(BTech  Graduate, preparing for banking exam and struggling to find herself)</em>
+					<a class="pull-right" href="testimonials">View More<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+					<div class="clearfix"></div>
 				</div>
 				<div class="col-md-3 counter pull-right">
 					<p><strong>300+ </strong>users supported in 30 days</p>
-					<mark>8 Supporters</mark>
+					<mark>32 Supporters</mark>
 					<br/>
 					<a href="https://milaap.org/campaigns/dost" target="_blank">SUPPORT THE CAUSE</a>
 				</div>
@@ -110,12 +113,15 @@
 							</ul>
 					</li>
 					
-					<li class="exploration_option well col-md-6" >
+					<li class="exploration_option well col-md-6" id="quotes" >
 					<a href="quotes">
 						<h3 class="categoryName">Quotes</h3>
 						<ul class="details_box">
 								<li>
-									The best dreams happen when you are awake.
+									If you tell the truth, you don't have to remember anything.<span class="secondary_information">~Mark Twain</span>
+								</li>
+								<li>
+									If an egg is broken by an outside force, LIFE ENDS. If broken by an inside force, LIFE BEGINS. Great things always begin from inside.
 								</li>
 								<li>
 									Winners are not people who never fail, but people who never quit.
@@ -133,7 +139,18 @@
 							</ul>
 					</a>
 					</li>
-					
+					<li class="exploration_option well col-md-6" id="signupNow_index">
+						<a href="signupNow">
+							<ul class="details_box">
+								<li>
+									<h4 class="topic_categoryName coming_soon"><strong>SIGNUP NOW</strong> and get into 1 to 1 chat with professional psychologists and other experienced people</h4>
+								</li>
+								
+							</ul>
+							
+							
+						</a>
+					</li>
 					<!-- <li class="exploration_option well horoscopes">
 						<h3 class="categoryName">Horoscopes</h3>
 						<ul>
@@ -171,18 +188,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="exploration_option well col-md-6" id="signupNow_index">
-						<a href="signupNow">
-							<ul class="details_box">
-								<li>
-									<h4 class="topic_categoryName coming_soon"><strong>SIGNUP NOW</strong> and get into 1 to 1 chat with professional psychologists and other experienced people</h4>
-								</li>
-								
-							</ul>
-							
-							
-						</a>
-					</li>
+					
 					<li class="clearfix"></li>
 				</ul>
 			</div>

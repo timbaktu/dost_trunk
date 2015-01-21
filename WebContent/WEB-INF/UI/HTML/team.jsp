@@ -25,7 +25,7 @@
 					var this_list_html = $("#coreTeam").find(".listOuterContainer").last() ;
 					
 					$(this_list_html).find(".listheading").text( elem.name ) ;
-					$(this_list_html).find(".listContent").text( elem.details ) ;
+					$(this_list_html).find(".listContent").html( elem.details ) ;
 					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
 					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;
 					var background_image= '#FFEDB5 url("resources/img/team/'+elem.image+'") no-repeat center center';
@@ -47,7 +47,7 @@
 					var this_list_html = $("#volunteers").find(".listOuterContainer").last() ;
 					
 					$(this_list_html).find(".listheading").text( elem.name ) ;
-					$(this_list_html).find(".listContent").text( elem.details ) ;
+					$(this_list_html).find(".listContent").html( elem.details ) ;
 					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
 					$(this_list_html).find(".twitter").attr("id", elem.name ) ;
 					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;

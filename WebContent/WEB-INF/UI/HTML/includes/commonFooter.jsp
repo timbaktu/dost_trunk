@@ -2,9 +2,9 @@
 	<!-- Go to www.addthis.com/dashboard to customize your tools -->
 	<div class="addthis_horizontal_follow_toolbox"></div>
 
-	<a href="termsOfService" class="footer_link">Terms of Service</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="team"  class="footer_link">Our Team</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="contact"  class="footer_link">Contact Us</a>
-	<br/>
-	Copyright 2014, D.O.S.T. All rights reserved | Contact us at <strong><a title="Contact for enquiries" target="_blank" href="mailto:customersupport@yourdost.com">customersupport@yourdost.com</a></strong> for any queries, we respond really fast!
+	<a href="termsOfService" class="footer_link">Terms of Service</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="team"  class="footer_link">Our Team</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="testimonials"  class="footer_link">What users say about us?</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="contact"  class="footer_link">Contact Us</a>
+	<br/><br/>
+	Copyright 2015, D.O.S.T. All rights reserved | Contact us at <strong><a title="Contact for enquiries" target="_blank" href="mailto:customersupport@yourdost.com">customersupport@yourdost.com</a></strong> for any queries, we respond really fast!
 </footer>
 
 <script src="http://d2g9qbzl5h49rh.cloudfront.net/static/feedback2.js?3.2.4748" type="text/javascript">

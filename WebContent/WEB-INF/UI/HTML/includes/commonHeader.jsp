@@ -1,6 +1,6 @@
 <head>
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.js"></script>
-	<script src="${pageContext.request.contextPath}/JS/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/JS/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.sieve.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/JS/script.js"></script>
 	<link href="${pageContext.request.contextPath}/resources/CSS/bootstrap.min.css" rel="stylesheet" media="screen">

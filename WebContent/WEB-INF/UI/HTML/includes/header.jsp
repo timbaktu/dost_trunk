@@ -26,7 +26,18 @@
 					  <li id="forums"><a href="forums/show/1.page">Discussions</a></li>
 					  <li id="faqs"><a href="faqs">FAQs</a></li>
 					  <li id="quotes"><a href="quotes">Quotes</a></li>
-					  <li id="blog"><a href="blog" >Blog</a></li>
+					  <li class="dropdown" id="blog">
+					  		 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Blogs <b class="caret"></b></a>
+				             <ul class="dropdown-menu">
+				                    <li><a href="http://blog.yourdost.com/search/label/love">Relationships</a></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/marriage">Marriages</a></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/education">Education</a></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/parents">Parents/Kids</a></li>
+				                    <li class="divider"></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/counseling%20profession">Counseling Profession</a></li>
+				                </ul>
+		            </li>
+		             <li style="" id="team"><a href="team">Team</a></li>
 				</ul>
 			
 		  </div><!--/.nav-collapse -->
@@ -66,7 +77,18 @@
 				  <li id="faqs"><a href="faqs">FAQs</a></li>
 				  <li style="" id="quotes"><a href="quotes">Quotes</a></li>
 				  <!-- <li id="blogs"><a href="http://blog.yourdost.com" target="_blank">Blog</a></li>-->
-				  <li id="blogs"><a href="blog">Blog</a></li>
+				  <li class="dropdown" id="blogs">
+					  		 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Blogs <b class="caret"></b></a>
+				             <ul class="dropdown-menu">
+				                    <li><a href="http://blog.yourdost.com/search/label/love">Relationships</a></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/marriage">Marriages</a></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/education">Education</a></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/parents">Parents/Kids</a></li>
+				                    <li class="divider"></li>
+				                    <li><a href="http://blog.yourdost.com/search/label/counseling%20profession">Counseling Profession</a></li>
+				                </ul>
+		            </li>
+		            <li style="" id="team"><a href="team">Team</a></li>
 				</ul>
 			  </div><!--/.nav-collapse -->
 			</div>

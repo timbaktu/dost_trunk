@@ -35,6 +35,11 @@ public class HomeController {
 		return new ModelAndView("index"); 
 	}
 	
+	@RequestMapping("testimonials")  
+	public ModelAndView testimonials() {
+		return new ModelAndView("testimonials"); 
+	}
+	
 	@RequestMapping("team")  
 	public ModelAndView team() {
 		return new ModelAndView("team"); 
