@@ -40,7 +40,7 @@
 						else {
 							for (var j in entry) {
 								var inner = entry[j];
-								$(".conversations").append('<div class="categoryList"><h3 class="subject secondary_heading" id='+i+'_subject>'+'Chat' + j +'</h3>');
+								$(".conversations").append('<div class="categoryList"><h3 class="subject secondary_heading" id='+i+'_subject>'+'Chat on ' + timeConverter(inner.userChats[0].sentDate) +'</h3>');
 								$("#"+ i+"_subject").after("<ul></ul></div>");						
 								for(var k in inner.userChats) {
 									//debugger;
