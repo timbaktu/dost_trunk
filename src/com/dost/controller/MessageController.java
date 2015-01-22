@@ -251,8 +251,8 @@ public class MessageController {
 		}
 		// If msgId is null then create new..Using bad way of doing it for now
 		else {
-//			Long maxMsgId = messageService.getMaxMsgId();
-			Long maxMsgId = chatHistoryService.getMaxMsgId();
+			Long maxMsgId = messageService.getMaxMsgId();
+//			Long maxMsgId = chatHistoryService.getMaxMsgId();
 			dbMessage.setMsgId(maxMsgId + 1);
 		}
 		dbMessage.setRecipients(createRecipientList(message, dbMessage));
