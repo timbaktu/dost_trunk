@@ -20,14 +20,11 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name="message")
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="database")
 public class DbMessage extends DbGeneric implements Serializable {
 
 	@Id

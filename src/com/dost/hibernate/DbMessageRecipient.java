@@ -13,12 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name="messagerecipient")
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="database")
 public class DbMessageRecipient extends DbGeneric implements Serializable {
 
 	@Id

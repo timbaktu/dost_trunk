@@ -13,12 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonManagedReference;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name="faqcategory")
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE, region="database")
 public class DbFaqCategory extends DbGeneric implements Serializable {
 
 	/**
