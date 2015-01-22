@@ -16,6 +16,12 @@ iframe { width:100% ;
 border:none ;
 }
 </style>
+<script>
+$( document ).ready(function() {
+	var category = window.location.href.split("=");
+	$("iframe").attr("src", 'http://blog.yourdost.com/search/label/'+category[1].toLowerCase());
+});
+</script>
 <body>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	
@@ -26,7 +32,7 @@ border:none ;
 	</sec:authorize>
 	<jsp:include page="includes/header.jsp"></jsp:include>					
 	
-	<iframe src="http://blog.yourdost.com/" height="100%"></iframe>
+	<iframe height="100%"></iframe>
 	
 </body>
 </html>
