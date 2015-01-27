@@ -41,7 +41,10 @@
 		<session-timeout>7200</session-timeout>
 	</session-config>
 
-
+	<!-- Listener for blocking user -->
+	<listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

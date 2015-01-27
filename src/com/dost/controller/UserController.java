@@ -4,14 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dost.hibernate.DbUser;
 import com.dost.model.User;
@@ -24,6 +29,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	 @Resource(name="sessionRegistry")
+	 private SessionRegistryImpl sessionRegistry;
 	
 	/*messages received*/
 	@RequestMapping(value="/users", method=RequestMethod.GET)  
@@ -67,5 +75,21 @@ public class UserController {
 		return countMap;
 	}
 	
+	@RequestMapping(value="/user/{username}/block", method=RequestMethod.GET)  
+	@ResponseBody
+	public Map<String, String> blockUser(@PathVariable String username) {
+		Map<String, String> statusMap = new HashMap<String, String>();
+		statusMap.put("status", "false");
+		for (Object principal : sessionRegistry.getAllPrincipals()) {
+			UserDetails userDetail = (UserDetails)principal;
+			if(username.equals(userDetail.getUsername())) {
+		        for (SessionInformation session : sessionRegistry.getAllSessions(principal, false)) {
+		            session.expireNow();
+		        }
+		        statusMap.put("status", "true");
+			}
+		}
+		return statusMap;
+	}	
 	
 }

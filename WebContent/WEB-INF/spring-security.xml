@@ -44,6 +44,10 @@
 		<!-- enable csrf protection -->
 		<intercept-url pattern="/user/**" access="isAuthenticated()" />
 		<intercept-url pattern="/counselor/**" access="isAuthenticated()" />
+		
+		<!-- Code for blocking user and checking who all are logged in right now -->
+		<custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrencyFilter" />
+		<session-management session-authentication-strategy-ref="sas" />
 	</http>
 	
 	<!-- Select users and user_roles from database -->
@@ -59,4 +63,21 @@
 	
 	<!-- <global-method-security pre-post-annotations="enabled" />-->
 	<beans:bean id="runMeTask" class="com.dost.quartz.ScheduledTask" />	
+	
+	<!-- Code segment for block user -->
+	<beans:bean id="concurrencyFilter"
+		class="org.springframework.security.web.session.ConcurrentSessionFilter">
+		<beans:property name="sessionRegistry" ref="sessionRegistry" />
+		<beans:property name="expiredUrl" value="/signupNow" />
+	</beans:bean>
+	
+	<beans:bean id="sas"
+		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+		<beans:constructor-arg name="sessionRegistry"
+			ref="sessionRegistry" />
+		<beans:property name="maximumSessions" value="1" />
+	</beans:bean>
+	<beans:bean id="sessionRegistry"
+		class="org.springframework.security.core.session.SessionRegistryImpl" />
+		
 </beans:beans>
