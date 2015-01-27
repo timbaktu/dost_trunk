@@ -61,8 +61,17 @@
 		</authentication-provider>
 	</authentication-manager>
 	
-	<!-- <global-method-security pre-post-annotations="enabled" />-->
-	<beans:bean id="runMeTask" class="com.dost.quartz.ScheduledTask" />	
+	<!-- Scheduled Task Entries Start -->
+
+	<beans:bean id="chatFeedbackTask" class="com.dost.quartz.ChatFeedbackTask" />	
+	<beans:bean id="incompleteChatTask" class="com.dost.quartz.IncompleteChatTask" />	
+	<beans:bean id="mobileUsageTask" class="com.dost.quartz.MobileUsageTask" />	
+	<beans:bean id="newDiscussionTask" class="com.dost.quartz.NewDiscussionTask" />	
+	<beans:bean id="newPostOnYourDiscussionTask" class="com.dost.quartz.NewPostOnYourDiscussionTask" />	
+	<beans:bean id="noActivityInTwoWeeksTask" class="com.dost.quartz.NoActivityInTwoWeeksTask" />	
+	<beans:bean id="signupOnlyTask" class="com.dost.quartz.SignupOnlyTask" />	
+	
+	<!-- Scheduled Task Entries End -->
 	
 	<!-- Code segment for block user -->
 	<beans:bean id="concurrencyFilter"
