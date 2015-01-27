@@ -65,6 +65,10 @@ $( document ).ready(function() {
 				'list-style': 'none',
 				'margin-left': '0px'
 			});
+			$("iframe.quotes").contents().find(".status-msg-wrap").css({
+				'display': 'none'
+				
+			});
 		},1000);
 		/*end of styling the favorite discussion iframe*/
 });

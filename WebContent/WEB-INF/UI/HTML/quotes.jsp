@@ -30,7 +30,7 @@
 		</sec:authorize>
 		<jsp:include page="includes/header.jsp"></jsp:include>					
 		
-		<iframe src="http://quotesdost.blogspot.com/" height="100%"></iframe>
+		<iframe class="quotes" src="http://quotesdost.blogspot.in/search/label/quote" height="100%"></iframe>
 	
 	</body>
 	<!--<sec:authorize access="hasRole('ROLE_ADMIN')">

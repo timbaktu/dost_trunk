@@ -208,17 +208,21 @@
 	}
 	.exploration_option a{
 		color:#333;
-		text-decoration: none
+		text-decoration: none;
+	}
+	.exploration_option a:hover{
+		color:#428bca !important;
 	}
 	.eachDiscussion a:hover{
-		color: #000;
+		color: #428bca;
 	}
 	
 	h3{
 		font-size: 16px;
 	}
-	.details_box h4{
+	.exploration_option .details_box h4{
 		font-size: 13px;
+		margin-bottom: 5px;
 	}
 	#discussion .details_box, #faqs .details_box, #quotes .details_box{
 		overflow: hidden;
@@ -374,9 +378,14 @@
 		margin-top:20px;
 	
 	}
+	
 	h4.media-heading span, .secondary_information{
 		color: #999;
 		font-size:12px;
+		line-height:15px;
+	}
+	.exploration_option .secondary_information{
+		display: inline-block;
 	}
 	.discussion_topic .well{
 		margin-bottom:0;
