@@ -7,6 +7,14 @@
 	<jsp:include page="includes/commonHeader.jsp"></jsp:include>
 	<script>
 	$( document ).ready(function() {
+		var pageUrl=window.location.href;
+		var txt="=";
+		if(pageUrl.indexOf(txt) > -1) {
+			var username = window.location.href.split("=");
+			$("#username").val(username[username.length-1]);
+		}
+		
+		
 		$.get('/dost/api/securityquestions/all', function(response) {
 			$("#question1").append('<option value="blank">Select your first secret question</option>');
 			$.each(JSON.parse(JSON.stringify(response)), function(index, value){
@@ -132,13 +140,13 @@
 						</div><label class="chooseAvatar">Choose your avatar* <span>(This is how I will know you)</span></label>
 
 						<div id="avatarId" class="avatarHolder">
-							<img class="avatar" src="avatar/avatar1.png" id="avatar1"/>
-							<img class="avatar" src="avatar/avatar2.png" id="avatar2"/>
-							<img class="avatar" src="avatar/avatar3.png" id="avatar3"/>
-							<img class="avatar" src="avatar/avatar4.png" id="avatar4"/>
-							<img class="avatar" src="avatar/avatar5.png" id="avatar5"/>
-							<img class="avatar" src="avatar/avatar6.png" id="avatar6"/>
-							<img class="avatar" src="avatar/avatar7.png" id="avatar7"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar1.png" id="avatar1"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar2.png" id="avatar2"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar3.png" id="avatar3"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar4.png" id="avatar4"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar5.png" id="avatar5"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar6.png" id="avatar6"/>
+							<img class="avatar" src="${pageContext.request.contextPath}/avatar/avatar7.png" id="avatar7"/>
 							
 						</div>
 						<br/>

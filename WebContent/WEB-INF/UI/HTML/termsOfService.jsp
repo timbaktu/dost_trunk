@@ -8,7 +8,7 @@
 <jsp:include page="includes/header.jsp"></jsp:include>
 <head>
 <meta charset="utf-8">
-<title>Terms of Service - D.O.S.T.</title>
+<title>Terms of Service - Your D.O.S.T.</title>
 	
 </head>
 <body class="theme-default">
@@ -42,7 +42,7 @@
 							</ol>
 						</li>
 						<li>yourdost.com reserves the right to modify or discontinue, temporarily or permanently, any service in or on the Site(s), with or without notice to client;</li> 
-						<li><strong>Confidentiality</strong>: Your data will not be shared for advertising or any other purpose without your permission;</li> 
+						<li><strong>Confidentiality</strong>: We do not collect your personally identifiable information. However if you share it with your special friends, it will always be kept confidential and will never shared with anyone for advertising or any other purpose without your permission;</li> 
 						<li><strong>IF YOU ARE THINKING ABOUT SUICIDE, IF YOU FEEL THAT YOU MAY BE A DANGER TO YOURSELF OR TO OTHERS, OR IF YOU OTHERWISE HAVE ANY MEDICAL EMERGENCY, PLEASE IMMEDIATELY CALL 100 / 101 AND NOTIFY THE POLICE OR EMERGENCY MEDICAL SERVICES.</strong></li> 
 						<li>At our option, we retain the absolute right to modify the terms of this Agreement at any time.</li>
 					</ol>
