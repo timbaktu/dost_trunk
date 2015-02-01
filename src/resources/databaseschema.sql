@@ -217,3 +217,41 @@ CREATE TRIGGER user_OnInsert BEFORE INSERT ON `user`
     
 ALTER TABLE user
 ADD COLUMN `email` VARCHAR(100) DEFAULT NULL AFTER `branch`;
+
+--Table for storing emails after conversation with Shweta
+
+CREATE TABLE `dost_email` (
+    `emailid` INTEGER NOT NULL AUTO_INCREMENT,
+    `conversationid` INTEGER NOT NULL,
+    `email_type` VARCHAR(4500) DEFAULT NULL,
+    `sender` varchar(255) DEFAULT NULL,
+	`agent` varchar(255) DEFAULT NULL,
+    `recipient` varchar(255) DEFAULT NULL,
+    `recipient_email` VARCHAR(10000) DEFAULT NULL,
+    `status` varchar(255) DEFAULT NULL,
+    `error_message` varchar(4500) DEFAULT NULL,
+    `createdate` varchar(255) DEFAULT NULL,
+    `createby` bigint(20) DEFAULT NULL,
+    `updatedate` varchar(255) DEFAULT NULL,
+    `updateby` bigint(20) DEFAULT NULL,
+    `deleted` INTEGER DEFAULT 0,
+    PRIMARY KEY (`emailid`)
+);
+
+--Trigger to add data in chat_update table from ofConversation when chat ends
+delimiter |
+CREATE TRIGGER chat_update
+AFTER UPDATE ON ofConParticipant
+FOR EACH ROW
+BEGIN
+SET @countOfemail = (select count(*) from dost_email where conversationid = OLD.conversationID);
+IF @countOfemail = 0 THEN
+insert into dost_email (conversationid, email_type, sender, agent, recipient, recipient_email, status) 
+values(OLD.conversationID, 'CHAT_FEEDBACK', 'customersupport@yourdost.com', 
+(select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource in ('Spark 2.6.3')),
+(select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo')),
+(select email from user where username in( select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo'))), 
+'NOT_SENT');
+END IF;
+END |
+delimiter ;
