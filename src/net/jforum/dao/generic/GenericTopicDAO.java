@@ -351,8 +351,28 @@ public class GenericTopicDAO extends AutoKeys implements TopicDAO
 			int topicId = this.executeAutoKeysQuery(p);
 			
 			topic.setId(topicId);
-			
+			// Added by Satya to send messages to users informing that there is new discussion
+			addEntryInEmailTableForNewTopic(topicId);
 			return topicId;
+		}
+		catch (SQLException e) {
+			throw new DatabaseException(e);
+		}
+		finally {
+			DbUtils.close(p);
+		}
+	}
+	
+	private void addEntryInEmailTableForNewTopic(int topicId) {
+		PreparedStatement p = null;
+		try {
+			p = JForumExecutionContext.getConnection().prepareStatement("insert into dost_email (conversationid, email_type, sender, status) values" +
+			"(?,?,?,?)");	
+			p.setInt(1, topicId);
+			p.setString(2, "NEW_TOPIC_IN_DISCUSSION");
+			p.setString(3, "customersupport@yourdost.com");
+			p.setString(4, "NOT_SENT");
+			p.executeUpdate();
 		}
 		catch (SQLException e) {
 			throw new DatabaseException(e);

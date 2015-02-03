@@ -92,4 +92,40 @@ public class MessageUtil {
 			System.out.println("Eating exception..DO not want to fail only when their is some problem with sending email..");
 		}
 	}
+	
+	public static void sendEmail(String senderEmail, String recipientEmail, String subject, String content) {
+		//TODO: Hard-coding this to richa and my email to test
+		recipientEmail = "satyajeet@yourdost.com, richa@yourdost.com";
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.port", "465");
+
+		Session session = Session.getDefaultInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(
+								"customersupport@yourdost.com", "D0$t4321");
+					}
+				});
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("customersupport@yourdost.com"));
+			message.setRecipients(Message.RecipientType.CC,
+					InternetAddress.parse(recipientEmail));
+			message.setSubject(subject);
+			message.setContent(content, "text/html");
+
+			Transport.send(message);
+			System.out.println("Done");
+		} catch (MessagingException e) {
+			//throw new RuntimeException(e);
+			System.out.println("Eating exception..DO not want to fail only when their is some problem with sending email..");
+		}		
+	}
 }

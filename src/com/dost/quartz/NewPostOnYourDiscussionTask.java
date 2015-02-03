@@ -3,7 +3,7 @@ package com.dost.quartz;
 import org.springframework.scheduling.annotation.Scheduled;
 
 public class NewPostOnYourDiscussionTask {
-	@Scheduled(fixedDelay=30000)
+	@Scheduled(fixedDelay=30*60000)
 	public void newPostOnYourDiscussionTask() {
 		System.out.println("NewPostOnYourDiscussionTask Started" );
 		

@@ -253,5 +253,16 @@ values(OLD.conversationID, 'CHAT_FEEDBACK', 'customersupport@yourdost.com',
 (select email from user where username in( select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo'))), 
 'NOT_SENT');
 END IF;
+-- if message count is 2 or less
+SET @countOfMessage = (select messageCount from ofConversation where conversationID = OLD.conversationID);
+IF @countOfMessage < 3 and @countOfemail = 1 THEN -- there can be only one entry in dost_email table
+insert into dost_email (conversationid, email_type, sender, agent, recipient, recipient_email, status) 
+values(OLD.conversationID, 'MESSAGE_COUNT', 'customersupport@yourdost.com', 
+(select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource in ('Spark 2.6.3')),
+(select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo')),
+(select email from user where username in( select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo'))), 
+'NOT_SENT');
+END IF;
 END |
 delimiter ;
+
