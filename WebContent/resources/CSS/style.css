@@ -9,8 +9,11 @@
 		padding-top: 20px; 	
 		margin-bottom:20px;
 	}
+	.container>ul{
+		padding:0;
+	}
 	.addthis_horizontal_follow_toolbox{
-		width: 110px;
+		width: 230px;
 		margin: auto;
 		margin-bottom: 10px;
 	}
@@ -55,7 +58,13 @@
 	.loadingIndex{
 		left: 50%;
 	}
-	
+	.become_a_volunteer{
+		vertical-align: middle;
+		margin-left: 20px;
+		font-size: 1.3em;
+		margin-top: 16px;
+		font-style: italic;
+	}
 	.conversation_history{
 		min-height:200px;
 	}
@@ -330,6 +339,9 @@
 	.exploration_option .details_box h4{
 		font-size: 1em;
 		margin-bottom: 5px;
+	}
+	.exploration_option a.quotes_list:hover{
+		color:#333333 !important
 	}
 	#discussions .details_box, #faqs .details_box, #quotes .details_box, #destressing .details_box, #articles  .details_box{
 		overflow: hidden;
@@ -630,7 +642,28 @@
 		font-weight: 600;
 		margin-top: 0;
 	}
+	/*animation for testimonials*/
 	
+	#slideshow { 
+	    position: relative; 
+	    padding: 10px; 
+	 }
+	
+	#slideshow > div { 
+	    position: absolute; 
+	    top: 10px; 
+	    left: 10px; 
+	    right: 10px; 
+	    bottom: 10px; 
+	}
+	
+	
+	/*end of animation for testimonals*/
+	
+	.theme-default .container a.testimonial_signup{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
 	/*stickyNote*/
 	.stickyNote{
 		margin-left: 330px;
@@ -638,6 +671,7 @@
 	.testimonial_container{
 		background: #ffffff !important;
 	}
+	
 	.stickyNote a{
 	  text-decoration:none;
 	  color:#000;

@@ -8,7 +8,7 @@
 <html>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>DOST Team</title>
+	<title>Your D.O.S.T Team</title>
 	<jsp:include page="includes/commonHeader.jsp"></jsp:include>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/teams.css"> 
 		
@@ -119,9 +119,13 @@
 			
 		<div id="volunteers" class="row">
 			<div class="row">
-				<h2 class="col-md-8 pageHeading">
+				<h2 class="pull-left pageHeading">
                     VOLUNTEERS <em>(People who make this work seamlessly)</em>
 				</h2>
+				<a href="https://www.surveymonkey.com/s/FP6Z6QN" target="_blank" class="pull-left become_a_volunteer">Do you want to volunteer too?</a>
+					
+				
+				
 			</div>
 			<div class="details well"></div>
 			

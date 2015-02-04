@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page session="true"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,6 +56,17 @@ I am so thankful to you for such an inspiring reply. Really a heartfelt thanks. 
 				 	</ul>
 				 </div>
 			</div> 
+			
+			<sec:authorize access="!hasRole('ROLE_ADMIN')">
+				<sec:authorize ifNotGranted="ROLE_USER">
+					<a href="${pageContext.request.contextPath}/signupNow" class="testimonial_signup btn btn-primary btn-large signup_now">SIGNUP NOW & START TALKING TO YOUR FRIEND</a>
+    			</sec:authorize>
+    			<sec:authorize access="hasRole('ROLE_USER')">
+    				<a href="${pageContext.request.contextPath}/talkToFriend" class="testimonial_signup btn btn-primary btn-large signup_now">START TALKING TO YOUR FRIEND</a>
+    			</sec:authorize>
+    		</sec:authorize>
+    		<br/><br/>
+			
     	</div> <!-- /container -->
 		
 		<jsp:include page="includes/commonFooter.jsp"></jsp:include>

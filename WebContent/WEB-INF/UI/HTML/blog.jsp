@@ -18,8 +18,15 @@ border:none ;
 </style>
 <script>
 $( document ).ready(function() {
-	var category = window.location.href.split("=");
-	$("iframe").attr("src", 'http://blog.yourdost.com/search/label/'+category[1].toLowerCase());
+	var pageUrl=window.location.href;
+	var txt="=";
+	if(pageUrl.indexOf(txt) > -1) {
+		var category = window.location.href.split("=");
+		$("iframe").attr("src", 'http://blog.yourdost.com/search/label/'+category[1].toLowerCase());
+	}
+	else{
+		$("iframe").attr("src", 'http://blog.yourdost.com/');
+	}	
 });
 </script>
 <body>
