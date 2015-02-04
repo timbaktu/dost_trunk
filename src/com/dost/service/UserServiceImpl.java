@@ -58,4 +58,5 @@ public class UserServiceImpl implements UserService {
 	public int getUsersCount() {
 		return userDAO.getUsersCount();
 	}
+
 }

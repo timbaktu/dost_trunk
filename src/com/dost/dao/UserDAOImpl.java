@@ -59,6 +59,18 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return user;
 	}
+	
+	public List<DbUser> getUsers(List<Long> ids) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from DbUser u where u.userId in (:ids)");
+		query.setParameterList("ids", ids);
+		
+		List<DbUser> users = query.list();
+		if(users == null){
+			users = new ArrayList<DbUser>();
+		}
+		return users;
+	}
 
 	public List<DbUser> getAllUsers(String role) {
 		Session session = sessionFactory.getCurrentSession();
@@ -149,5 +161,5 @@ public class UserDAOImpl implements UserDAO {
 		Long count = (Long)query.list().get(0);
 		return count.intValue();
 	}
-	
+
 }
