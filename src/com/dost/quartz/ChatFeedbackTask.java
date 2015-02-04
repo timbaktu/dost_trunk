@@ -45,7 +45,7 @@ public class ChatFeedbackTask {
 		content.append("<br><br>");
 		content.append("I am Richa, Co-Founder for <a href='www.yourdost.com'>Your D.O.S.T</a>. I notice that you had a one to one chat with " + email.getAgent() + ".");
 		content.append("<br><br>");
-		content.append("Please give us your feedback regarding your experience with " + email.getAgent() + ". It will not take more than 30 seconds.");
+		content.append("Please give us your <a href='https://secure.jotform.me/form/43353828159462?utm_source=email&utm_medium=target%2Bemail&utm_campaign=Interaction%2BFeedback'>feedback</a> regarding your experience with " + email.getAgent() + ". It will not take more than 30 seconds.");
 		content.append("<br><br>");
 		content.append("I assure you, your information will never be shared with anyone.");
 		content.append("<br><br>");
