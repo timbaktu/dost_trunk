@@ -244,25 +244,43 @@ CREATE TRIGGER chat_update
 AFTER UPDATE ON ofConParticipant
 FOR EACH ROW
 BEGIN
+SET @countOfMessage = (select messageCount from ofConversation where conversationID = OLD.conversationID);
 SET @countOfemail = (select count(*) from dost_email where conversationid = OLD.conversationID);
 IF @countOfemail = 0 THEN
-insert into dost_email (conversationid, email_type, sender, agent, recipient, recipient_email, status) 
+insert into dost_email (conversationid, email_type, sender, agent, messagecount, recipient, recipient_email, status, createdate) 
 values(OLD.conversationID, 'CHAT_FEEDBACK', 'customersupport@yourdost.com', 
 (select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource in ('Spark 2.6.3')),
+@countOfMessage,
 (select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo')),
 (select email from user where username in( select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo'))), 
-'NOT_SENT');
+'NOT_SENT', NOW());
 END IF;
 -- if message count is 2 or less
 SET @countOfMessage = (select messageCount from ofConversation where conversationID = OLD.conversationID);
-IF @countOfMessage < 3 and @countOfemail = 1 THEN -- there can be only one entry in dost_email table
-insert into dost_email (conversationid, email_type, sender, agent, recipient, recipient_email, status) 
+IF @countOfMessage < 5 and @countOfemail = 1 THEN -- there can be only one entry in dost_email table
+insert into dost_email (conversationid, email_type, sender, agent, messagecount, recipient, recipient_email, status, createdate) 
 values(OLD.conversationID, 'MESSAGE_COUNT', 'customersupport@yourdost.com', 
 (select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource in ('Spark 2.6.3')),
+@countOfMessage,
 (select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo')),
 (select email from user where username in( select nickname from ofConParticipant where conversationID = OLD.conversationID and jidResource not in ('Spark 2.6.3', 'demo'))), 
-'NOT_SENT');
+'NOT_SENT', NOW());
 END IF;
 END |
 delimiter ;
 
+ALTER TABLE dost_email
+ADD COLUMN `messagecount` INTEGER DEFAULT 0 AFTER `agent`;
+
+
+--Adding new forums 
+
+insert into jforum_categories values (2, 'Category Relation', 2, 0)
+insert into jforum_categories values (3, 'Category Career', 3, 0)
+insert into jforum_categories values (4, 'Category Education', 4, 0)
+insert into jforum_categories values (5, 'Category Personality', 5, 0)
+
+insert into jforum_forums values (2, 2, 'Relationship', 'Relationship', 1, 0, 0, 0)
+insert into jforum_forums values (3, 3, 'Career', 'Career', 1, 0, 0, 0)
+insert into jforum_forums values (4, 4, 'Education', 'Education', 1, 0, 0, 0)
+insert into jforum_forums values (5, 5, 'Personality', 'Personality', 1, 0, 0, 0)

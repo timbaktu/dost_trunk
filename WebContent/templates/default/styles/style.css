@@ -257,3 +257,21 @@ blockquote dl.codebox code { font-size: 1.0em; }
 input.subject, textarea.message { width: 100%; }
 .postTabContents { padding-top: 24px; }
 .postTabContents div { background-color: #E5EDF3; }
+
+.categoryList h4 {	
+font-size: 16px;
+font-weight: bold;	
+}
+
+.categoryList li {
+font-size: 12px;
+}
+
+.categoryList li a {
+color: #000;
+}
+
+.forumsList{
+margin-top : 10px;
+margin-bottom: 10px ;
+}

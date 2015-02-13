@@ -21,6 +21,30 @@ var SERVLET_EXTENSION  = "${extension}";
 </script>
 
 <script type="text/javascript">
+
+/*GET FORUMS NAMES*/
+$.getJSON("/dost/api/forums/all", function(Forums) {	
+	
+	
+	var forumDropDown = '<select class=" input-block-level form-control subject" id="forum_list" name="forum_list" onchange="update_forum_id();">' ;
+	var numberOfForums = Forums.length;
+	for (var i = 0 ; i < numberOfForums; i++) {
+		forumDropDown += '<option value="'+Forums[i].forumId+'">'+ Forums[i].forumName +'</option>' ;
+	}
+	forumDropDown += "</select>" ;
+
+	$(".forumsList").html(  '<label>Category</label>' + forumDropDown ) ;
+	
+	$("#forum_list").val( ${forum.id} ) ;
+	
+	//$(".formForPosting").append( forumDropDown );
+	//$(".formForPosting").append( '</div>' ); 
+	
+});
+
+function update_forum_id(){
+	$('input[name="forum_id"]').val( $("#forum_list").val() );
+}
 <!--
 function newCaptcha()
 {
@@ -232,6 +256,7 @@ function smiliePopup()
 								<input class=" input-block-level form-control subject" type="text" tabindex="2" maxlength="100" name="subject" value="${subject?default("")}" placeholder="Enter topic for discussion" /> 
 		
 							</div>
+	<div class="forumsList"></div>
 			
 							<div>
 								<label>Content</label>
