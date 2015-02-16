@@ -112,7 +112,7 @@
 								'</div>'+
 								'<div class="media-body col-md-8">'+
 										messageHeading +
-										'<div class="wrapperConversations">'+messages[i].content+'</div>'+
+										'<div style="white-space: pre-line">'+Linkify(messages[i].content)+'</div>'+
 								'</div>'+
 								'<div class="pull-right col-md-1">'+
 									'<div title="view complete conversation" href="conversationsExpanded?='+messages[i].msgId+'">View'+
@@ -162,7 +162,7 @@
 								'</div>'+
 								'<div class="pull-left media-body col-md-7">'+
 								messageHeading + 
-								'<span style="conversation_summary">'+messages[j].content+'</span>'+
+								'<span style="white-space: pre-line;">'+Linkify(messages[j].content)+'</span>'+
 								'</div>'+
 								'<div class="pull-left">'+messages[j].sentDate+'</div>'+
 								'<div class="pull-right col-md-1">'+
@@ -414,6 +414,27 @@
 			  var time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec ;
 			  return time;
 		}
+	
+		// Code from Druveen to handle space and link url
+		function Linkify(inputText) {
+			debugger;
+			if (inputText && inputText.indexOf("href=") != -1) {
+			  return inputText;
+			} 
+			    //URLs starting with http://, https://, or ftp://
+			    var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+			    var replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+			    //URLs starting with www. (without // before it, or it'd re-link the ones done above)
+			    var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+			    var replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+			    //Change email addresses to mailto:: links
+			    var replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
+			    var replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+			    return replacedText
+			}
 	
 	</script>
 	

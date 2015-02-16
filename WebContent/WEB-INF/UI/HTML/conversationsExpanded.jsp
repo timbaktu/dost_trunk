@@ -59,14 +59,17 @@
 					$(".error").hide();
 					
 					
-					var datatosend = 'subject='+messages[0].subject+'&content=' + $("#messageContent").val()+ '&recipients='+receipient+'&senderId=' + userid+'&msgId='+threadId[1];
-					
+					//var datatosend = 'subject='+messages[0].subject+'&content=' + $("#messageContent").val()+ '&recipients='+receipient+'&senderId=' + userid+'&msgId='+threadId[1];
+					// Added to handle special characters
+					var encodedSubject = encodeURIComponent(messages[0].subject);
+                    var encodedContent = encodeURIComponent($("#messageContent").val());
+                    
+                    var datatosend = 'subject='+ encodedSubject +'&content=' + encodedContent + '&recipients='+receipient+'&senderId=' + userid+'&msgId='+threadId[1];
 					
 					if($("#messageContent").val() =='') {
 						$(".error").show().text("Please type out the reply");
 					}
 					else{
-						
 						$.post('http://localhost:8800/dost/api/user/message', datatosend, function(response) {							
 						//$('#visitFormResponse').text(response);
 						});
@@ -118,7 +121,7 @@
 						}
 						else{
 							
-							$.post('http://localhost:8800/dost/api/userdetail/add', datatosend, function(response) {							
+							$.post('http://54.209.217.90:80/dost/api/userdetail/add', datatosend, function(response) {							
 								if(response = ""){
 										$(".status").show().html("sending..");
 								}
