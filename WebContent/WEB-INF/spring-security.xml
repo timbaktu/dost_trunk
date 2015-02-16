@@ -31,7 +31,8 @@
 		<intercept-url pattern="/login/**" access="permitAll" />
 		<intercept-url pattern="/forums/show/**" access="permitAll" />
 		<intercept-url pattern="/signup**" access="permitAll"/>
-<!-- 		<intercept-url pattern="/**" access="isAuthenticated()" /> -->
+ 		<intercept-url pattern="/conversations**" access="isAuthenticated()" /> 
+ 		<intercept-url pattern="/talkToFriend" access="isAuthenticated()" /> 
 		<logout logout-success-url="/login?logout"  />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
