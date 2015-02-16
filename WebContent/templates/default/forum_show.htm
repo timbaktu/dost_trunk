@@ -18,7 +18,7 @@
 			var allCategory = '<ul>' ;
 			var numberOfForums = Forums.length;
 			for (var i = 0 ; i < numberOfForums; i++) {
-				allCategory += '<li><a href="/dost/forums/show/'+ Forums[i].forumId +'.page">'+ Forums[i].forumName +'</a></li>' ;
+				allCategory += '<li><a href="/forums/show/'+ Forums[i].forumId +'.page">'+ Forums[i].forumName +'</a></li>' ;
 			}
 			allCategory += "</ul>" ;
 
@@ -169,6 +169,12 @@
 				
 	</div>
 </div>
+
+	<div class="col-md-3" style="margin-top: 70px;">
+		<div class="categoryList">
+		<h4>Categories</h4>
+		</div>
+	</div> 
 <#if !logged>
 <!--  <div class="col-md-3" >
 		<div class="right_unit login_unit">
@@ -181,20 +187,15 @@
 		</div>
 	</div> -->
 	
-	<div class="col-md-3" style="margin-top: 70px;">
-		<div class="categoryList">
-		<h4>Categories</h4>
-		</div>
-	</div> 
+
 </#if>
 <#if logged>
-<!-- 	<div class="col-md-3" >
+	<div class="col-md-3" >
 		<div class="right_unit most_popular_discussions"> 
 			<h4>Most Popular Topics</h4>
 			<iframe style="height:600px" class="well popularDiscussions" name="popularDiscussions" class="well" src="/dost/hottestTopics/list.page"></iframe>
 		</div>
 	</div>
-	 -->
 </#if>
 
 
