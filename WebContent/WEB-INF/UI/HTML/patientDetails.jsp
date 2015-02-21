@@ -136,7 +136,7 @@
 				</div>
 				<br/>
 				 
-				<ul class="conversations">
+				<ul class="conversations conversation_History_details">
 					<li class="loading" id="loading">
 							<img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" />
 					</li>

@@ -16,7 +16,8 @@
 		$.getJSON( "${pageContext.request.contextPath}/resources/JSON/teams.json", function( data ){
 				var core_team  = data[ "core_team"  ] ;
 				var volunteers = data[ "volunteers" ] ;	
-
+				var campus = data[ "campus" ] ;	
+				
 				$.each( core_team, function( index, elem ){
 					var html = return_team_html() ;
 					
@@ -45,6 +46,34 @@
 					$("#volunteers .details").append(html) ;
 					
 					var this_list_html = $("#volunteers").find(".listOuterContainer").last() ;
+					
+					$(this_list_html).find(".listheading").text( elem.name ) ;
+					$(this_list_html).find(".listContent").html( elem.details ) ;
+					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
+					$(this_list_html).find(".twitter").attr("id", elem.name ) ;
+					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;
+					
+					var background_image= '#FFEDB5 url("resources/img/team/'+elem.image+'") no-repeat center center';
+					$(this_list_html).find(".listImage").css("background", background_image ) ;
+					
+					if( index > 0 && (index % 3 ) ){
+						$(this_list_html).addClass("col-md-offset-1") ;
+						
+					}
+					
+					if( index >= 3 ){
+						
+						$(this_list_html).css("margin-top","40px" ) ;
+					}
+					
+				});
+				
+				$.each(campus, function( index, elem ){
+					var html = return_team_html() ;
+					
+					$("#campusAmbassador .details").append(html) ;
+					
+					var this_list_html = $("#campusAmbassador").find(".listOuterContainer").last() ;
 					
 					$(this_list_html).find(".listheading").text( elem.name ) ;
 					$(this_list_html).find(".listContent").html( elem.details ) ;
@@ -123,29 +152,21 @@
                     VOLUNTEERS <em>(People who make this work seamlessly)</em>
 				</h2>
 				<a href="https://www.surveymonkey.com/s/FP6Z6QN" target="_blank" class="pull-left become_a_volunteer">Do you want to volunteer too?</a>
-					
-				
-				
 			</div>
 			<div class="details well"></div>
 			
 		</div>
 	
-	   <!-- 
-	   <div id="campusAmbassador" class="row">
+	  <div id="campusAmbassador" class="row" >	
 			<div class="row">
-				<div class="col-md-8 teamsCategoryHeading">
-                    CAMPUS AMBASSADOR
-				</div>
+				<h2 class="pull-left pageHeading">
+					CAMPUS AMBASSADOR
+				</h2>
+				<a href="https://www.surveymonkey.com/s/FP6Z6QN" target="_blank" class="pull-left become_a_volunteer">Do you want to volunteer too?</a>
 			</div>
-
-			<div class="row">
-				Coming Soon .... 
-			</div>
-
-		</div>
-		-->
-	</div>
+			<div class="details well"></div>
+	</div>		
+</div>
 
 		<jsp:include page="includes/commonFooter.jsp"></jsp:include>
 

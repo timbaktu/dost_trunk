@@ -39,20 +39,20 @@
 		 	"image":"Vishnu.jpg"
 		 },
 		 {
+		 	"name":"Nabanita",
+		 	"details":"Nabanita is your special friend from Your D.O.S.T team. <br/><br/>She has done her masters in Clinical Psychology and has the knack of motivating people. <br/><br/>She believes that through Your D.O.S.T she will be able to help a lot of people.<br/><br/>She has a philosophical bent, likes to read and is a fitness freak. She knows self defence too! <br/><br/> ",
+		 	"linkedin":"https://www.linkedin.com/pub/nabanita-barua/35/4b3/681",
+		 	"twitter":"",
+		 	"image":"nabanita.jpg"
+		 },
+		 {
 			 "name":"Tarun",
-			 "details":"Tarun is your special friend from Your D.O.S.T team. <br/><br/>He is a clinicaL psychologist by profession and a lecturer at SGT University, Gurgaon. He was a medical student at school but chose to take psychology as career as he loved to explore inner self and helped others too in exploration. <br/><br/>An extremely good listener, a kind and helping person who goes an extra mile to solve others problem. He believes he will be able to help others through by being a neutral, impartial and by providing unconditional guidance to D.O.S.T users.<br/><br/>He loves reading about psychology, watching movies. <br/><br/> ",
+			 "details":"Tarun is your special friend from Your D.O.S.T team. <br/><br/>He is a clinicaL psychologist by profession and a lecturer at SGT University, Gurgaon. He was a medical student at school but chose to take psychology as career as he loved to explore inner self and helped others too in exploration. <br/><br/>An extremely good listener, a kind and helping person who goes an extra mile to solve others problem. He believes he will be able to help others through by being a neutral, impartial and by providing unconditional guidance to Your D.O.S.T users.<br/><br/>He loves reading about psychology, watching movies. <br/><br/> ",
 			 "linkedin":"https://www.linkedin.com/profile/view?id=151960741",
 			 "twitter":"",
 			 "image":"Tarun.gif"
 		 },
-		 {
-		 	"name":"Kenton",
-		 	"details":"Kenton contributes to D.O.S.T by providing rich and insightful content on Your D.O.S.T blog.<br/><br/> He is an American Psychotherapist with 15+ years of experience in solving the most challenging cases across the globe. He grew up from Portuguese explorer roots in an international environment and became fascinated with India from an early age. <br/><br/>Kenton has great love and compassion for the Indians and shares the Your D.O.S.T. vision of bring stress free help and friendship to everyone in times of need.<br/><br/>",
-		 	"linkedin":"https://www.linkedin.com/in/kentonlane",
-		 	"twitter":"https://www.twitter.com/KentonLaneCom",
-		 	"image":"Kenton.jpg"
-		 },
-		
+		 
 		
 		 {
 			 "name":"Ankita",
@@ -70,13 +70,47 @@
 		 	"image":"Kishlay.jpg"
 		 },
 		 
-		 
+		  {
+		 	"name":"Shreya",
+		 	"details":"Shreya is your special friend from Your D.O.S.T team. <br/><br/>She has done her Post Graduation in Psychological Counselling from Montfort College, Bangalore. A skilled counselor and experienced in dealing with all age groups. <br/><br/>She believes in helping people in a way that would better suit them rather than having a textbook or purist approach. She volunteers for Your D.O.S.T as she loves helping people and believes all the human beings have the potential to reach their optimum best once they overcome the barriers and resolve the deep lying issues.<br/><br/>",
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=400113328",
+		 	"twitter":"https://www.twitter.com/KentonLaneCom",
+		 	"image":"Shreya.jpg"
+		 },
 		  {
 		 	"name":"Ankita",
-		 	"details":"Ankita is a great UX designer and helps Your D.O.S.T with Design. <br/><br/>An IIT'an, traveller, a basket ball player, avid reader and a great photographer. <br/><br/>She volunteers at Your D.O.S.T  as she believes in the vision of - making this world a happier place.. <br/><br/> ",
+		 	"details":"Ankita is a great UX designer and helps Your D.O.S.T with Design. <br/><br/>An IIT'an, traveller, a basket ball player, avid reader and a great photographer. <br/><br/>She volunteers at Your D.O.S.T  as she believes in the vision of - making this world a happier place. <br/><br/> ",
 		 	"linkedin":"https://www.linkedin.com/in/ankitagautam",
 		 	"twitter":"https://twitter.com/njoinlife_",
 		 	"image":"ankitaGautam.jpg"
+		 },
+		 {
+		 	"name":"Vikas",
+		 	"details":"Vikas helps Your D.O.S.T with Marketing. <br/><br/>A Bangalore Institute of Technology Alumnus, socialholic, likes to google and read interesting article on web.<br/><br/>He volunteers for Your D.O.S.T as he believes that words have power and can help people change the way they live and think.<br/><br/> ",
+		 	"linkedin":"https://www.linkedin.com/in/3vikasvicky",
+		 	"twitter":"https://twitter.com/3VikasVicky",
+		 	"image":"Vikas.jpg"
+		 },
+		 {
+		 	"name":"Kenton",
+		 	"details":"Kenton contributes to D.O.S.T by providing rich and insightful content on Your D.O.S.T blog.<br/><br/> He is an American Psychotherapist with 15+ years of experience in solving the most challenging cases across the globe. He grew up from Portuguese explorer roots in an international environment and became fascinated with India from an early age. <br/><br/>Kenton has great love and compassion for the Indians and shares the Your D.O.S.T. vision of bring stress free help and friendship to everyone in times of need.<br/><br/>",
+		 	"linkedin":"https://www.linkedin.com/in/kentonlane",
+		 	"twitter":"https://www.twitter.com/KentonLaneCom",
+		 	"image":"Kenton.jpg"
 		 }
-	] 
+		 
+		 
+		 
+		
+	],
+	"campus":[
+		
+		 {
+		 	"name":"Aalap",
+		 	"details":"Aalap is Your D.O.S.T campus ambassador for NIT Surat (SVNIT).<br/><br/> He is third year Mechanical Engineering student. He is really excited with Your D.O.S.T vision from Day 1. He helps to increase awareness about Your D.O.S.T not just in his own campus but also outside. <br/><br/>",
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=399839239",
+		 	"twitter":"",
+		 	"image":"Aalap.jpg"
+		 }
+	]  
 }

@@ -53,6 +53,27 @@ I am so thankful to you for such an inspiring reply. Really a heartfelt thanks. 
 					      		<em>(Young independent girl, overwhelmed with her problems)</em>
 				      		</a>
 				    	</li>
+				    	<li class="stickyNote testimonial col-md-3">
+				      		<a href="#">
+				      			<p><strong>&ldquo;</strong>i really dont have words to thank you!! you have motivated me to achieve my dream!! you all are doing a great work!! may god bless u all!! once again thanxx a lott
+</p>
+				        		<em>(A youngster, feeling broken and lost the zeal of life, burdened with expectations)</em>
+				      		</a>
+				    	</li>
+				    	<li class="stickyNote testimonial  col-md-3">
+				      		<a href="#">
+				      			<p><strong>&ldquo;</strong>Thank you folks for replying .. somewhere today i was feeeling good .. hd a nyc breakfast. went fr a walk wid my dog... .. so overall a smiling and healthy day. feeling positive for sometime... Thank u..
+</p>
+				        		<em>(stressed with relationship and not able to concentrate on exam preparation)</em>
+				      		</a>
+				    	</li>
+				    	<li class="stickyNote testimonial  col-md-3">
+					      	<a href="#">
+					      		<p><strong>&ldquo;</strong>Sir, definitely your words are encouraging and thank you for your support. now-a-days I am trying to get over my fear and stay cool in interviews .
+</p>
+					      		<em>(Btech Graduate stressed with job hunt)</em>
+				      		</a>
+				    	</li>
 				 	</ul>
 				 </div>
 			</div> 

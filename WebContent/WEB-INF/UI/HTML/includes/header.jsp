@@ -41,6 +41,7 @@
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=marriage">Marriages</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=education">Education</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=parents">Parents/Kids</a></li>
+				                    <li><a href="${pageContext.request.contextPath}/blog/?=experience">Experiences</a></li>
 				                    <li class="divider"></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=counseling%20profession">Counseling Profession</a></li>
 				                </ul>
@@ -92,6 +93,7 @@
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=marriage">Marriages</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=education">Education</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=parents">Parents/Kids</a></li>
+				                    <li><a href="${pageContext.request.contextPath}/blog/?=experience">Experiences</a></li>
 				                    <li class="divider"></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=counseling%20profession">Counseling Profession</a></li>
 				                </ul>

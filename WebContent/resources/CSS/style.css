@@ -68,6 +68,14 @@
 	.conversation_history{
 		min-height:200px;
 	}
+	.conversation_History_details .post_details {
+		display:none;
+		
+	}
+	.conversation_History_details .each_conversation{
+		padding:0;
+		margin: 5px;
+	}
 	.quotesBg{
 		background:url("../img/background_hand.png") no-repeat scroll 0 0 #fff;
 		margin-top: 70px;
