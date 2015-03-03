@@ -77,6 +77,33 @@ I am so thankful to you for such an inspiring reply. Really a heartfelt thanks. 
 				 	</ul>
 				 </div>
 			</div> 
+			<div class="col-md-12 press-container">
+				<h3>What does media say about us</h3>
+				
+				<div class='col-md-6 press-block'>
+					<div class='col-md-2'><img alt="" src="http://cdn.marketplaceimages.windowsphone.com/v8/images/f6b95d5f-ba8e-4371-a3f7-e65730856163?imageType=ws_icon_large">
+					</div>
+				
+						<div class='col-md-10'><h3>Real Super Heroes of India Who Turn a Plan Into Action</h3><a href="http://www.siliconindia.com/news/general/Real-Super-Heroes-of-India-Who-Turn-a-Plan-Into-Action-nid-178192-cid-1.html/3" target="_blank">
+						<span>Depression is one of the most helpless feelings you can come across with.
+								A survey by WHO in the past showed that around 36 percent of the Indians 
+								represent the case of depression. Richa Singh
+						  
+						  </span></a>
+						</div>
+				</div>
+				<div class='col-md-6 press-block'>
+					<div class=' col-xs-4 col-md-2'><img alt="" src="https://lh5.ggpht.com/s5DuS8_GWnjvGd-Ypdxd9-5S3H3ul_82CFMomN7OgTYBM223Sxnf-qOZLxPk0owqUAw=w300">
+					</div>
+				
+						<div class='col-md-10'><h3>7 Ordinary Indians Doing Extraordinary Things</h3><a href="http://www.huffingtonpost.in/2015/01/26/indians-extraordinary-thi_n_6545512.html" target="_blank"><span>Studies have shown that Indians are among the worst sufferers of depression,
+						 with nearly 36 percent of the population having a major depressive episode, according to an earlier WHO study. </span></a>
+						</div>
+				</div>
+				
+				
+			
+			</div>
 			
 			<sec:authorize access="!hasRole('ROLE_ADMIN')">
 				<sec:authorize ifNotGranted="ROLE_USER">

@@ -1171,5 +1171,17 @@ div.medical_warning{
 	margin-bottom:30px;
 }
 .more-link {
-/*end of styling for more*/
-
+/*end of styling for more*/}
+/*------press blocks in testimonials page ----*/
+.press-block img {width:100%;height:auto;}
+.press-block{padding:10px;margin-bottom:4%;background-color:#fff; -webkit-transition: background-color 1s;
+    -moz-transition: background-color 1s;
+    -o-transition: background-color 1s;
+    transition: background-color 1s;
+    text-decoration:none;}
+    .press-block a{color:#000;}
+    .press-block a:hover{text-decoration:none;}
+.press-container{margin-top:5%;color:#222;}
+.press-block:hover{ background-color:rgba(255, 204, 51, 1);}
+.press-container h3{margin:3% 0;}
+.press-block h3{margin-top:0;}
