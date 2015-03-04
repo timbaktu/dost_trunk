@@ -14,9 +14,32 @@
 		
 	<script>
 		$.getJSON( "${pageContext.request.contextPath}/resources/JSON/teams.json", function( data ){
+				var advisor  = data[ "advisor"  ] ;
 				var core_team  = data[ "core_team"  ] ;
 				var volunteers = data[ "volunteers" ] ;	
 				var campus = data[ "campus" ] ;	
+				
+				$.each( advisor, function( index, elem ){
+					var html = return_team_html() ;
+					
+					$("#advisor .details").append(html) ;
+					
+					var this_list_html = $("#advisor").find(".listOuterContainer").last() ;
+					
+					$(this_list_html).find(".listheading").text( elem.name ) ;
+					$(this_list_html).find(".listContent").html( elem.details ) ;
+					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
+					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;
+					var background_image= '#FFEDB5 url("resources/img/team/'+elem.image+'") no-repeat center center';
+					$(this_list_html).find(".listImage").css("background", background_image ) ;
+					
+					if( index > 0 ){
+						$(this_list_html).addClass("col-md-offset-1") ;
+						
+					}
+					
+				});
+
 				
 				$.each( core_team, function( index, elem ){
 					var html = return_team_html() ;
@@ -50,6 +73,7 @@
 					$(this_list_html).find(".listheading").text( elem.name ) ;
 					$(this_list_html).find(".listContent").html( elem.details ) ;
 					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
+					$(this_list_html).find(".linkedin").attr("id", elem.name+"Linkedin" ) ;
 					$(this_list_html).find(".twitter").attr("id", elem.name ) ;
 					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;
 					
@@ -135,7 +159,14 @@
 	<jsp:include page="includes/header.jsp"></jsp:include>
 				
 	<div class="container row-fluid pageMainContainer" >
-	
+		<div id="advisor" class="row" style="display:none;">	
+			<div class="row">
+				<h2 class="col-md-3 pageHeading">
+					Honorary Advisor 
+				</h2>
+			</div>
+			<div class="details well"></div>
+		</div>
 	
 		<div id="coreTeam" class="row">	
 			<div class="row">
