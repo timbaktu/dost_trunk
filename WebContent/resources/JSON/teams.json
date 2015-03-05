@@ -1,4 +1,15 @@
-{"core_team":[
+{
+"advisor":[
+	{"name":"Pradeep",
+	 "details":"Prof Pradeep Yammiyavar is our honorary advisor who guides us in every step. <br/><br/> He Has over 29 years of experience as  Senior Professor working in the area of multi and interdisciplinary programs related to Design, Innovation, Psychology, Management & Technology.<br/><br/> He is a qualified Psychotherapist and Counselor and a memeber of IIT Guwahati counseling cell. <br/><br/>Having years of experience in UX Design, Technology and Psychology he is able to guide us both on the sensitivity of the topic and the product<br/><br/>",
+	 "linkedin":"https://www.linkedin.com/profile/view?id=6520181",
+	 "twitter":"",
+	 "image":"Pradeep.jpg"
+	}
+	
+  ], 
+  
+"core_team":[
 	{"name":"Richa",
 	 "details":"Richa is the Co-Founder and Conceptualizer for Your D.O.S.T. <br/><br/>She felt the need for Your D.O.S.T while she was studying at IIT Guwahati. Even though there was a counseling cell in the college, no-one would ever go there. Even she herself was never able to gather courage to see a counselor, however emotionally stressed she felt. She observed her colleagues also having similar issues. That's when she started seriously thinking about a virtual emotional support system. <br/><br/> She is agony aunt for most of her friends. A keen observer, TT Lover and a complete foodie.<br/><br/>",
 	 "linkedin":"https://www.linkedin.com/in/richa0387",
@@ -52,8 +63,14 @@
 			 "twitter":"",
 			 "image":"Tarun.gif"
 		 },
+		 {
+			 "name":"Namrta",
+			 "details":"Namrta Mohan is your special friend from Your D.O.S.T team. <br/><br/>She has over 8+ years of experience as a clinical psychologist, currently working in Canada. Prior to moving to Canada, she was working as a psychologist for IIFT College Chandigarh.<br/><br/>She has done her MSc Psychology from Punjabi University with specialisation in Clinical, Child Psychopathology & Counseling Psychology<br/><br/> ",
+			 "linkedin":"https://www.linkedin.com/profile/view?id=150580802",
+			 "twitter":"",
+			 "image":"Namrta.jpg"
+		 },
 		 
-		
 		 {
 			 "name":"Ankita",
 			 "details":"Ankita is a gifted programmer and helps Your D.O.S.T with development. <br/><br/>She has done her engineering from Pune Institute of Technology. If there exist a fix for a technical problem, she always has it. <br/><br/>She believes in Your D.O.S.T's vision of helping people in stress. She says she has herself been there multiple times and understands the pain. She is a big time foodie and an avid traveler.<br/><br/>",
@@ -74,8 +91,15 @@
 		 	"name":"Shreya",
 		 	"details":"Shreya is your special friend from Your D.O.S.T team. <br/><br/>She has done her Post Graduation in Psychological Counselling from Montfort College, Bangalore. A skilled counselor and experienced in dealing with all age groups. <br/><br/>She believes in helping people in a way that would better suit them rather than having a textbook or purist approach. She volunteers for Your D.O.S.T as she loves helping people and believes all the human beings have the potential to reach their optimum best once they overcome the barriers and resolve the deep lying issues.<br/><br/>",
 		 	"linkedin":"https://www.linkedin.com/profile/view?id=400113328",
-		 	"twitter":"https://www.twitter.com/KentonLaneCom",
+		 	"twitter":"",
 		 	"image":"Shreya.jpg"
+		 },
+		  {
+		 	"name":"Dhirendra",
+		 	"details":" Dhirendra Sinha is your special friend from Your D.O.S.T who helps users in providing career guidance. <br/><br/>He is Director of Engineering for Captora Inc, California. He has done his engineering from IIT Guwahati and MS from Texas A&M University, US.  He is a father of two beautiful girls. <br/><br/>He volunteers for Your D.O.S.T as he wants to help people through this medium.<br/><br/>" ,
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=4599667",
+		 	"twitter":"https://twitter.com/dhiren_sinha",
+		 	"image":"Dhirendra.jpg"
 		 },
 		  {
 		 	"name":"Ankita",
@@ -91,14 +115,28 @@
 		 	"twitter":"https://twitter.com/3VikasVicky",
 		 	"image":"Vikas.jpg"
 		 },
+		
 		 {
 		 	"name":"Kenton",
 		 	"details":"Kenton contributes to D.O.S.T by providing rich and insightful content on Your D.O.S.T blog.<br/><br/> He is an American Psychotherapist with 15+ years of experience in solving the most challenging cases across the globe. He grew up from Portuguese explorer roots in an international environment and became fascinated with India from an early age. <br/><br/>Kenton has great love and compassion for the Indians and shares the Your D.O.S.T. vision of bring stress free help and friendship to everyone in times of need.<br/><br/>",
 		 	"linkedin":"https://www.linkedin.com/in/kentonlane",
 		 	"twitter":"https://www.twitter.com/KentonLaneCom",
 		 	"image":"Kenton.jpg"
+		 },
+		 {
+		 	"name":"Paromita",
+		 	"details":"Paromita Bardoloi works with Your D.O.S.T as a content writer.<br/><br/>She is a writer, who is now writing her first book. She believes - Life is Beautiful <br/><br/>",
+		 	"linkedin":"",
+		 	"twitter":"https://twitter.com/ParomitaBardolo",
+		 	"image":"Paromita.jpg"
+		 },
+		 {
+		 	"name":"Anshita",
+		 	"details":"Anshita helps Your D.O.S.T with Content Management<br/><br/>A traveler by choice and IT professional by compulsion. She loves making difference with her words. She is a philanthropist with a knack for helping people and wishes to help a few using Your D.O.S.T <br/><br/>",
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=83540727",
+		 	"twitter":"https://twitter.com/AnshitaAjmani",
+		 	"image":"Anshita.jpg"
 		 }
-		 
 		 
 		 
 		
@@ -111,6 +149,14 @@
 		 	"linkedin":"https://www.linkedin.com/profile/view?id=399839239",
 		 	"twitter":"",
 		 	"image":"Aalap.jpg"
+		 },
+		 
+		 {
+		 	"name":"Sushobhit",
+		 	"details":"Sushobhit is Your D.O.S.T campus ambassador for Thapar University, Patiala.<br/><br/> He is a final year BE Civil Engg student. He loves talking to people on various issues - society, science, religion and take interest in listening and understanding their point of view and behavior. He is an artist - loves pencil and charcoal sketching, playing flute and piano and solving Rubik's cube. <br/><br/>He believes in the vision of Your D.O.S.T and wants to contribute towards creating a stress free society. He believes a free mind is a gateway to innovation, progress, new ideas.<br/><br/>",
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=94097664",
+		 	"twitter":"",
+		 	"image":"Sushobhit.jpg"
 		 }
 	]  
 }
