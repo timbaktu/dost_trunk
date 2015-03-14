@@ -1,7 +1,7 @@
 {
 "advisor":[
 	{"name":"Pradeep",
-	 "details":"Prof Pradeep Yammiyavar is our honorary advisor who guides us in every step. <br/><br/> He Has over 29 years of experience as  Senior Professor working in the area of multi and interdisciplinary programs related to Design, Innovation, Psychology, Management & Technology.<br/><br/> He is a qualified Psychotherapist and Counselor and a memeber of IIT Guwahati counseling cell. <br/><br/>Having years of experience in UX Design, Technology and Psychology he is able to guide us both on the sensitivity of the topic and the product<br/><br/>",
+	 "details":" Prof Pradeep Yammiyavar is our  Advisor (Honorary) who guides us in every step. <br/><br/>He has over 30 years of experience  working in  multi and interdisciplinary education programs related to Design, Innovation, Psychology, Management &  Technology. Besides being an Engineer & Designer he is a qualified  Psychological counselor & Psychotherapist. He has been associated with IIT Guwahati Counseling Cell since its inception.<br/><br/>UX, interaction Design & Usability are his research specialization. His mentorship has benefited several successful startups.<br/><br/>",
 	 "linkedin":"https://www.linkedin.com/profile/view?id=6520181",
 	 "twitter":"",
 	 "image":"Pradeep.jpg"
@@ -41,7 +41,13 @@
 		 	"twitter":"",
 		 	"image":"Namrata.jpg"
 		 },
-		 
+		 {
+		 	"name":"Sanskriti",
+		 	"details":"Sanskriti s your special friend from Your D.O.S.T team.<br/><br/>She is a licensed Clinical Psychologist and a Trainer. Currently she is a Consultant Clinical Psychologist in two private hospitals in Noida. She also conduct workshops on various psychological issues in schools and corporate houses. <br/><br/>She is passionate about helping people. She believes, through Your D.O.S.T, she can reach out to many people who need help but are not able to come out due to social stigma attached to seeking help. She is a very compassionate and empathetic individual.<br/><br/>",
+		 	"linkedin":"https://www.linkedin.com/pub/sanskriti-singh/a1/861/871/en",
+		 	"twitter":"",
+		 	"image":"Sanskriti.jpg"
+		 },
 		 {
 		 	"name":"Vishnu",
 		 	"details":"Vishnu is your special friend from Your D.O.S.T team. <br/><br/>He is an Industrial and Organizational Psychologist by profession and also a Research Scholar at Jai Narayan Vyas University, Jodhpur. He loves to explore inner self and helps others too in self exploration. He has successfully guided many students to achieve their academic and career goals. <br/><br/> He believes he will be able to help others through D.O.S.T.<br/><br/>A good listener, motivational speaker, a kind and helping person who finds happiness in helping others. <br/><br/> ",
@@ -102,6 +108,13 @@
 		 	"image":"Dhirendra.jpg"
 		 },
 		  {
+		 	"name":"Aditya",
+		 	"details":" Aditya Upadhyay is your special friend from Your D.O.S.T team <br/><br/>An IIT'an, working in Banking industry, a compassionate individual and a great listener.<br/><br/>He loves the idea of Your D.O.S.T as he believes that  lending ears can make this world a whole lot happier<br/><br/>" ,
+		 	"linkedin":"https://www.linkedin.com/pub/aditya-upadhyay/8/97b/69a/en",
+		 	"twitter":"https://twitter.com/adityaupadhyay",
+		 	"image":"Aditya.jpg"
+		 },
+		 {
 		 	"name":"Ankita",
 		 	"details":"Ankita is a great UX designer and helps Your D.O.S.T with Design. <br/><br/>An IIT'an, traveller, a basket ball player, avid reader and a great photographer. <br/><br/>She volunteers at Your D.O.S.T  as she believes in the vision of - making this world a happier place. <br/><br/> ",
 		 	"linkedin":"https://www.linkedin.com/in/ankitagautam",
