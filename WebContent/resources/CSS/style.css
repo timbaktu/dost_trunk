@@ -13,7 +13,7 @@
 		padding:0;
 	}
 	.addthis_horizontal_follow_toolbox{
-		width: 230px;
+		width: 253px;
 		margin: auto;
 		margin-bottom: 10px;
 	}
@@ -837,7 +837,11 @@
 	.theme-default .well{
 		background-color: #FFFFFF;
 		border-radius:0;
+		
 	}
+	.theme-default .media{height:104px;text-overflow:ellipsis;-o-text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;}
 	.theme-default .btn-default {
 		color: #000;
 	}
@@ -997,9 +1001,15 @@
 	#dialog{
 		display:none;
 	}
-	.theme-default .ui-dialog, .theme-default .ui-widget{
+	.theme-default .ui-dialog{
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13px;
+		  overflow-y: scroll;
+	}
+	.theme-default .ui-widget{
+		font-family: 'Open Sans', sans-serif;
+		font-size: 13px;
+		
 	}
 	.ui-dialog .ui-dialog-title {
 		font-size: 1.3em;
@@ -1185,3 +1195,12 @@ div.medical_warning{
 .press-block:hover{ background-color:rgba(255, 204, 51, 1);}
 .press-container h3{margin:3% 0;}
 .press-block h3{margin-top:0;}
+/*------press blocks in testimonials page ----*/
+/*------removing empty notes ----*/
+.notes-right{min-height:0px;padding:0px;border:none;}
+.notes-right ul{margin-bottom:0px;}
+.conversation_topic{height:150px;}
+
+/*------styling welcome message ----*/
+.welcome-message-link {height:40px; width:400px;background:blue;}
+.ui-dialog{overflow-y:scroll;}

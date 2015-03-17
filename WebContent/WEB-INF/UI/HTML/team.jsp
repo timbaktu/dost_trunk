@@ -11,7 +11,15 @@
 	<title>Your D.O.S.T Team</title>
 	<jsp:include page="includes/commonHeader.jsp"></jsp:include>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/teams.css"> 
-		
+		<script>
+		$(document).ready(function(){
+		    $(document).ajaxStart(function(){
+		        $(".loading").css("display", "block");
+		    });
+		    
+		    
+		});
+		</script>
 	<script>
 		$.getJSON( "${pageContext.request.contextPath}/resources/JSON/teams.json", function( data ){
 				var advisor  = data[ "advisor"  ] ;
@@ -19,7 +27,11 @@
 				var volunteers = data[ "volunteers" ] ;	
 				var campus = data[ "campus" ] ;	
 				
-				$.each( advisor, function( index, elem ){
+				$(document).ajaxComplete(function(){
+			        $(".loading").css("display", "none");
+			        alert("loading done");
+			    });
+					$.each( advisor, function( index, elem ){
 					var html = return_team_html() ;
 					
 					$("#advisor .details").append(html) ;
@@ -157,6 +169,9 @@
 	<body class="container-fluid   theme-default">
 
 	<jsp:include page="includes/header.jsp"></jsp:include>
+	<li class="loading" id="loading">
+							<img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" />
+						</li>
 				
 	<div class="container row-fluid pageMainContainer" >
 		<div id="advisor" class="row" style="display:none;">	

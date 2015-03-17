@@ -29,10 +29,11 @@
 					  }
 					  %>
 					  
-					  <li id="patientHistory"><a href="${pageContext.request.contextPath}/patientList">Client History</a></li>
+					  <li id="patientHistory"><a href="${pageContext.request.contextPath}/clientList">Client History</a></li>
 					  <!-- <li id="onlineCounseling"><a href="onlineCounseling">Online Counseling</a></li> -->
 					  <li id="forums"><a href="${pageContext.request.contextPath}/forums/show/6.page">Discussions</a></li>
 					  <li id="faqs"><a href="${pageContext.request.contextPath}/faqs">FAQs</a></li>
+					   
 					  <li id="quotes"><a href="${pageContext.request.contextPath}/quotes">Quotes</a></li>
 					  <li class="dropdown" id="blog">
 					  		 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Blogs <b class="caret"></b></a>
@@ -42,6 +43,7 @@
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=education">Education</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=parents">Parents/Kids</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=experience">Experiences</a></li>
+				                    <li><a href="${pageContext.request.contextPath}/blog/?=tips%20and%20tricks">Tips and tricks</a></li>
 				                    <li class="divider"></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=counseling%20profession">Counseling Profession</a></li>
 				                </ul>
@@ -94,6 +96,7 @@
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=education">Education</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=parents">Parents/Kids</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=experience">Experiences</a></li>
+				                    <li><a href="${pageContext.request.contextPath}/blog/?=tips%20and%20tricks">Tips and tricks</a></li>
 				                    <li class="divider"></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=counseling%20profession">Counseling Profession</a></li>
 				                </ul>

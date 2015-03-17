@@ -280,19 +280,51 @@
 			$('.wrapperConversation').more({length: 120});
 		},1000);
 		/*End of showing ellipsis*/
+
 		
-		
-		var receipient = 'all' ; /*to go as receipientID*/
+		var recipient = 'all' ; /*to go as receipientID*/
 		
 		/*populating users*/
 			function split( val ) {
 			return val.split( /,\s*/ );
 		}
-		function extractLast( term ) {
+		  function extractLast( term ) {
 			return split( term ).pop();
-		}
-		/*
-		$("#recipient" ).autocomplete({
+		} 
+		  $( "#recipient" )
+			// don't navigate away from the field on tab when selecting an item
+			.bind( "keydown", function( event ) {
+				if ( event.keyCode === $.ui.keyCode.TAB &&
+						$( this ).autocomplete( "instance" ).menu.active ) {
+					event.preventDefault();
+				}
+			})
+			.autocomplete({
+				minLength: 0,
+				source: function( request, response ) {
+					// delegate back to autocomplete, but extract the last term
+					response( $.ui.autocomplete.filter(
+						availableTags, extractLast( request.term ) ) );
+				},
+				focus: function() {
+					// prevent value inserted on focus
+					return false;
+				},
+				select: function( event, ui ) {
+					var terms = split( this.value );
+					// remove the current input
+					terms.pop();
+					// add the selected item
+					terms.push( ui.item.value );
+					// add placeholder to get the comma-and-space at the end
+					terms.push( "" );
+					this.value = terms.join( ", " );
+					return false;
+				}
+			});
+		
+		
+		 /*$("#recipient" ).autocomplete({
 			source: function( request, response ) {
 	                $.ajax({
 	                    url: "/dost/api/users",
@@ -323,7 +355,7 @@
 					this.value = terms.join( ", " );
 					return false;
 				}
-		});*/
+		}); */
 		
 		/*end of populating users*/
 		
@@ -534,7 +566,7 @@
 		
 		<script>
 		
-		$.ajax({
+		/*$.ajax({
             url: "/dost/api/users",
             dataType: "json",
             success: function(data) {
@@ -555,6 +587,61 @@
         				$("#selected_recipient").val( ui.item.name ) ;
         			}
             	});            	
+            	
+                }
+            }); */
+		
+          $.ajax({
+            url: "/dost/api/users",
+            dataType: "json",
+            success: function(data) {
+            	console.log(1) ;
+            	var arr =  $.map(data, function(users) {
+                  return {
+                    label: users.username,
+                    name: users.userId,
+                    };
+                });   
+            	console.log( arr ) ;	
+            	debugger;
+            	function split( val ) {
+        			return val.split( /,\s*/ );
+        		}
+        		  function extractLast( term ) {
+        			return split( term ).pop();
+        		} 
+        		  $( "#recipient" )
+        			// don't navigate away from the field on tab when selecting an item
+        			.bind( "keydown", function( event ) {
+        				if ( event.keyCode === $.ui.keyCode.TAB &&
+        						$( this ).autocomplete( "instance" ).menu.active ) {
+        					event.preventDefault();
+        				}
+        			})
+        			.autocomplete({
+        				minLength: 0,
+        				source: function( request, response ) {
+        					// delegate back to autocomplete, but extract the last term
+        					response( $.ui.autocomplete.filter(
+        						availableTags, extractLast( request.term ) ) );
+        				},
+        				focus: function() {
+        					// prevent value inserted on focus
+        					return false;
+        				},
+        				select: function( event, ui ) {
+        					var terms = split( this.value );
+        					// remove the current input
+        					terms.pop();
+        					// add the selected item
+        					terms.push( ui.item.value );
+        					// add placeholder to get the comma-and-space at the end
+        					terms.push( "" );
+        					this.value = terms.join( ", " );
+        					return false;
+        				}
+        			});
+        		           	
             	
                 }
             });

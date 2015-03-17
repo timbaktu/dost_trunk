@@ -4,7 +4,7 @@
 
 
 <!--patient summary-->
-<div class="pull-right col-md-3 well">
+<div class="pull-right col-md-3 well notes-right">
 	
 	<ul class="counselor_notes">
 		

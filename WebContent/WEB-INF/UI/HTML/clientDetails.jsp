@@ -122,7 +122,7 @@
 		<div class="container">
 			<div class="pageTop">
 					<h2 class="pull-left pageHeading">
-						<a  href="patientList">&larr; Back to all Patients</a>
+						<a  href="clientList">&larr; Back to all Patients</a>
 					</h2>
 					<div class="clearfix"></div>
 			</div>
@@ -131,10 +131,10 @@
 				
 				<div class="summary_patient">
 					<h2 class="pageHeading patientName"></h2>
-					<label>Relationship</label> | <label>Repeat</label>
+					<!--  <label>Relationship</label> | <label>Repeat</label> -->
 					<div class="clearfix"></div>
 				</div>
-				<br/>
+				<!--  <br/> -->
 				 
 				<ul class="conversations conversation_History_details">
 					<li class="loading" id="loading">
