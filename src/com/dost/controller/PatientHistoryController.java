@@ -2,8 +2,10 @@ package com.dost.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +119,12 @@ public class PatientHistoryController {
 	@RequestMapping(value = "/user/{id}/patienthistory/all", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getAllUserMessagesForHistory(@PathVariable Long id) {
-		List<DbMessage> messages = messageService.getAllUserMessages(id);
+		List<DbMessage> senderMessages = messageService.getAllUserMessages(id);
+		List<DbMessage> recipientMessages = messageService.getUserMessages(id);
+		Set<DbMessage> messages = new HashSet<DbMessage>();
+		messages.addAll(senderMessages);
+		messages.addAll(recipientMessages);
+
 		for(DbMessage msg : messages) {
 			msg.setSentDate(Utils.formatDate("yyyy-MM-dd hh:mm:s", msg.getSentDateDb()));
 			System.out.println(msg.getSentDate());

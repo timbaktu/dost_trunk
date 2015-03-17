@@ -42,6 +42,7 @@
 					$(this_list_html).find(".listContent").html( elem.details ) ;
 					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
 					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;
+					$(this_list_html).find(".twitter").attr("id", elem.name ) ;
 					var background_image= '#FFEDB5 url("resources/img/team/'+elem.image+'") no-repeat center center';
 					$(this_list_html).find(".listImage").css("background", background_image ) ;
 					
@@ -174,10 +175,10 @@
 						</li>
 				
 	<div class="container row-fluid pageMainContainer" >
-		<div id="advisor" class="row" style="display:none;">	
+		<div id="advisor" class="row">	
 			<div class="row">
 				<h2 class="col-md-3 pageHeading">
-					Honorary Advisor 
+					Advisor (Honorary) 
 				</h2>
 			</div>
 			<div class="details well"></div>
