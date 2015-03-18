@@ -23,7 +23,7 @@
 					<div class="error alert alert-danger" role="alert"></div>
 					<label>To</label>
 					<input id="recipient" required type="text" id="autocomplete" class="form-control questionForm autocomplete" placeholder="Send To"/>
-					<input type="hidden" id="selected_recipient" />
+					<input type="hidden" class="form-control questionForm autocomplete" id="selected_recipient" />
 					<br/>
 					
 					<label>Subject</label>

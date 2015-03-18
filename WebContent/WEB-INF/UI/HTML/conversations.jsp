@@ -291,37 +291,6 @@
 		  function extractLast( term ) {
 			return split( term ).pop();
 		} 
-		  $( "#recipient" )
-			// don't navigate away from the field on tab when selecting an item
-			.bind( "keydown", function( event ) {
-				if ( event.keyCode === $.ui.keyCode.TAB &&
-						$( this ).autocomplete( "instance" ).menu.active ) {
-					event.preventDefault();
-				}
-			})
-			.autocomplete({
-				minLength: 0,
-				source: function( request, response ) {
-					// delegate back to autocomplete, but extract the last term
-					response( $.ui.autocomplete.filter(
-						availableTags, extractLast( request.term ) ) );
-				},
-				focus: function() {
-					// prevent value inserted on focus
-					return false;
-				},
-				select: function( event, ui ) {
-					var terms = split( this.value );
-					// remove the current input
-					terms.pop();
-					// add the selected item
-					terms.push( ui.item.value );
-					// add placeholder to get the comma-and-space at the end
-					terms.push( "" );
-					this.value = terms.join( ", " );
-					return false;
-				}
-			});
 		
 		
 		 /*$("#recipient" ).autocomplete({
@@ -384,12 +353,13 @@
 							$(".error").hide();
 							
 							var selected_recipient = $("#selected_recipient").val() ;
+							alert(selected_recipient);
 							if( selected_recipient == undefined || selected_recipient == '' || !selected_recipient ){
-								selected_recipient = "all" ;
+								selected_recipient = "al" ;
 							}
 														
 							var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+ selected_recipient +'&senderId=' + userid;
-							//alert(datatosend);						 
+							alert(datatosend);						 
 							if($("#recipient").val()== '' || $("#subject").val()== '' || $("#messageContent").val() =='') {
 								$(".error").show().text("Please fill in details");
 							}
@@ -566,7 +536,7 @@
 		
 		<script>
 		
-		/*$.ajax({
+		 /*$.ajax({
             url: "/dost/api/users",
             dataType: "json",
             success: function(data) {
@@ -590,61 +560,64 @@
             	
                 }
             }); */
-		
-          $.ajax({
-            url: "/dost/api/users",
-            dataType: "json",
-            success: function(data) {
-            	console.log(1) ;
-            	var arr =  $.map(data, function(users) {
-                  return {
-                    label: users.username,
-                    name: users.userId,
-                    };
-                });   
-            	console.log( arr ) ;	
-            	debugger;
-            	function split( val ) {
-        			return val.split( /,\s*/ );
-        		}
-        		  function extractLast( term ) {
-        			return split( term ).pop();
-        		} 
-        		  $( "#recipient" )
-        			// don't navigate away from the field on tab when selecting an item
-        			.bind( "keydown", function( event ) {
-        				if ( event.keyCode === $.ui.keyCode.TAB &&
-        						$( this ).autocomplete( "instance" ).menu.active ) {
-        					event.preventDefault();
-        				}
-        			})
-        			.autocomplete({
-        				minLength: 0,
-        				source: function( request, response ) {
-        					// delegate back to autocomplete, but extract the last term
-        					response( $.ui.autocomplete.filter(
-        						availableTags, extractLast( request.term ) ) );
-        				},
-        				focus: function() {
-        					// prevent value inserted on focus
-        					return false;
-        				},
-        				select: function( event, ui ) {
-        					var terms = split( this.value );
-        					// remove the current input
-        					terms.pop();
-        					// add the selected item
-        					terms.push( ui.item.value );
-        					// add placeholder to get the comma-and-space at the end
-        					terms.push( "" );
-        					this.value = terms.join( ", " );
-        					return false;
-        				}
-        			});
-        		           	
-            	
-                }
-            });
+            $.ajax({
+                url: "/dost/api/users",
+                dataType: "json",
+                success: function(data) {
+                	console.log(1) ;
+                	var arr =  $.map(data, function(users) {
+                      return {
+                        label: users.username,
+                        name: users.userId,
+                        };
+                    });   
+                	console.log( arr ) ;	
+                	function split( val ) {
+            			return val.split( /,\s*/ );
+            		}
+            		function extractLast( term ) {
+            			return split( term ).pop();
+            		}
+
+            		$( "#recipient" )
+            			// don't navigate away from the field on tab when selecting an item
+            			.bind( "keydown", function( event ) {
+            				if ( event.keyCode === $.ui.keyCode.TAB &&
+            						$( this ).autocomplete( "instance" ).menu.active ) {
+            					event.preventDefault();
+            				}
+            			})
+            			.autocomplete({
+            				minLength: 0,
+            				source: function( request, response ) {
+            					// delegate back to autocomplete, but extract the last term
+            					response( $.ui.autocomplete.filter(
+            						arr, extractLast( request.term ) ) );
+            				},
+            				focus: function() {
+            					// prevent value inserted on focus
+            					return false;
+            				},
+            				select: function( event, ui ) {
+            					var terms = split( this.value );
+            					// remove the current input
+            					terms.pop();
+            					// add the selected item
+            					terms.push( ui.item.value );
+            					// add placeholder to get the comma-and-space at the end
+            					terms.push( "" );
+            					this.value = terms.join( ", " );
+            					//$("#recipient").val( ui.item.label ) ;
+            				      //$("#selected_recipient").val( ui.item.name ) ;
+            					return false;
+            				} 
+            				
+            				
+            			});            	
+                	
+                    }
+                }); 
+          
 		
 		/*end of populating users*/
 		

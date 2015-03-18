@@ -833,6 +833,7 @@
 	}
 	.theme-default .media-body{
 		color: #333;
+		height:65px;
 	}
 	.theme-default .well{
 		background-color: #FFFFFF;
@@ -1004,7 +1005,7 @@
 	.theme-default .ui-dialog{
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13px;
-		  overflow-y: scroll;
+		  //overflow-y: scroll;
 	}
 	.theme-default .ui-widget{
 		font-family: 'Open Sans', sans-serif;
@@ -1203,4 +1204,12 @@ div.medical_warning{
 
 /*------styling welcome message ----*/
 .welcome-message-link {height:40px; width:400px;background:blue;}
-.ui-dialog{overflow-y:scroll;}
+.ui-dialog{overflow-y:hidden;}
+
+.ui-autocomplete {
+		max-height:300px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+	
+	}
