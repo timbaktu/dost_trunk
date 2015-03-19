@@ -352,10 +352,12 @@
 							$(".error").html("");
 							$(".error").hide();
 							
-							var selected_recipient = $("#selected_recipient").val() ;
+							var selected_recipient = $("#selected_recipient").val().split(",").reverse() ;
+							selected_recipient.pop();
+							selected_recipient.join();
 							alert(selected_recipient);
 							if( selected_recipient == undefined || selected_recipient == '' || !selected_recipient ){
-								selected_recipient = "al" ;
+								selected_recipient = "all" ;
 							}
 														
 							var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+ selected_recipient +'&senderId=' + userid;
@@ -604,13 +606,17 @@
             					terms.pop();
             					// add the selected item
             					terms.push( ui.item.value );
+            					var ids=$("#selected_recipient").val()+","+ui.item.name;
             					// add placeholder to get the comma-and-space at the end
             					terms.push( "" );
             					this.value = terms.join( ", " );
             					//$("#recipient").val( ui.item.label ) ;
-            				      //$("#selected_recipient").val( ui.item.name ) ;
+            				      $("#selected_recipient").val( ids ) ;
+            				      alert($("#selected_recipient").val());
+            				      debugger;
             					return false;
             				} 
+            				
             				
             				
             			});            	
