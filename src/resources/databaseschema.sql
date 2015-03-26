@@ -284,3 +284,25 @@ insert into jforum_forums values (2, 2, 'Relationship', 'Relationship', 1, 0, 0,
 insert into jforum_forums values (3, 3, 'Career', 'Career', 1, 0, 0, 0)
 insert into jforum_forums values (4, 4, 'Education', 'Education', 1, 0, 0, 0)
 insert into jforum_forums values (5, 5, 'Personality', 'Personality', 1, 0, 0, 0)
+
+
+CREATE TABLE `dost_codes` (
+    `codeid` INTEGER NOT NULL AUTO_INCREMENT,
+    `type` varchar(255) NOT NULL,
+	`value` varchar(1000) NOT NULL,
+    `createdate` varchar(255) DEFAULT NULL,
+    `createby` bigint(20) DEFAULT NULL,
+    `updatedate` varchar(255) DEFAULT NULL,
+    `updateby` bigint(20) DEFAULT NULL,
+    `deleted` INTEGER DEFAULT 0,
+    PRIMARY KEY (`codeid`)
+);
+
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('1', 'TAG', 'Relationship', '0');
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('2', 'TAG', 'Career', '0');
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('3', 'TAG', 'Education', '0');
+
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('4', 'LOCATION', 'Bangalore', '0');
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('5', 'LOCATION', 'Delhi', '0');
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('6', 'LOCATION', 'Hyderabad', '0');
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('7', 'LOCATION', 'Bhopal', '0');
