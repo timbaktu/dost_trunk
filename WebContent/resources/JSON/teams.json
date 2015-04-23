@@ -11,24 +11,24 @@
   
 "core_team":[
 	{"name":"Richa",
-	 "details":"Richa is the Co-Founder and Conceptualizer for Your D.O.S.T. <br/><br/>She felt the need for Your D.O.S.T while she was studying at IIT Guwahati. Even though there was a counseling cell in the college, no-one would ever go there. Even she herself was never able to gather courage to see a counselor, however emotionally stressed she felt. She observed her colleagues also having similar issues. That's when she started seriously thinking about a virtual emotional support system. <br/><br/> She is agony aunt for most of her friends. A keen observer, TT Lover and a complete foodie.<br/><br/>",
+	 "details":"Richa is the Founder and Chief Executive for Your D.O.S.T. <br/><br/>She felt the need for Your D.O.S.T while she was studying at IIT Guwahati. Even though there was a counseling cell in the college, no-one would ever go there. Even she herself was never able to gather courage to see a counselor, however emotionally stressed she felt. She observed her colleagues also having similar issues. That's when she started seriously thinking about a virtual emotional support system. <br/><br/> She is agony aunt for most of her friends. A keen observer, TT Lover and a complete foodie.<br/><br/>",
 	 "linkedin":"https://www.linkedin.com/in/richa0387",
 	 "twitter":"https://www.twitter.com/des_richa",
 	 "image":"Richa.jpg"
 	},
 	
 	{"name":"Satyajeet",
-	 "details":"Satyajeet is the Co-Founder and Conceptualizer for Your D.O.S.T. <br/><br/> He breathes and eats code. The day Richa and Satyajeet had discussion about the idea of Your D.O.S.T, he actually started creating it because he felt that D.O.S.T has the potential to help millions.<br><br> An avid traveler, runner, a compassionate person and the person behind making Your D.O.S.T a reality.<br/><br/>",
+	 "details":"Satyajeet is the Co-Founder and Chief Technical Officer for Your D.O.S.T. <br/><br/> He breathes and eats code. The day Richa and Satyajeet had discussion about the idea of Your D.O.S.T, he actually started creating it because he felt that D.O.S.T has the potential to help millions.<br><br> An avid traveler, runner, a compassionate person and the person behind making Your D.O.S.T a reality.<br/><br/>",
 	 "linkedin":"https://www.linkedin.com/profile/view?id=53321336",
 	 "twitter":"",
 	 "image":"Satyajeet.jpg"
 	},
 	{
-			"name":"Puneet",
-		 	"details":"Puneet is the Chief Strategist for Your D.O.S.T. <br/><br/>Difficult problems make him happy. An IIM Bangalore alumni, a consultant with Mckinsey & Company and a former programmer by profession. He keeps coming up with innovative ideas on making Your D.O.S.T a sustainable business. <br/><br/>A huge bollywood fan, tennis lover and a king of poor jokes.<br/><br/>  ",
-		 	"linkedin":"https://www.linkedin.com/profile/view?id=34069522",
-		 	"twitter":"https://twitter.com/puneetmanuja",
-		 	"image":"Puneet.jpg"
+	"name":"Puneet",
+	"details":"Puneet is the Co-Founder & Chief Strategy Officer for Your D.O.S.T. <br/><br/>Difficult problems make him happy. An IIM Bangalore alumni, a former consultant with Mckinsey & Company and a former programmer by profession. He keeps coming up with innovative ideas on making Your D.O.S.T a sustainable business. <br/><br/>A huge bollywood fan, tennis lover and a king of poor jokes.<br/><br/>  ",
+	"linkedin":"https://www.linkedin.com/profile/view?id=34069522",
+	"twitter":"https://twitter.com/puneetmanuja",
+	"image":"Puneet.jpg"
 		}
   ], 
   
@@ -115,6 +115,62 @@
 		 	"image":"Aditya.jpg"
 		 },
 		 {
+		 	"name":"Maitreyee",
+		 	"details":" Maitreyee is your special friend from Your D.O.S.T team. <br/><br/>She is Masters in Counseling Psychology from Sampurna Insititute of Advanced Studies, Bangalore. She is experienced in dealing with adolescent related issues.<br/><br/> She firmly believes that we all have the capacity to help ourselves but sometimes we do need support and guidance when life doesn't seem all that good and those tough times is where she wants to help others.<br/><br/>Her helping nature and compassion attracts her to this field of psychology and Your D.O.S.T",	 	
+		 	"linkedin":"https://in.linkedin.com/pub/maitreyee-bezbaroa/b2/119/194",
+		 	"twitter":"https://twitter.com/BezbaroaM",
+		 	"image":"Maitreyee.jpg"
+		 },
+		 {
+		 	"name":"Athaliah",
+		 	"details":"Athaliah your special friend from Your D.O.S.T team. <br/><br/>She is a Masters in Applied Psychology from Montfort college. She specializes in Clinical Psychology. She is passionate about helping people in any way that she can and believes that through Your D.O.S.T, she can reach out to more people than she would ordinarily be able to help. <br/><br/>She is an audiophile and a bibliophile and firmly believe that anyone can make positive changes in their lives.<br/><br/>",	 	
+		 	"linkedin":"https://in.linkedin.com/pub/athaliah-simmons/99/744/669",
+		 	"twitter":"https://twitter.com/atabattata",
+		 	"image":"Athaliah.jpg"
+		 },
+		 {
+		 	"name":"Jancy",
+		 	"details":" Jancy is your special friend from Your D.O.S.T team. <br/><br/>She is a Masters in Counseling Pyschology from Christ University. She comes from a nursing background and has worked with people from different age groups and backgrounds. <br/><br/>She hopes to make a small difference in the lives of the people she comes across. She believes most of us have the keys to our own problems; we just need to find the right direction and through Your D.O.S.T she wants to empower people to do that.<br/><br/>An optimistic person, a compassionate listener, dreams of travelling the entire world and meeting as many people as she can. <br/><br/>",	 	
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=388283427",
+		 	"twitter":"",
+		 	"image":"Jancy.jpg"
+		 },
+		 {
+		 	"name":"Kannupriya",
+		 	"details":"Kannupriya your special friend from Your D.O.S.T team. <br/><br/>She is a practicing Counseling Psychologist at a renowned hospital and a certified EMDR therapist (Level-1). <br/><br/>She has had experience of dealing with issues related to career, relationships, families, family laws, de-addiction, psychiatric setup, trauma & grief, parenting and many more. She has also been active researcher in the field of psychology and mental health.<br/><br/>An ardent lover of art & craft and music (especially drumming). writing, reading and travelling.<br/><br/>She believes - I can't change the direction of the wind, but I can adjust my sails to always reach my destination.<br/><br/>",	 	
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=141884122",
+		 	"twitter":"https://twitter.com/mausumidutta",
+		 	"image":"Kannupriya.jpg"
+		 },
+		  {
+		 	"name":"Mausumi",
+		 	"details":" Mausumi is your special friend from Your D.O.S.T team. <br/><br/>Mausumi is an M.Tech Computer Science from Calcutta University, worked for TCS for 3 years but her desire to help people made her switch the career. She is currently associated with Adamas Group. She has more than 5 years of hands-on experience in handling adolescent and teenage related issues. She has completed Certification in Child Guidance course and at present pursuing her Masters in Psychology.<br/><br/>Through Your D.O.S.T she believes, she will be able to reach many more people who need little support.<br/><br/>",	 	
+		 	"linkedin":"https://in.linkedin.com/in/mausumidutta",
+		 	"twitter":"",
+		 	"image":"Mausumi.jpg"
+		 },
+		 {
+		 	"name":"Prachi",
+		  	"details":"Prachi is your special friend from Your D.O.S.T team. <br/><br/>She is a writer, traveler and founder of www.ghoomophiro.com. She is also associated with eetindia group, DDNews,HT Horizons and several NGOs like AID/Butterflies etc. She is a compassionate listener, has been agony aunt for her friends and volunteered for suicide prevention helpline. <br/><br/> A CS graduate from Miranda House - Delhi, an MBA from Great Lakes Institute of Management - Chennai, avid traveler and theatre lover. <br/><br/>Through Your D.O.S.T, she wants to help all those who are in distress.<br/><br/>",	 	
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=10241170",
+		 	"twitter":"https://twitter.com/prachimadri",
+		 	"image":"Prachi.jpg"
+		 },
+		 {
+		 	"name":"Angana",
+		 	"details":"Angana is your special friend from Your D.O.S.T team. <br/><br/>She has done her Masters in Developmental Psychology from University of Durham, UK. She is currently working under the guidance of a reputed Psychiatrist and Psychologist in Kolkata.<br/><br/>She has a special interest in dealing with childhood and adolescent related issues as well as sexuality counseling. <br/><br/>She loves reading romantic novels! Through Your D.O.S.T she wants to reach out to those who need little support and understanding.<br/><br/>" ,
+		 	"linkedin":"https://in.linkedin.com/pub/angana-nandy/50/463/285",
+		 	"twitter":"",
+		 	"image":"Angana.jpg"
+		 },
+		 {
+		 	"name":"Vaishnavi",
+		 	"details":"Vaishnavi is your special friend from Your D.O.S.T team. <br/><br/>She is currently pursuing Psychology from University of Delhi. She believes that nothing is more satisfying than helping people who  are in emotional turmoil. She is compassionate, empathetic and extrovert who loves talking to people and helping them see their problem from different perspectives.<br/><br/> She is a big time foodie and a voracious reader.<br/><br/> ",
+		 	"linkedin":"https://www.linkedin.com/profile/view?id=372750488",
+		 	"twitter":"",
+		 	"image":"Vaishnavi.jpg"
+		 },
+		 {
 		 	"name":"Ankita",
 		 	"details":"Ankita is a great UX designer and helps Your D.O.S.T with Design. <br/><br/>An IIT'an, traveller, a basket ball player, avid reader and a great photographer. <br/><br/>She volunteers at Your D.O.S.T  as she believes in the vision of - making this world a happier place. <br/><br/> ",
 		 	"linkedin":"https://www.linkedin.com/in/ankitagautam",
@@ -127,6 +183,13 @@
 		 	"linkedin":"https://www.linkedin.com/in/3vikasvicky",
 		 	"twitter":"https://twitter.com/3VikasVicky",
 		 	"image":"Vikas.jpg"
+		 },
+		 {
+		 	"name":"Divya",
+		 	"details":"Divya helps Your D.O.S.T with Marketing. <br/><br/>A student from Christ University, dramatics enthusiast, story-teller and a hard core Hyderabad Lover.<br/><br/>She works with Your D.O.S.T as she believes if people can only talk it out, they will feel much better. She has herself felt the need for something like Your D.O.S.T, so now she is dedicated to increase awareness so that more people can be benefitted <br/><br/> ",
+		 	"linkedin":"",
+		 	"twitter":"https://twitter.com/Divyarajuv27",
+		 	"image":"Divya.jpg"
 		 },
 		
 		 {
