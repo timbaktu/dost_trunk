@@ -2,6 +2,17 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script>
+$.ajax({
+	 url : "/dost/api/forums/checkForAccess",
+	 success : function(data){ 
+		 if( !data ){
+			$(".menuItems #discussions").css("display", "none") ;
+	 	}
+	 }
+});
+</script>
+
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 	<header id="main-navbar" class="navbar navbar-default navbar-fixed-top">
 	  <div class="navbar-inner">
@@ -17,12 +28,13 @@
 			
 				<ul class="nav navbar-nav pull-right ">
 					<li><a href="#" class="navbar-link">${pageContext.request.userPrincipal.name}</a></li>
-					<li><a href="dost/j_spring_security_logout" class="navbar-link">Logout</a></li>
+					<li><a href="j_spring_security_logout" class="navbar-link">Logout</a></li>
 				</ul>
 				<ul class="nav navbar-nav pull-left menuItems">
 					  <!-- Adding this after talking to Richa, conversation link should appear only for Prashant and Aarti -->
 					  <%
-					  if(request.getUserPrincipal().getName().equalsIgnoreCase("prashant") || request.getUserPrincipal().getName().equalsIgnoreCase("aarti")) {
+					  //if(request.getUserPrincipal().getName().equalsIgnoreCase("prashant") || request.getUserPrincipal().getName().equalsIgnoreCase("aarti")) {
+					  if(true) {
 					  %>
 					  <li id="conversations"><a href="${pageContext.request.contextPath}/conversations">Conversations</a></li>
 					  <%
@@ -33,7 +45,6 @@
 					  <!-- <li id="onlineCounseling"><a href="onlineCounseling">Online Counseling</a></li> -->
 					  <li id="forums"><a href="${pageContext.request.contextPath}/forums/show/6.page">Discussions</a></li>
 					  <li id="faqs"><a href="${pageContext.request.contextPath}/faqs">FAQs</a></li>
-					   
 					  <li id="quotes"><a href="${pageContext.request.contextPath}/quotes">Quotes</a></li>
 					  <li class="dropdown" id="blog">
 					  		 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Blogs <b class="caret"></b></a>
@@ -55,6 +66,7 @@
 		</div>
 	  </div>
 	</header>
+	
 </sec:authorize>
 <sec:authorize access="!hasRole('ROLE_ADMIN')">
 	<header id="main-navbar" class="navbar navbar-inverse navbar-fixed-top">
@@ -71,7 +83,7 @@
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_USER')">
 						<li><a href="#" class="navbar-link">${pageContext.request.userPrincipal.name}</a></li>
-						<li><a href="dost/j_spring_security_logout" class="navbar-link">Logout</a></li>
+						<li><a href="j_spring_security_logout" class="navbar-link">Logout</a></li>
 					</sec:authorize>
 				</ul>
 				<ul class="nav navbar-nav pull-left menuItems">
@@ -82,9 +94,11 @@
 				  <sec:authorize access="hasRole('ROLE_USER')">
 				  	<li style="" id="talkToFriend"><a href="${pageContext.request.contextPath}/talkToFriend">Talk To a Friend</a></li>
 				  </sec:authorize>
+<!-- 
 				  <sec:authorize access="hasRole('ROLE_USER')">
 				  	<li style="" id="talkToSpecificFriend"><a href="${pageContext.request.contextPath}/chat2">Talk To Specific Friend</a></li>
 				  </sec:authorize>				  
+ -->
 				  <li id="faqs"><a href="${pageContext.request.contextPath}/faqs">FAQs</a></li>
 				  <li style="" id="quotes"><a href="${pageContext.request.contextPath}/quotes">Quotes</a></li>
 				  <!-- <li id="blogs"><a href="http://blog.yourdost.com" target="_blank">Blog</a></li>-->
@@ -96,7 +110,7 @@
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=education">Education</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=parents">Parents/Kids</a></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=experience">Experiences</a></li>
-				                    <li><a href="${pageContext.request.contextPath}/blog/?=tips%20and%20tricks">Tips and tricks</a></li>
+				                   <li><a href="${pageContext.request.contextPath}/blog/?=tips%20and%20tricks">Tips and tricks</a></li>
 				                    <li class="divider"></li>
 				                    <li><a href="${pageContext.request.contextPath}/blog/?=counseling%20profession">Counseling Profession</a></li>
 				                </ul>

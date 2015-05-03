@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
@@ -35,6 +36,7 @@ public class DbUser extends DbGeneric implements Serializable {
 	@Column(name = "password")
 	@JsonIgnore
 	private String password;
+	
 	@Column(name = "userrole")
 	@JsonIgnore
 	private Role userRole;
@@ -70,6 +72,19 @@ public class DbUser extends DbGeneric implements Serializable {
 	private String branch;
 	@Column(name = "email")
 	private String email;	
+	@Column(name = "blocked")
+	private String blocked;	
+	@Column(name = "identifier")
+	private String identifier;
+	
+	public DbUser() {
+		
+	}
+
+	public DbUser(Long userId, String username) {
+		this.userId = userId;
+		this.username = username;
+	}
 	
 	public Long getUserId() {
 		return userId;
@@ -154,6 +169,18 @@ public class DbUser extends DbGeneric implements Serializable {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getBlocked() {
+		return blocked;
+	}
+	public void setBlocked(String blocked) {
+		this.blocked = blocked;
+	}
+	public String getIdentifier() {
+		return identifier;
+	}
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 	
 	

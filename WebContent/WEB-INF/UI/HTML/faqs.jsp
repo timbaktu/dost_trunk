@@ -8,7 +8,7 @@
 <jsp:include page="includes/header.jsp"></jsp:include>
 <head>
 <meta charset="utf-8">
-<title>Frequently Asked Questions - DOST</title>
+<title>Frequently Asked Questions, Your D.O.S.T</title>
 <script>
 	$(function() {
 		
@@ -20,7 +20,7 @@
 			for (var i = 0 ; i < FAQ.length; i++) {
 				
 				/*FAQ listing on faq page*/
-				$(".FAQList").append('<div class="well categoryList"><h3 class="categoryName subHeading" id='+FAQ[i].faqCategoryName+">"+FAQ[i].faqCategoryName+"</h3>");
+				$(".FAQList").append('<div class="categoryList"><h3 class="categoryName subHeading" id='+FAQ[i].faqCategoryName+">"+FAQ[i].faqCategoryName+"</h3>");
 				$("#"+FAQ[i].faqCategoryName).after("<ul></ul></div>");
 
 				for (var j = 0 ; j < FAQ[i].faqs.length; j++) {
@@ -42,13 +42,16 @@
 		$(".question").click(function(){
 				$(this).addClass("clickedQuestion");
 				$(this).closest(".questionAnswer").addClass("clicked");
+				$(".categoryList").addClass("removeSpace");
 				$(".nextPreviousNav").show();
 				$(".allQuestions").show();
 				$(".question").not(this).hide();
+				$(".pageTop h2.pageHeading").hide();
 				var thisCategory = $(this).closest(".categoryList");
 				$(".categoryList").not(thisCategory).hide();
 				$(this).siblings(".answer").show();
-				$(".searchBox").hide();		
+				$(".searchBox").hide();	
+				$("#deletebutton, #editbutton").removeClass("hide");
 				
 		});
 		/*end of click on FAQs*/
@@ -56,15 +59,18 @@
 		/*Moving through FAQs*/
 		$(".allQuestions").click(function(){
 				$(".categoryName").show();
+				$(".categoryList").removeClass("removeSpace");
 				$(".question").removeClass("clickedQuestion");
 				$(".questionAnswer").removeClass("clicked");
 				$(".nextPreviousNav").hide();
+				$(".pageTop h2.pageHeading").show();
 				$(".allQuestions").hide();
 				$(".categoryList").show();
 				$(".questionAnswer").show();
 				$(".question").show();
 				$(".answer").hide();
 				$(".searchBox").show();
+				$("#deletebutton, #editbutton").addClass("hide");
 		});
 		/*End of Moving through FAQs*/
 		
@@ -78,6 +84,7 @@
 		/*Next Previous navigation*/
 		$(".next").click(function(){
 			$(".clickedQuestion").closest("li.questionAnswer").hide();
+			$(".categoryList").addClass("removeSpace");
 			var nextQuestion = $(".clickedQuestion").closest("li").next("li");		
 			
 			if(nextQuestion.length == 0){
@@ -99,6 +106,7 @@
 		
 		
 		$(".previous").click(function(){
+			$(".categoryList").addClass("removeSpace");
 			$(".clickedQuestion").closest("li.questionAnswer").hide();
 			var prevQuestion = $(".clickedQuestion").closest("li").prev("li");		
 			
@@ -113,6 +121,7 @@
 			}
 			
 			$(".clickedQuestion").removeClass("clickedQuestion");
+			
 			prevQuestion.show();
 			prevQuestion.find("div").show();
 			prevQuestion.find(".question").addClass("clickedQuestion");
@@ -145,15 +154,38 @@
 		/*End of for adding edit/delete options for a question*/
 		
 		/* for editing the Question/Answer */
-		$(".questionAnswer").on("click",".editQuestion", function(){
+				
+		$(".FAQList").on("click",".editQuestion", function(){
 			$("#dialog").dialog("option","title", "Edit this question/Answer");
 			$("#dialog").dialog("open");
+
+			$("#faq").show();
+			$(".confirm-delete").remove();
+			$(".ui-dialog-buttonset button:last-child span").text("EDIT");
 			
-			var questionToBeEdited = $(this).closest(".editDeleteOptions").siblings(".question").text();
-			var answerToBeEdited = $(this).closest(".editDeleteOptions").siblings(".answer").text();
+			var questionToBeEdited = $(".questionAnswer").find(".clickedQuestion").text();
+			var answerToBeEdited = $(".questionAnswer").find(".clickedQuestion").next().text();
 			$(".questionForm").val(questionToBeEdited);
 			$(".answerForm").val(answerToBeEdited);
+			$(".ui-dialog-buttonset button").show();
+			$(".ui-dialog-buttonset button").eq(1).hide();
+			$(".ui-dialog-buttonset button").eq(3).hide();
 		});
+		
+		
+		$(".FAQList").on("click","#deletebutton", function(){
+			$("#dialog").dialog("option","title", "Delete the Question/Answer");
+			$("#dialog").dialog("open");
+			
+			$("#faq").hide();
+			$("#dialog").append('<h2 class="confirm-delete" style="color:#d55; text-align:center">Are you sure you want to delete?</h2>');
+			$(".ui-dialog-buttonset button").show();
+			$(".ui-dialog-buttonset button").eq(1).hide();
+			$(".ui-dialog-buttonset button").eq(2).hide();
+			$(".ui-dialog-buttonset button").eq(3).find("span").text("DELETE");
+		});
+		
+		
 		
 		/* end of for editing the Question/Answer */
 
@@ -172,11 +204,64 @@
 			}, {
 				text : "ADD",
 				click : function() {
-					debugger;
-					var datatosend = 'answer='+$("#answer").val()+'&question=' + $("#question").val()/*+'&category=' + $("#categoryid: selected").val()*/;
-					$.post('http://localhost:8800/dost/api/faq/add', $("#faq").serialize(), function(response) {
-						//$('#visitFormResponse').text(response);
-					});
+					
+					var datastring = $("#faq").serializeArray();
+				      var formData = {};
+				      $.map(datastring, function(n, i){
+				          formData[n['name']] = n['value'];
+				      });
+					$.ajax({
+	              		type: "POST",
+	              		url: "http://yourdost.com/api/faq/add",
+	              		contentType: "application/json",
+	              		data:JSON.stringify(formData),
+	                    dataType: "jsonP",
+	              		success: function(response){
+		              		$("#dialog").html('<h2 style="color:#5a5; text-align:center">Added Successfully</h2>');
+							window.setTimeout('location.reload()', 1000);
+	              		 },			              
+				          error: function(){
+				        	  $("#dialog").html('<h2 style="color:#5a5; text-align:center">Added Successfully</h2>');
+								window.setTimeout('location.reload()', 1000);
+				          }
+						});
+				}
+			}, {
+				text : "EDIT",
+				click : function() {
+					var datastring = $("#faq").serializeArray();
+				      var formData = {};
+				      $.map(datastring, function(n, i){
+				          formData[n['name']] = n['value'];
+				      });
+
+				      formData["id"]=$(".clicked").attr("id");
+				      formData["categoryId"]=$('select#categoryid option:selected').attr("id");
+					$.ajax({
+                		type: "PUT",
+                		url: "http://yourdost.com/api/faq/update",
+                		contentType: "application/json",
+                		data:JSON.stringify(formData),
+                        dataType: "jsonP",
+                        success: function(response){
+		              		$("#dialog").html('<h2 style="color:#5a5; text-align:center">Edited Successfully</h2>');
+							window.setTimeout('location.reload()', 1000);
+	              		 },			              
+				          error: function(){
+				        	  $("#dialog").html('<h2 style="color:#5a5; text-align:center">Edited Successfully</h2>');
+								window.setTimeout('location.reload()', 1000);
+				          }
+						});
+				}
+			}, {
+				text : "DELETE",
+				click : function() {					
+					$.ajax({
+                		type: "DELETE",
+                		url: "http://yourdost.com/api/faq/"+$('.clicked').attr('id')+"/delete"
+                	}).done(function(response){
+                	});
+					$("#dialog").html('<h2 style="color:#5a5; text-align:center">Deleted Successfully</h2>')
 					window.setTimeout('location.reload()', 1000);
 				}
 			} ]
@@ -186,10 +271,15 @@
 		$("#addbutton").click(function(event) {
 			$("#dialog").dialog("option","title", "Add New Question");
 			$("#dialog").dialog("open");
+			$("#faq").show();
+			$(".confirm-delete").remove();
 			$('.ui-widget-overlay').css('background', 'white');
 			
 			$(".questionForm").val("");
 			$(".answerForm").val("");
+			$(".ui-dialog-buttonset button").show();
+			$(".ui-dialog-buttonset button").eq(2).hide();
+			$(".ui-dialog-buttonset button").eq(3).hide();
 		});
 		
 		
@@ -207,7 +297,7 @@
 </sec:authorize>
 
 	<div class="container row-fluid">
-		<div class="col-md-7">
+		<div class="col-md-8">
 			<div class="pageTop">
 				<h2 class="pull-left pageHeading">Frequently Asked Questions</h2>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -216,21 +306,25 @@
 				<div class="clearfix"></div>
 			</div>
 			<div>
-				<div class="pull-left allQuestions">Back to List</div>
-				<div class="pull-right nextPreviousNav">
-					<span id="previous" class="previous">Previous</span> 
-					<span id="next" class="next">Next</span>
-				</div>
+				<h2 class="pull-left allQuestions pageHeading">&#9668; Back to List</h2>
+				<h2 class="pull-right nextPreviousNav pageHeading">
+					<span id="previous" class="previous">&lArr; Previous</span> 
+					<span id="next" class="next">Next &rArr;	</span>
+				</h2>
 				<div class="clearfix"></div>
-				<div class="FAQList">	
+				<div class="FAQList">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<button type="button" id="editbutton" class="editQuestion btn btn-primary pull-right hide">EDIT</button>
+					<button type="button" id="deletebutton" class="addFAQs btn btn-primary pull-right hide">DELETE</button>
+				</sec:authorize>		
 				</div>
 				
 				
 			</div>
 			<div class="loading" id="loading">
-						<img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" />
+				<img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" />
 			</div>
-			<p>We are extremely thankful to <a target="_blank" href="https://www.linkedin.com/profile/view?id=21998428">Mahalakshmi Rajagopal</a>, <a target="_blank" href="http://in.linkedin.com/in/tarun911">Tarun Verma</a>, <a target="_blank" href="http://ca.linkedin.com/pub/namrta-mohan/42/519/802">Namrta Moha</a>, <a target="_blank" href="http://in.linkedin.com/pub/veena-bose/3b/921/471">Veena Bose </a>, <a target="_blank" href="https://www.linkedin.com/profile/view?id=117319614">Anamika Papriwal</a> for helping us with frequenly asked questions</p>
+			<p class="credits">We are extremely thankful to <a target="_blank" href="https://www.linkedin.com/profile/view?id=21998428">Mahalakshmi Rajagopal</a>, <a target="_blank" href="http://in.linkedin.com/in/tarun911">Tarun Verma</a>, <a target="_blank" href="http://ca.linkedin.com/pub/namrta-mohan/42/519/802">Namrta Moha</a>, <a target="_blank" href="http://in.linkedin.com/pub/veena-bose/3b/921/471">Veena Bose </a>, <a target="_blank" href="https://www.linkedin.com/profile/view?id=117319614">Anamika Papriwal</a> for helping us with frequenly asked questions</p>
 		</div>
 		
 		
@@ -257,9 +351,9 @@
 				Select Category : <select id="categoryid" name="category">
 									  <option id="1" name="career" value="career">Career</option>
 									  <option id="2" name="Love-Relationships" value="relationship">Love/Relationship</option>
-									  <option id="2" name="family" value="family">Family</option>
-									  <option id="3" name="friends" value="friends">Friends</option>
-									  <option id="3" name="other" value="other">Other</option>
+									  <option id="3" name="family" value="family">Family</option>
+									  <option id="4" name="friends" value="friends">Friends</option>
+									  <option id="5" name="other" value="other">Other</option>
 									</select> </br>
 				
 			
@@ -267,6 +361,14 @@
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
+	
+	<script type="text/javascript">
+	/*
+		if( !$(".login_unit ").length ){
+			$(".container > div").removeClass("col-md-8");		
+		}
+	*/
+	</script>
 	
 </body>
 </html>

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dost.util.Utils;
+
 @Controller
 public class HomeController {
 
@@ -45,6 +47,11 @@ public class HomeController {
 		return new ModelAndView("team"); 
 	}
 	
+	@RequestMapping("welcome")  
+	public ModelAndView welcome() {
+		return new ModelAndView("welcome"); 
+	}
+	
 	@RequestMapping("contact")  
 	public ModelAndView contact() {
 		return new ModelAndView("contact"); 
@@ -56,6 +63,11 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("forgotPassword");
 		mav.addObject("username", username);
 		return new ModelAndView("forgotPassword"); 
+	}
+	
+	@RequestMapping("resetPassword")  
+	public ModelAndView resetPassword() {
+		return new ModelAndView("resetPassword"); 
 	}
 	
 	@RequestMapping("horoscope")  
@@ -96,8 +108,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping("signupNow")  
-	public ModelAndView signupNow() {
-		return new ModelAndView("signupNow"); 
+	public ModelAndView signupNow(HttpServletRequest request) {
+		if(Utils.showSignUpPage(request)) {
+			request.setAttribute("canAccessSignupScreen", "true");
+			return new ModelAndView("signupNow"); 
+		}
+		else {
+			request.setAttribute("canAccessSignupScreen", "false");
+			return new ModelAndView("login"); 
+		}
 	}
 	
 	@RequestMapping("user/discussionsAll")  
@@ -135,6 +154,12 @@ public class HomeController {
 	public ModelAndView counselor_conversationsExpanded() {
 		return new ModelAndView("conversationsExpanded"); 
 	}
+	
+	@RequestMapping("chatExpanded")  
+	public ModelAndView chatExpanded() {
+		return new ModelAndView("chatExpanded"); 
+	}
+	
 	@RequestMapping("patientList")  
 	public ModelAndView counselor_patientList() {
 		return new ModelAndView("patientList"); 
@@ -143,6 +168,16 @@ public class HomeController {
 	public ModelAndView patientDetails() {
 		return new ModelAndView("patientDetails"); 
 	}
+	
+	@RequestMapping("clientList")  
+	public ModelAndView counselor_clientList() {
+		return new ModelAndView("clientList"); 
+	}
+	@RequestMapping("clientDetails")  
+	public ModelAndView clientDetails() {
+		return new ModelAndView("clientDetails"); 
+	}
+	
 	@RequestMapping("onlineCounseling")  
 	public ModelAndView counselor_onlineCounseling() {
 		return new ModelAndView("onlineCounseling"); 

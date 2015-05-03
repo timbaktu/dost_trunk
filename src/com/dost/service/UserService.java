@@ -11,8 +11,11 @@ public interface UserService {
 	public Role authenticateUser(String username, String password);
 	
 	public DbUser getUser(Long userId);
+	public String getUserNameById(Long userId);
+	public List<DbUser> getUsers(List<Long> userIds);
 	
-	public List<DbUser> getAllUsers(String role);
+	public List<DbUser> getAllUsers(String role, String pageNo, String per_page, String sort, String order, String username);
+	public List<DbUser> getAllUsersLightCall(String role, String pageNo, String per_page, String sort, String order, String username);
 	
 	public List<DbUser> getAllCounselors();
 	
@@ -24,6 +27,11 @@ public interface UserService {
 	public DbUser updateUser(DbUser dbUser);
 	
 	public int getUsersCount();
+	public List<DbUser> searchUserByUserName(String username);
 	
-
+	public DbUser getUserByIdentifier(String identifier);
+	public DbUser getUserByEmail(String email);
+	
+	public boolean isCounselor(String userName);
+	public boolean isCounselor(Long userId);
 }

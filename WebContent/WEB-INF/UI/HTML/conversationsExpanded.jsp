@@ -4,16 +4,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Client History, Your D.O.S.T</title>
+	</head>
 	<jsp:include page="includes/commonHeader.jsp"></jsp:include>
 	
 	<script>
 	$( document ).ready(function() {
 		var selectedUser;
+		var loggedinUser;
 		$.getJSON("/dost/api/user/${pageContext.request.userPrincipal.name}", function(user) {
+			loggedinUser=user;
 			userid = user.userId;
 			userRole = user.dbUserRole.role;
 			var threadId = window.location.href.split("=");
-		
+			
 			
 			// Setting message as read
 			//message/{messageId}/user/{userId}/markasread"
@@ -32,8 +37,8 @@
 //														messages[i].content+
 //													'</li>');
 						// From Druveen
-						$(".conversation_history").append('<li style="white-space: pre-line;">'+'<h4 class="media-heading">'+ messages[i].sender.username+ '<span> &nbsp' +
-							messages[i].sentDate +'</span></h4>'+Linkify(messages[i].content)+'</li>');						
+						$(".conversation_history").append('<li style="white-space: pre-wrap;">'+'<h4 class="media-heading">'+ messages[i].sender.username+ '<span> &nbsp' +
+							formatDate(messages[i].sentDate) +'</span></h4>'+Linkify(messages[i].content)+'</li>');						
 			
 						// Richa?? I am not sure if this is the correct way of getting Sohil
 						if(messages[i].sender.dbUserRole.role=="ROLE_USER"){
@@ -63,14 +68,13 @@
 					// Added to handle special characters
 					var encodedSubject = encodeURIComponent(messages[0].subject);
                     var encodedContent = encodeURIComponent($("#messageContent").val());
-                    
-                    var datatosend = 'subject='+ encodedSubject +'&content=' + encodedContent + '&recipients='+receipient+'&senderId=' + userid+'&msgId='+threadId[1];
+                    var datatosend = 'subject='+ encodedSubject +'&content=' + encodedContent + '&recipients='+receipient+'&senderId=' + userid+'&msgId='+threadId[1]+'&counselorTag='+messages[0].categoryId;
 					
 					if($("#messageContent").val() =='') {
 						$(".error").show().text("Please type out the reply");
 					}
 					else{
-						$.post('http://localhost:8800/dost/api/user/message', datatosend, function(response) {							
+						$.post('http://yourdost.com/api/user/message', datatosend, function(response) {							
 						//$('#visitFormResponse').text(response);
 						});
 						
@@ -86,6 +90,43 @@
 		$(".addNote").click(function(){
 			$(".notePopup").show();		
 		});
+		$(document).on("click",".addNoteButton",function(){
+		 if ($("textarea[name='messageContent']").val()==""){
+			 $(".error").removeClass("hidden").show().css("color","red");
+			
+		 }
+		 else{
+			var hostname=$(location).attr('host');   
+			$.getJSON("http://"+hostname+"/dost/api/message/"+ window.location.href.split("=")[1]+"/", function(messages){
+				
+				  var formData = {};
+			      
+			      formData["msgId"]=  window.location.href.split("=")[1];
+			      formData["messageId"]= messages[0].messageId;
+			      formData["note"]= $("textarea[name='messageContent']").val();
+			      formData["userId"]= messages[0].sender.userId;
+			      console.log(formData);
+			      $.ajax({
+			           type: "POST",
+			           url: "http:\/\/"+hostname+"/dost/api/notes/add",
+			           contentType: "application/json",
+			           data:JSON.stringify(formData),
+			                 dataType: "jsonP",
+			                 success: function(response){
+			                  $("textarea[name='messageContent']").val("");
+			                 },                 
+			             error: function(){
+			                   $("textarea[name='messageContent']").val("");
+			             }
+			     });
+			});
+			
+			// $(".error").addClass("hidden");
+			$(this).closest(".notePopup").hide();
+		
+		 }
+		
+			});
 		
 		$(".cancelButton").click(function(){
 			$(this).closest(".notePopup").hide();
@@ -121,7 +162,7 @@
 						}
 						else{
 							
-							$.post('http://54.209.217.90:80/dost/api/userdetail/add', datatosend, function(response) {							
+							$.post('http://yourdost.com/api/userdetail/add', datatosend, function(response) {							
 								if(response = ""){
 										$(".status").show().html("sending..");
 								}
@@ -156,7 +197,7 @@
 		
 		// Code from Druveen to handle space and link url
 		function Linkify(inputText) {
-			debugger;
+			//debugger;
 			if (inputText && inputText.indexOf("href=") != -1) {
 			  return inputText;
 			} 
@@ -212,8 +253,8 @@
 							<div class="pull-right">
 								<div class="btn-group">
 								  <button type="button" class="replyBtn btn btn-default">Reply</button>
-								  <button type="button" class="btn btn-default addNote">Add Note</button>
-								  <button type="button" class="btn btn-default addDetail">Add Detail</button>
+								  <button type="button" class="btn btn-default addNote">Add Note</button> 
+								<!--    <button type="button" class="btn btn-default addDetail">Add Detail</button> -->
 	
 								  <!-- <div class="btn-group">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -268,7 +309,7 @@
 								<div class="btn-group">
 								  
 								  <button type="button" class="replyBtn btn btn-default">Reply</button>
-								  <button type="button" class="btn btn-default addNote">Add Note</button>
+								 <!--   <button type="button" class="btn btn-default addNote">Add Note</button> -->
 								  
 								  <!--  <div class="btn-group">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -311,14 +352,8 @@
 			</div>
 				
 		</sec:authorize>
-		<jsp:include page="includes/notesPopup.jsp"></jsp:include>
-		<div class="notePopup">
-			<form>
-				<textarea class="form-control" id="messageContent" rows="3"></textarea>
-				<button type="button"  class="addNoteButton pull-right btn btn-primary">Submit</button>
-				<button type="button"  class="cancelButton pull-right btn btn-outline">Cancel</button>
-			</form>
-		</div>
+	 <jsp:include page="includes/notesPopup.jsp"></jsp:include>
+		
 
 		<jsp:include page="includes/popupUserDetails.jsp"></jsp:include>
 		<jsp:include page="includes/commonFooter.jsp"></jsp:include>

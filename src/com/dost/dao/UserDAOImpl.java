@@ -60,6 +60,7 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 	
+
 	public List<DbUser> getUsers(List<Long> ids) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from DbUser u where u.userId in (:ids)");
@@ -72,10 +73,51 @@ public class UserDAOImpl implements UserDAO {
 		return users;
 	}
 
-	public List<DbUser> getAllUsers(String role) {
+	public List<DbUser> getAllUsers(String role, String pageNo, String per_page, String sort, String order, String username) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from DbUser u where u.dbUserRole.role = :role");
+		StringBuilder hqlQuery = new StringBuilder("from DbUser u where u.dbUserRole.role = :role");
+		if(username != null) {
+			hqlQuery.append(" and u.username like :username");
+		}
+		if(order != null) {
+			hqlQuery.append(" order by u.userId " + order);
+		}
+		
+		Query query = session.createQuery(hqlQuery.toString());
 		query.setParameter("role", role);
+		if(username != null) {
+			query.setParameter("username", "%"+ username +"%");
+		}
+		if(per_page != null) {
+			query.setFirstResult((Integer.parseInt(pageNo) - 1) * Integer.parseInt(per_page));
+			query.setMaxResults(Integer.parseInt(per_page));			
+		}
+		List<DbUser> users = query.list();
+		if(users == null) {
+			users = new ArrayList<DbUser>();
+		}
+		return users;
+	}
+	
+	public List<DbUser> getAllUsersLightCall(String role, String pageNo, String per_page, String sort, String order, String username) {
+		Session session = sessionFactory.getCurrentSession();
+		StringBuilder hqlQuery = new StringBuilder("select new DbUser(u.userId, u.username) from DbUser u where u.dbUserRole.role = :role");
+		if(username != null) {
+			hqlQuery.append(" and u.username like :username");
+		}
+		if(order != null) {
+			hqlQuery.append(" order by u.userId " + order);
+		}
+		
+		Query query = session.createQuery(hqlQuery.toString());
+		query.setParameter("role", role);
+		if(username != null) {
+			query.setParameter("username", "%"+ username +"%");
+		}
+		if(per_page != null) {
+			query.setFirstResult((Integer.parseInt(pageNo) - 1) * Integer.parseInt(per_page));
+			query.setMaxResults(Integer.parseInt(per_page));			
+		}
 		List<DbUser> users = query.list();
 		if(users == null) {
 			users = new ArrayList<DbUser>();
@@ -162,4 +204,62 @@ public class UserDAOImpl implements UserDAO {
 		return count.intValue();
 	}
 
+	public List<DbUser> searchUserByUserName(String username) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from DbUser u where u.username like :username");
+		query.setParameter("username", "%"+username+"%");
+		List<DbUser> users = query.list();
+		if(users == null) {
+			users = new ArrayList<DbUser>();
+		}
+		return users;
+	}
+	
+	public DbUser getUserByIdentifier(String identifier) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from DbUser u where u.identifier= :identifier");
+		query.setParameter("identifier", identifier);
+		DbUser user = (DbUser)query.uniqueResult();
+		return user;
+	}
+
+	public DbUser getUserByEmail(String email) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from DbUser u where u.email= :email");
+		query.setParameter("email", email);
+		DbUser user = (DbUser)query.uniqueResult();
+		return user;	
+	}
+	
+	public String getUserNameById(Long userId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select u.username from DbUser u where u.userId = :userId");
+		query.setParameter("userId", userId);
+		String userName = (String)query.uniqueResult();
+		return userName;		
+	}
+	
+	public boolean isCounselor(String userName) {
+		boolean isCounselor = false;
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select ur.username from DbUserRole ur where ur.role = 'ROLE_ADMIN' and ur.username = :username");
+		query.setParameter("username", userName);
+		String counselorName = (String)query.uniqueResult();
+		if(counselorName != null) {
+			isCounselor = true;
+		}
+		return isCounselor;
+	}
+	
+	public boolean isCounselor(Long userId) {
+		boolean isCounselor = false;
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select ur.username from DbUserRole ur where ur.role = 'ROLE_ADMIN' and ur.dbUser.userId = :userId");
+		query.setParameter("userId", userId);
+		String counselorName = (String)query.uniqueResult();
+		if(counselorName != null) {
+			isCounselor = true;
+		}
+		return isCounselor;
+	}
 }

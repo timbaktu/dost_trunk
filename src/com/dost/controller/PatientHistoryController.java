@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dost.hibernate.DbMessage;
+import com.dost.hibernate.DbUser;
 import com.dost.model.ChatHistory;
 import com.dost.model.UserChat;
 import com.dost.service.ChatHistoryService;
 import com.dost.service.MessageService;
+import com.dost.service.UserService;
+import com.dost.util.AuthorizationUtil;
 import com.dost.util.Utils;
 
 @Controller
@@ -31,6 +36,9 @@ public class PatientHistoryController {
 
 	@Autowired
 	ChatHistoryService chatHistoryService;
+	
+	@Autowired
+	UserService userService;
 
 	/**
 	 * Nobody is using it.
@@ -115,16 +123,33 @@ public class PatientHistoryController {
 	//
 	// return historyData;
 	// }
+	
+	@RequestMapping(value="/user/{username}/clients", method=RequestMethod.GET)  
+	@ResponseBody
+	public List<DbUser> getClientList(@PathVariable String username, HttpServletRequest request) {
+		if(!AuthorizationUtil.authorizeAsCounselorByName(username)) return null;
+		
+		Set<Long> userIds = new HashSet<Long>();
+		DbUser inputUser = userService.getUserByUsername(username);
+		List<Long> recipientIds = messageService.getRecipientIdsBySenderId(inputUser.getUserId());
+		List<Long> senderIds = messageService.getSenderIdsByRecipientId(inputUser.getUserId());
+		userIds.addAll(recipientIds);
+		userIds.addAll(senderIds);
+		
+		return userService.getUsers(new ArrayList<Long>(userIds));
+	}
 
 	@RequestMapping(value = "/user/{id}/patienthistory/all", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> getAllUserMessagesForHistory(@PathVariable Long id) {
-		List<DbMessage> senderMessages = messageService.getAllUserMessages(id);
-		List<DbMessage> recipientMessages = messageService.getUserMessages(id);
-		Set<DbMessage> messages = new HashSet<DbMessage>();
-		messages.addAll(senderMessages);
-		messages.addAll(recipientMessages);
-
+		if(!AuthorizationUtil.authorizeAsCounselor()) return null;
+		
+		List<DbMessage> senderMessages = messageService.getAllUserMessages(id, null, null, null, null);
+		List<DbMessage> recipientMessages = messageService.getUserMessages(id, null, null, null, null);
+//		Set<DbMessage> messages = new HashSet<DbMessage>();
+//		messages.addAll(senderMessages);
+//		messages.addAll(recipientMessages);
+		List<DbMessage> messages = removeDuplicateMessages(senderMessages, recipientMessages);
 		for(DbMessage msg : messages) {
 			msg.setSentDate(Utils.formatDate("yyyy-MM-dd hh:mm:s", msg.getSentDateDb()));
 			System.out.println(msg.getSentDate());
@@ -191,5 +216,30 @@ public class PatientHistoryController {
 			System.out.println(sortedMap1.getKey());
 		}
 		return sortedMap;
+	}
+	
+	/**
+	 * All this I have to do to remove duplicate messages from 2 lists.
+	 * Somehow hashset is not helping
+	 * @param list1
+	 * @param list2
+	 * @return
+	 */
+	private List<DbMessage> removeDuplicateMessages(List<DbMessage> list1, List<DbMessage> list2) {
+		
+		List<DbMessage> output = new ArrayList<DbMessage>();
+		Map<Long, DbMessage> map1 = new HashMap<Long, DbMessage>();
+		for(DbMessage msg1 : list1) {
+			map1.put(msg1.getMessageId(), msg1);
+			output.add(msg1);
+		}
+		
+		for(DbMessage msg2 : list2) {
+			if(map1.get(msg2.getMessageId()) == null) {
+				output.add(msg2);
+			}
+		}
+		
+		return output;
 	}
 }

@@ -1,12 +1,15 @@
 package com.dost.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dost.hibernate.DbCounselor;
 import com.dost.hibernate.DbMessage;
 import com.dost.hibernate.DbMessageRecipient;
 import com.dost.hibernate.DbUser;
 import com.dost.model.Faq;
 import com.dost.model.Message;
 import com.dost.service.ChatHistoryService;
+import com.dost.service.CounselorService;
 import com.dost.service.MessageService;
 import com.dost.service.UserService;
+import com.dost.util.AuthorizationUtil;
 import com.dost.util.MessageUtil;
 import com.dost.util.Utils;
 
@@ -39,6 +45,9 @@ public class MessageController {
 	@Autowired
 	ChatHistoryService chatHistoryService;
 	
+	@Autowired
+	CounselorService counselorService;
+	
 	@RequestMapping(value="/user/{id}/unreadcount", method=RequestMethod.GET)  
 	@ResponseBody
 	public Map<Long, Integer> getUnreadMessageCount(@PathVariable Long id) {
@@ -51,14 +60,23 @@ public class MessageController {
 	@RequestMapping(value="/message/{messageId}/user/{userId}/markasread", method=RequestMethod.GET)  
 	@ResponseBody
 	public void markAsRead(@PathVariable Long messageId, @PathVariable Long userId) {
+		if(!AuthorizationUtil.authorizeByUserId(userId)) return;
+		
 		messageService.setViewed(messageId, userId);
 	}
 	
 	/*messages received*/
 	@RequestMapping(value="/user/{id}/messages/all", method=RequestMethod.GET)  
 	@ResponseBody
-	public Map<Long, List<DbMessage>> getAllUserMessagesForHistory(@PathVariable Long id) {
-		List<DbMessage> messages = messageService.getAllUserMessages(id);
+	public Map<Long, List<DbMessage>> getAllUserMessagesForHistory(HttpServletRequest request, @PathVariable Long id) {
+		if(!AuthorizationUtil.authorizeByUserId(id)) return null;
+		
+		String pageNo = request.getParameter("page");
+		String per_page = request.getParameter("per_page");
+		String sort = request.getParameter("sort");
+		String order = request.getParameter("order");
+		
+		List<DbMessage> messages = messageService.getAllUserMessages(id, pageNo, per_page, sort, order);
 		for(DbMessage msg : messages) {
 			msg.setSentDate(Utils.formatDate(msg.getSentDateDb()));
 		}
@@ -104,8 +122,15 @@ public class MessageController {
 	/*messages received*/
 	@RequestMapping(value="/user/{id}/messages", method=RequestMethod.GET)  
 	@ResponseBody
-	public List<DbMessage> getAllUserMessages(@PathVariable Long id) {
-		List<DbMessage> messages = messageService.getUserMessages(id);
+	public List<DbMessage> getAllUserMessages(HttpServletRequest request, @PathVariable Long id) {
+		if(!AuthorizationUtil.authorizeByUserId(id)) return null;
+		
+		String pageNo =  request.getParameter("page");
+		String per_page = request.getParameter("per_page");
+		String sort = request.getParameter("sort");
+		String order = request.getParameter("order");
+		
+		List<DbMessage> messages = messageService.getUserMessages(id, pageNo, per_page, sort, order);
 		for(DbMessage msg : messages) {
 			msg.setSentDate(Utils.formatDate(msg.getSentDateDb()));
 		}
@@ -145,31 +170,45 @@ public class MessageController {
 				messagesToReturn.add(messagesByMsgId.get(0));
 			}
 		}
-		
-		
+		// Sort messages on sent date
+		sortMessagesOnSentDate(messagesToReturn);	
+		return messagesToReturn;
+	}
+
+	private void sortMessagesOnSentDate(List<DbMessage> messagesToReturn) {
 		// Sort messages based on dates
 		Collections.sort(messagesToReturn, new Comparator<DbMessage>() {
 			public int compare(DbMessage o1, DbMessage o2) {
 				// Sort in descending order date
 				return o2.getSentDate().compareTo(o1.getSentDate());
 			}
-		});	
-		return messagesToReturn;
+		});
 	}
 	
 	@RequestMapping(value="/user/{id}/draftmessages", method=RequestMethod.GET)  
 	@ResponseBody
 	public List<DbMessage> getDraftUserMessages(@PathVariable Long id) {
+		if(!AuthorizationUtil.authorizeByUserId(id)) return null;
+		
 		return messageService.getDraftUserMessages(id);
 	}
 	
 	@RequestMapping(value="/user/{id}/sentmessages", method=RequestMethod.GET)  
 	@ResponseBody
-	public List<DbMessage> getSentUserMessages(@PathVariable Long id) {
-		List<DbMessage> messages =  messageService.getSentUserMessages(id);
+	public List<DbMessage> getSentUserMessages(HttpServletRequest request, @PathVariable Long id) {
+		if(!AuthorizationUtil.authorizeByUserId(id)) return null;
+		
+		String pageNo =  request.getParameter("page");
+		String per_page = request.getParameter("per_page");
+		String sort = request.getParameter("sort");
+		String order = request.getParameter("order");
+		
+		List<DbMessage> messages =  messageService.getSentUserMessages(id, pageNo, per_page, sort, order);
 		for(DbMessage msg : messages) {
 			msg.setSentDate(Utils.formatDate(msg.getSentDateDb()));
 		}
+		// Sort messages on sent date
+		sortMessagesOnSentDate(messages);
 		return messages;
 	}
 	
@@ -181,6 +220,8 @@ public class MessageController {
 	
 	@RequestMapping(value="/message/{id}/user/{userid}/setview", method=RequestMethod.GET)  
 	public void setViewed(@PathVariable Long id, @PathVariable Long userId) {
+		if(!AuthorizationUtil.authorizeByUserId(id)) return;
+		
 		messageService.setViewed(id, userId);
 	}
 	
@@ -196,6 +237,8 @@ public class MessageController {
 	@RequestMapping(value="/user/message", method=RequestMethod.POST)  
 	@ResponseBody
 	public void sendMessage(Message message) {
+		if(!AuthorizationUtil.authorizeByUserId(message.getSenderId())) return;
+		
 		DbMessage messageToSend = populateDbMessage(message);
 		messageService.sendMessage(messageToSend);
 		
@@ -277,14 +320,33 @@ public class MessageController {
 		String recipientIds = message.getRecipients();
 		String[] recipientArray = null;
 		if(!recipientIds.equals("all")){
-			recipientArray = recipientIds.split(",");	
+			recipientArray = recipientIds.split(",");
+			Long counselorTagId = message.getCounselorTag() != null ? Long.parseLong(message.getCounselorTag()) : 8; // 8 is TAG id for Others which is default type
+			dbMessage.setCategoryId(counselorTagId);
 		}
-		// If UI didnt send the recipient id then get list of available couselors
+		// If UI didnt send the recipient id then get list of available counselors
 		else {
-			List<DbUser> counselors = userService.getAllCounselors();
+			// Earlier we used to send messages to all counselors, now after 02/28 for IITG we send messages messages to only counselor having TAG sent by user
+//			List<DbUser> counselors = userService.getAllCounselors();
+			String selectedCounselorTag = message.getCounselorTag();
+			// This may be the case 
+			List<DbCounselor> counselors = new ArrayList<DbCounselor>();
+			if(selectedCounselorTag == null || selectedCounselorTag.length() == 0) {
+				counselors = counselorService.getAllCounselors();
+				
+				// Setting selectedCounselorTagId in message as we are saving this going forward
+				dbMessage.setCategoryId(0L); // Category 0 means all
+			}
+			else {
+				Long selectedCounselorTagId = Long.parseLong(selectedCounselorTag);
+				counselors = counselorService.getCounselorsByCodeIds(Arrays.asList(selectedCounselorTagId));
+				
+				// Setting selectedCounselorTagId in message as we are saving this going forward
+				dbMessage.setCategoryId(selectedCounselorTagId);
+			}
 			recipientArray = new String[counselors.size()];
 			for(int i = 0; i < counselors.size(); i++) {
-				recipientArray[i] = ""+counselors.get(i).getUserId();
+				recipientArray[i] = ""+counselors.get(i).getCounselorId();
 			}
 		}
 		for(String userId : recipientArray) {

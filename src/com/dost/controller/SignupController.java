@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dost.hibernate.DbMessage;
 import com.dost.hibernate.DbMessageRecipient;
 import com.dost.hibernate.DbUser;
+import com.dost.hibernate.DbUserLog;
 import com.dost.hibernate.DbUserRole;
 import com.dost.hibernate.DbUserSecurity;
 import com.dost.model.Message;
@@ -33,6 +34,7 @@ import com.dost.model.User;
 import com.dost.service.MessageService;
 import com.dost.service.SecurityQuestionService;
 import com.dost.service.SignupService;
+import com.dost.service.UserLogService;
 import com.dost.service.UserService;
 
 @Controller
@@ -55,6 +57,9 @@ public class SignupController {
 	@Autowired
 	SecurityQuestionService questionService; 
 	
+	@Autowired
+	UserLogService userLogService;
+	
 	@RequestMapping(value="/su/{id}", method=RequestMethod.GET)  
 	@ResponseBody
 	public void signup1(@PathVariable Long id) {
@@ -63,7 +68,7 @@ public class SignupController {
 	}
 	
 	// Method to handle initial signup
-	@RequestMapping(value="/signup", method=RequestMethod.GET)  
+	@RequestMapping(value="/signup", method=RequestMethod.POST)  
 	public String signup(HttpServletRequest request) {
 		
 		User user = new User();
@@ -95,6 +100,9 @@ public class SignupController {
 			  // Adding this because new signup user after going to discussion page was getting header as logged out user.
 			HttpSession session = request.getSession();
 			session.setAttribute("myAppUser", user.getUsername());
+			
+			// Creating UserLog Entry, same code is in LoginController
+			createUserLogEntry(user, request);
 			  
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		    return "redirect:/conversations";
@@ -108,12 +116,26 @@ public class SignupController {
 		return "redirect:/conversations";
 	}
 
+	private void createUserLogEntry(User user, HttpServletRequest request) {
+		DbUserLog userLog = new DbUserLog();
+		userLog.setUserName(user.getUsername());
+		userLog.setUserId(0L);
+		String ipAddress = request.getHeader("X-FORWARDED-FOR");  
+		if (ipAddress == null) {  
+		   ipAddress = request.getRemoteAddr();  
+		}
+		userLog.setIp(ipAddress);
+		
+		userLogService.saveUserLog(userLog);
+	}
+
 	private DbUser populateDbUser(User user, HttpServletRequest request) {
 		DbUser dbUser = new DbUser();
 		dbUser.setUsername(user.getUsername());
 		dbUser.setPassword(user.getPassword());
 		dbUser.setDeleted("0");
 		dbUser.setEnabled(1);
+		dbUser.setBlocked("0");
 		dbUser.setAvatar(user.getAvatarId());
 		// Setting user role
 		DbUserRole userRole = new DbUserRole();
@@ -165,25 +187,22 @@ public class SignupController {
 	 */
 	private Message createWelcomeMessage(String recipient) {
 		StringBuilder welcomeBuffer = new StringBuilder();
-		welcomeBuffer.append("Hi!");
-		welcomeBuffer.append("<br><br>");
-		welcomeBuffer.append("Every problem has a solution and together we will find a solution to the problems that are bothering you.");
-		welcomeBuffer.append("<br><br>");
-		welcomeBuffer.append("I am your friend - not a computer program and I am here to help you come out of your problems. I will be here to support you and help you in any way I can. ");
-		welcomeBuffer.append("<br><br>");
-		welcomeBuffer.append("<u>Steps to get started</u>");
-		welcomeBuffer.append("<br>");
-		welcomeBuffer.append("Read on <a href='faqs'><strong>frequently asked questions</strong></a> by people around");
-		welcomeBuffer.append("<br>");
-		welcomeBuffer.append("Participate in <a href='forums/show/6.page'><strong>discussions</strong></a> and get views of your peers, professionals");
-		welcomeBuffer.append("<br>");
-		welcomeBuffer.append("<a href='conversations?=chat'><strong>Write a mail</strong></a> to me and I will respond within 4 hours");
-		welcomeBuffer.append("<br>");
-		welcomeBuffer.append("<a href='talkToFriend'><strong>Talk</strong></a> to me online and get quick reponse");
-		welcomeBuffer.append("<br><br>");
-		welcomeBuffer.append("Regards,");
-		welcomeBuffer.append("<br><br>");
-		welcomeBuffer.append("Counselors at Dost");
+
+		
+		welcomeBuffer.append("<div id='welcome-message'><span>Hi,</span> <br/><span>Welcome to Your D.O.S.T");
+		welcomeBuffer.append("</span> <br/><span>Every problem has a solution and together we will find a solution to the problems that are bothering you. <br/> ");
+		welcomeBuffer.append("<br/>I am your friend - not a computer program and I am here to help you come out of your problems. I will be here to support you ");
+		welcomeBuffer.append("and help you in any way I can.");
+		welcomeBuffer.append("</span><h3>STEPS TO GET STARTED</h3><ol>	");
+		welcomeBuffer.append("<li>You could leave a offline message and one of the counselors from the team will reply in not more than 24 hours.<br/>");
+		welcomeBuffer.append("<a href='conversations?=chat'> Leave a message</a>");
+		welcomeBuffer.append("<li> Chat online with the next available friend <br/>");
+		welcomeBuffer.append("<a href='talkToFriend'> CHAT ONLINE WITH THE NEXT AVAILABLE FRIEND</a>	</li>");
+		welcomeBuffer.append("<li>Discuss with the community about things bothering you");
+		welcomeBuffer.append("<a href='forums/show/6.page'> PEER TO PEER DISCUSSION</a>	</li>");
+		welcomeBuffer.append("<li>Explore Most Asked Questions<a href='faqs'>Frequently Asked Questions</a></li>");
+		welcomeBuffer.append("<div style='margin-top:20px'>Regards,</a></div>");
+		welcomeBuffer.append("<div>Your D.O.S.T - Team</a></div> </div>");
 		
 		Message welcomeMessage = new Message();
 		welcomeMessage.setContent(welcomeBuffer.toString());
@@ -192,15 +211,17 @@ public class SignupController {
 		// Trigger populates sent date
 		// welcomeMessage.setSentDate(new Date());
 		//welcomeMessage.setSenderId(Long.parseLong(Utils.getDostConfig("dostadmin.userid")));
-		welcomeMessage.setSubject("Welcome to your Dost.");
+		welcomeMessage.setSubject("Welcome to Your D.O.S.T");
 		return welcomeMessage;
 	}
+	
 	
 	private DbMessage populateDbMessage(Message message) {
 		
 		DbMessage dbMessage = new DbMessage();
 		dbMessage.setContent(message.getContent());
 		dbMessage.setSubject(message.getSubject());
+		dbMessage.setCategoryId(8L); // 8 is Others TAG for message category
 		dbMessage.setImportant(message.getImportant() != null ? 0l : 1l);
 		// Hibernate will set this
 		//dbMessage.setMessageId(messageId)
@@ -214,7 +235,7 @@ public class SignupController {
 		}
 		dbMessage.setRecipients(createRecipientList(message, dbMessage));
 		if(message.getSenderId() == null) {
-			message.setSenderId(104l);
+			message.setSenderId(104l); 
 		}
 		dbMessage.setSender(userService.getUser(message.getSenderId()));
 		dbMessage.setSentDateDb(new Date());

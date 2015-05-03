@@ -2,12 +2,15 @@ $( document ).ready(function() {
 		
 		/*applying properties based on url*/
 		var url = $(location).attr("pathname").split("/");
-		$('#main-navbar .menuItems a[href="'+url[url.length-1]+'"]').parent("li").addClass("active");
-		
-		if(url[url.length-3] ==('posts' || 'forums')){
-			$('li#discussions').addClass("active");			
+		if( url[url.length-1] != 'blog' && url[url.length-1] != "" ){
+			var tabType = url[url.length-1] ;
+			if( tabType == "clientList"){
+				tabType = "patientHistory" ;
+			}
+			$('#main-navbar .menuItems #'+tabType).addClass("active");
+		}else if( $(location).attr("pathname").match("blog") ){
+			$('#main-navbar .menuItems #blog').addClass("active");			
 		}
-		
 		
 		if(window.location.href.indexOf("counselor") > -1){
 			$("body").addClass("theme-default-counselor");
@@ -83,3 +86,126 @@ function check_if_contains_space( value ){
 	}
 	
 }
+function blockUser(name,ele) {
+	$.getJSON("/dost/api/user/"+name+"/block", function(data) {
+		if(data.status == "true") {
+			$(ele).parent().parent().css({"background-color":"#E2E2E2"});
+			$(ele).parent().html('<p class="pull-right">BLOCKED</p>');
+		}
+		
+	});
+}
+function showButton(ele) {
+	$(ele).find("button").show();
+}
+function hideButton(ele) {
+	$(ele).find("button").hide();
+}
+
+function showForgotEmailText(show,hide) {
+	$("#"+show).show();
+	$("#"+hide).hide();
+}
+
+function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}
+
+function submitForgotEmail() {
+	
+	var email = $("#email").val();
+	var userName = $("#username").val();
+	
+	if (email === "" && userName === "") {
+		$("#errorAlert").show().html("Please enter Username or Email");
+		return;
+	}
+	
+	if(email !== "" &&!validateEmail(email)) {
+		$("#errorAlert").show().html("Please enter valid Email ID");
+		return;
+	}
+	
+	/*$("#emailSentMsg").show().html("We have sent an email to you at "+email+" with details about your username and link to update password.");
+	$("#forgotBlock").hide();
+	*/
+	$.ajax({
+		  method: "POST",
+		  url: '/dost/api/user/emailpassword',
+		  data: { username :userName, email: email }
+		}).done(function( msg ) {
+			if(msg.status == "success") {
+				$("#emailSentMsg").show().html("We have sent an email with details about your username and link to update password.");
+				$("#forgotBlock").hide();
+			}else if(msg.status == "usernotpresent") {
+				$("#errorAlert").show().html("Username '"+userName+"' not registered with us. Don't worry, we are here for you. Please <a href='/dost/signupNow'>SIGNUP</a>  and get started.");
+			}else if(msg.status == "emailnotpresent") {
+				$("#errorAlert").show().html("Email '"+email+"' not registered with us. Don't worry, we are here for you. Please <a href='/dost/signupNow'>SIGNUP</a>  and get started.");
+			}else if(msg.status == "emailnotpresentcontactcustomecare") {
+				$("#errorAlert").hide()
+				$("#emailNotPresent").show();
+				$("#forgotUserPassBlock").hide();
+			} 
+		});
+}
+
+function getUrlParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+
+function loadingImage(className) {
+	$("."+className).append('<li class="secondloading"><img src="/dost/resources/img/ajax-loader.gif" alt="Loader" /></li>');
+}
+
+
+// Code from Druveen to handle space and link url
+function Linkify(inputText) {
+//		debugger;
+	if (inputText && inputText.indexOf("href=") != -1) {
+	  return inputText;
+	} 
+	    //URLs starting with http://, https://, or ftp://
+	    var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+	    var replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+	    //URLs starting with www. (without // before it, or it'd re-link the ones done above)
+	    var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+	    var replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+	    //Change email addresses to mailto:: links
+	    var replacePattern3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
+	    var replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+	    return replacedText
+}
+
+
+function formatDate( date ){
+	date = date.replace(/-/g,"/");
+	dateObj = new Date( date ) ;
+	var utc = dateObj.getTime() + (dateObj.getTimezoneOffset() * 60000);
+	var istTime = new Date(utc + (3600000 * 1.5));
+	var options = {weekday: "long", year: "2-digit", 
+			month: "short",day: "numeric", hour: "2-digit", minute: "2-digit"} ;
+	
+	var formatedDateStr = istTime.toLocaleDateString('en-us', options ) ;
+	var dateArr = formatedDateStr.split("," ) ;
+	
+	var dateToReturn = dateArr[1].trim().split(" ").reverse().join(" ") + "'" + dateArr[2].trim() + " " + dateArr[3] ;
+
+	return dateToReturn ;	
+	
+}
+
+

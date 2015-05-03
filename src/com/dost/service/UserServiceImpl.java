@@ -29,9 +29,20 @@ public class UserServiceImpl implements UserService {
 	public DbUser getUser(Long userId) {
 		return userDAO.getUser(userId);
 	}
+	
+	public List<DbUser> getUsers(List<Long> userIds) {
+		return userDAO.getUsers(userIds);
+	}
 
-	public List<DbUser> getAllUsers(String role) {
-		return userDAO.getAllUsers(role);
+	public List<DbUser> getAllUsers(String role, String pageNo, String per_page, String sort, String order, String username) {
+		return userDAO.getAllUsers(role, pageNo, per_page, sort, order, username);
+	}
+	
+	
+
+	public List<DbUser> getAllUsersLightCall(String role, String pageNo,
+			String per_page, String sort, String order, String username) {
+		return userDAO.getAllUsersLightCall(role, pageNo, per_page, sort, order, username);
 	}
 
 	public List<DbUser> getAllCounselors() {
@@ -40,6 +51,10 @@ public class UserServiceImpl implements UserService {
 
 	public DbUser getUserByUsername(String username) {
 		return userDAO.getUserByUsername(username);
+	}
+	
+	public String getUserNameById(Long userId) {
+		return userDAO.getUserNameById(userId);
 	}
 
 	public DbUser checkUserBySecurityQuestion(String username, String question1, String question2,
@@ -58,5 +73,24 @@ public class UserServiceImpl implements UserService {
 	public int getUsersCount() {
 		return userDAO.getUsersCount();
 	}
+	
+	public List<DbUser> searchUserByUserName(String username) {
+		return userDAO.searchUserByUserName(username);
+	}
 
+	public DbUser getUserByIdentifier(String identifier) {
+		return userDAO.getUserByIdentifier(identifier);
+	}
+
+	public DbUser getUserByEmail(String email) {
+		return userDAO.getUserByEmail(email);
+	}
+
+	public boolean isCounselor(String userName) {
+		return userDAO.isCounselor(userName);
+	}
+	
+	public boolean isCounselor(Long userId) {
+		return userDAO.isCounselor(userId);
+	}
 }

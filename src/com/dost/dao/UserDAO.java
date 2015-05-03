@@ -11,7 +11,8 @@ public interface UserDAO {
 	public Role authenticateUser(String username, String password);
 	public DbUser getUser(Long userId);
 	public List<DbUser> getUsers(List<Long> ids);
-	public List<DbUser> getAllUsers(String role);
+	public List<DbUser> getAllUsers(String role, String pageNo, String per_page, String sort, String order, String username);
+	public List<DbUser> getAllUsersLightCall(String role, String pageNo, String per_page, String sort, String order, String username);
 	public List<DbUser> getAllCounselors();
 	public DbUser getUserByUsername(String username);
 	public List<DbUser> getUsersByUsernames(List<String> usernames);
@@ -19,5 +20,12 @@ public interface UserDAO {
 	public DbUser updatePassword(String username, String password);
 	public DbUser updateUser(DbUser dbUser);
 	public int getUsersCount();
-
+	public List<DbUser> searchUserByUserName(String username);
+	public DbUser getUserByIdentifier(String identifier);
+	public DbUser getUserByEmail(String email);
+	public String getUserNameById(Long userId);
+	
+	public boolean isCounselor(String userName);
+	public boolean isCounselor(Long userId);
+	
 }

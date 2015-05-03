@@ -6,10 +6,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import net.jforum.SessionFacade;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +46,22 @@ public class ForumController {
 				postDates.add(post.getPostTime());
 			}
 			String recentPostDate = latestDate(postDates);
-			Date tempDate = Utils.formatDate("yyyy-MM-dd HH:mm:ss.S", recentPostDate);	
-			recentPostDate = Utils.formatDate("hh:mm a, dd MMMM yyyy", tempDate);	
+
+//			Date tempDate = Utils.formatDate("yyyy-MM-dd HH:mm:ss.S", recentPostDate);	
+//			recentPostDate = Utils.formatDate("hh:mm a, dd MMMM yyyy", tempDate);	
 			
 			// Create return data
 			List<DbForumPost> outputPosts = new ArrayList<DbForumPost>();
 			DbForumPost forumPost = new DbForumPost();
-			forumPost.setPostTime(recentPostDate);
+			if(recentPostDate != null) {
+				// Format date as needed by below method
+				String formattedDate = Utils.formatDateBasedOnInputFormat("yyyy-MM-dd HH:mm:ss.S", recentPostDate);
+				// Set IST
+				forumPost.setPostTime(Utils.convertDatetoIST(formattedDate));	
+			}
+			else {
+				forumPost.setPostTime("");
+			}
 			outputPosts.add(forumPost);
 			topic.setForumPosts(outputPosts);
 		}
@@ -61,6 +76,33 @@ public class ForumController {
 		return forumList;
 	}
 
+	
+	@RequestMapping(value = "/forums/checkForAccess", method = RequestMethod.GET)
+	@ResponseBody
+	public Boolean checkForUserAccess( HttpServletRequest request ) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		System.out.println("Auth : " + auth);
+		if(auth != null) {
+			System.out.println("Authenticated : " + auth.isAuthenticated());
+		}
+		if(!(auth instanceof AnonymousAuthenticationToken))
+		{ 
+			System.out.println("Returning true from first if block");
+			return true ; 
+		}
+		boolean canAccess = Utils.showSignUpPage(request);
+		System.out.println("canAccess returned : " + canAccess);
+		if(canAccess) {
+			return true ;
+		} else {
+			return false ; 
+		}
+	}
+
+	
+	
 	private String latestDate(List<String> postDates) {
 		Collections.sort(postDates, new Comparator<String>() {
 			DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");

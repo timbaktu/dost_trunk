@@ -29,7 +29,7 @@
 				
 				$(document).ajaxComplete(function(){
 			        $(".loading").css("display", "none");
-			        alert("loading done");
+			        //alert("loading done");
 			    });
 					$.each( advisor, function( index, elem ){
 					var html = return_team_html() ;

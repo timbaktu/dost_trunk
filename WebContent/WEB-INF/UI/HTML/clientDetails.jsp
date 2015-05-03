@@ -26,11 +26,11 @@
 								$("#"+inner[0].messageId).after("<ul></ul></div>");						
 								for(var k in inner) {
 									$("#"+ inner[0].messageId).siblings("ul").append('<li class=" media each_conversation">'+
-											'<div class="pull-left col-md-2">'+
-												'<div class="patient_name"><strong>'+inner[k].sender.username+'</strong></div>'+
-												'<div class="post_details">'+ inner[k].sentDate +'</div>'+
+											'<div class="pull-left col-md-4">'+
+												'<span class="patient_name"><strong>'+inner[k].sender.username+'</strong></span>'+
+												'<span class="post_details">( '+ formatDate(inner[k].sentDate ) +' )</span>'+
 											'</div>' +
-											'<div class="media-body col-md-8">'+
+											'<div class="media-body col-md-12">'+
 													'<span>'+inner[k].content+'</span>'+
 											'</div>'+
 										'</li>');							
@@ -63,7 +63,7 @@
 			
 			function timeConverter(UNIX_timestamp){
 				  var a = new Date(UNIX_timestamp * 1);
-				  debugger;
+				 // debugger;
 				  var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 				  var year = a.getFullYear();
 				  var month = months[a.getMonth()];
@@ -76,7 +76,7 @@
 				}
 			
 			$.getJSON('/dost/api/user/'+userId[0], function(user_details) {
-				debugger;
+				//debugger;
 				$(".summary_patient").append(
 						'<div class="user_actual_details">'+
 						'<span>'+user_details.fname +'&nbsp'+ user_details.lname+'</span>'+
@@ -88,7 +88,8 @@
 				);
 			});
 			/*displaying notes*/
-			$.getJSON('/dost/api/user/'+userId[1]+'/notes/all', function(notes){
+			var hostname=$(location).attr('host'); 
+			$.getJSON('http://'+hostname+'/dost/api/user/'+userId[1]+'/notes/all', function(notes){
 				for(i=0; i<notes.length; i++){
 					$(".counselor_notes").append(
 						'<li class="each_note">'+
@@ -111,8 +112,8 @@
 			/*end of scrolling to the related conversation for the note*/
 			
 			/*adding search for conversation*/
-			$(".col-md-8").sieve({ itemSelector: ".each_conversation" });
-			$(".col-md-8").prev("div").addClass("searchBox");
+			//$(".col-md-8").sieve({ itemSelector: ".each_conversation" });
+			//$(".col-md-8").prev("div").addClass("searchBox");
 			/*end of adding search for patient*/
 		});
 	</script>
@@ -120,21 +121,21 @@
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<!--patient summary-->
 		<div class="container">
-			<div class="pageTop">
+			<div class="pageTop col-sm-12">
 					<h2 class="pull-left pageHeading">
-						<a  href="clientList">&larr; Back to all Patients</a>
+						<a  href="clientList">&larr; Back to all clients</a>
 					</h2>
-					<div class="clearfix"></div>
+					<!-- <div class="clearfix"></div>  -->
 			</div>
 						
-			<div class="col-md-8 well">
+			<div class="col-md-8">
 				
 				<div class="summary_patient">
 					<h2 class="pageHeading patientName"></h2>
-					<!--  <label>Relationship</label> | <label>Repeat</label> -->
+					<!--   <label>Relationship</label> | <label>Repeat</label> -->
 					<div class="clearfix"></div>
 				</div>
-				<!--  <br/> -->
+				
 				 
 				<ul class="conversations conversation_History_details">
 					<li class="loading" id="loading">
