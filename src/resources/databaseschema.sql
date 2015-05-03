@@ -285,6 +285,23 @@ insert into jforum_forums values (3, 3, 'Career', 'Career', 1, 0, 0, 0)
 insert into jforum_forums values (4, 4, 'Education', 'Education', 1, 0, 0, 0)
 insert into jforum_forums values (5, 5, 'Personality', 'Personality', 1, 0, 0, 0)
 
+CREATE TABLE `dost_userlog` (
+    `logid` INTEGER NOT NULL AUTO_INCREMENT,
+    `userid` INTEGER NOT NULL,
+    `username` VARCHAR(255) NOT NULL,
+    `ip` varchar(255) DEFAULT NULL,
+	`logintime` varchar(255) DEFAULT NULL,
+    `createdate` varchar(255) DEFAULT NULL,
+    `createby` bigint(20) DEFAULT NULL,
+    `updatedate` varchar(255) DEFAULT NULL,
+    `updateby` bigint(20) DEFAULT NULL,
+    `deleted` INTEGER DEFAULT 0,
+    PRIMARY KEY (`logid`)
+);
+
+CREATE TRIGGER dost_userlog_OnInsert BEFORE INSERT ON `dost_userlog`
+    FOR EACH ROW SET NEW.logintime = NOW();
+  
 
 CREATE TABLE `dost_codes` (
     `codeid` INTEGER NOT NULL AUTO_INCREMENT,
@@ -301,8 +318,50 @@ CREATE TABLE `dost_codes` (
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('1', 'TAG', 'Relationship', '0');
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('2', 'TAG', 'Career', '0');
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('3', 'TAG', 'Education', '0');
+INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('8', 'TAG', 'Others', '0');
 
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('4', 'LOCATION', 'Bangalore', '0');
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('5', 'LOCATION', 'Delhi', '0');
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('6', 'LOCATION', 'Hyderabad', '0');
 INSERT INTO `dost`.`dost_codes` (`codeid`, `type`, `value`, `deleted`) VALUES ('7', 'LOCATION', 'Bhopal', '0');
+
+CREATE TABLE `dost_counselors` (
+    `counselorid` INTEGER NOT NULL AUTO_INCREMENT,
+	`username` varchar(1000) NOT NULL,
+    `password` varchar(1000) NOT NULL,
+	`name` varchar(1000) NOT NULL,
+    `description` varchar(10000) NOT NULL,
+	`profilename` varchar(1000) NOT NULL,
+    `timing` varchar(255) DEFAULT NULL,
+    `gender` varchar(255) DEFAULT NULL,
+    `location` varchar(255) DEFAULT NULL,
+    `createdate` varchar(255) DEFAULT NULL,
+    `createby` bigint(20) DEFAULT NULL,
+    `updatedate` varchar(255) DEFAULT NULL,
+    `updateby` bigint(20) DEFAULT NULL,
+    `deleted` INTEGER DEFAULT 0,
+    PRIMARY KEY (`counselorid`)
+);
+
+CREATE TABLE `dost_counselortags` (
+    `tagid` INTEGER NOT NULL AUTO_INCREMENT,
+    `counselorid` INTEGER NOT NULL,
+	`tagname` varchar(255) DEFAULT NULL,
+    `createdate` varchar(255) DEFAULT NULL,
+    `createby` bigint(20) DEFAULT NULL,
+    `updatedate` varchar(255) DEFAULT NULL,
+    `updateby` bigint(20) DEFAULT NULL,
+    `deleted` INTEGER DEFAULT 0,
+    PRIMARY KEY (`tagid`)
+);
+-- Add data in dost_counselortags
+-- Going forward we need to add data in dost_counselors also apart from users table
+
+ALTER TABLE user
+ADD COLUMN `blocked` VARCHAR(10) DEFAULT false AFTER `email`;
+
+ALTER TABLE user
+ADD COLUMN `identifier` VARCHAR(100) AFTER `blocked`;
+
+ALTER TABLE message
+ADD COLUMN `category` INTEGER AFTER `msgid`;
