@@ -6,7 +6,7 @@
 $.ajax({
 	 url : "/dost/api/forums/checkForAccess",
 	 success : function(data){ 
-		 if( !data ){
+		 if( false ){
 			$(".menuItems #discussions").css("display", "none") ;
 	 	}
 	 }
