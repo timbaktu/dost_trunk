@@ -46,7 +46,7 @@ $( document ).ready(function() {
 	$.ajax({
 	 url : "/dost/api/forums/checkForAccess",
 	 success : function(data){ 
-		 if( !data ){
+		 if( false ){
 	 		$("#discussions .loadingIndex").hide();
 			var hostname = $(location).attr('host');
 			var loginLink = hostname.match("localhost") ? "/dost/login" : "/login" ;
