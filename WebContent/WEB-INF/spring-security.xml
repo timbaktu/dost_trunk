@@ -29,7 +29,8 @@
 	<http auto-config="true" use-expressions="true" authentication-manager-ref="authMgr">
 		<intercept-url pattern="/index/**" access="permitAll" />
 		<intercept-url pattern="/login/**" access="permitAll" />
-		<intercept-url pattern="/forums/show/**" access="permitAll" />
+		<intercept-url pattern="/forums/show/**" access="isAuthenticated()" />
+		<intercept-url pattern="/posts/list/**" access="isAuthenticated()" />
 		<intercept-url pattern="/signup**" access="permitAll"/>
  		<intercept-url pattern="/conversations**" access="isAuthenticated()" /> 
  		<intercept-url pattern="/talkToFriend" access="isAuthenticated()" /> 

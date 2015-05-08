@@ -2,7 +2,10 @@ package com.dost.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -154,6 +157,25 @@ public class UserDAOImpl implements UserDAO {
 			users = new ArrayList<DbUser>();
 		}
 		return users;
+	}
+	
+	
+
+	public Map<String, Long> getUserIdsByUsernames(List<String> usernames) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select u.userId as id, u.username as name from DbUser u where u.username in (:usernames)");
+		query.setParameterList("usernames", usernames);
+		List<DbUser> users = query.list();
+		Map<String, Long> outputMap = new HashMap<String, Long>();
+		if(users != null) {
+			for(Iterator it = users.iterator(); it.hasNext(); ) {
+				 Object[] myResult = (Object[]) it.next();
+	             Long id = (Long) myResult[0];
+	             String name = (String) myResult[1];
+	             outputMap.put(name, id);
+			}
+		}
+		return outputMap;
 	}
 
 	public DbUser checkUserBySecurityQuestion(String username, String question1, String question2,

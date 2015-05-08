@@ -1,6 +1,7 @@
 package com.dost.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,10 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUserByUsername(username);
 	}
 	
+	public Map<String, Long> getUserIdsByUsernames(List<String> usernames) {
+		return userDAO.getUserIdsByUsernames(usernames);
+	}
+
 	public String getUserNameById(Long userId) {
 		return userDAO.getUserNameById(userId);
 	}

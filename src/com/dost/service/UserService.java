@@ -1,6 +1,7 @@
 package com.dost.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dost.hibernate.DbUser;
 import com.dost.hibernate.Role;
@@ -20,6 +21,7 @@ public interface UserService {
 	public List<DbUser> getAllCounselors();
 	
 	public DbUser getUserByUsername(String username);
+	public Map<String, Long>  getUserIdsByUsernames(List<String> usernames);
 	
 	public DbUser checkUserBySecurityQuestion(String username, String question1, String question2, String answer1, String answer2);
 	public DbUser updatePassword(String username, String password);

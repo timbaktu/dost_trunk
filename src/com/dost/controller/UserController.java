@@ -1,5 +1,6 @@
 package com.dost.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,15 @@ public class UserController {
 		if(!AuthorizationUtil.authorizeByUserName(username)) return null;
 			
 		return userService.getUserByUsername(username);
+	}
+	
+	@RequestMapping(value="/users/{usernames}/ids", method=RequestMethod.GET)  
+	@ResponseBody
+	public Map<String, Long> getUserIdsByUsername(@PathVariable String usernames) {
+		if(!AuthorizationUtil.authorizeByUserName(usernames)) return null;
+			
+		String[] usernameStringArray = usernames.split(",");
+		return  userService.getUserIdsByUsernames(Arrays.asList(usernameStringArray));
 	}
 	
 	@RequestMapping(value="/user/{username}/exists", method=RequestMethod.GET)  

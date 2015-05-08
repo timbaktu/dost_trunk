@@ -56,8 +56,10 @@ public class ForumController {
 			if(recentPostDate != null) {
 				// Format date as needed by below method
 				String formattedDate = Utils.formatDateBasedOnInputFormat("yyyy-MM-dd HH:mm:ss.S", recentPostDate);
-				// Set IST
-				forumPost.setPostTime(Utils.convertDatetoIST(formattedDate));	
+				// Set IST, this was done for IITG, they have RDS at Southeast
+				// No need for live, it has RDS in EST
+				forumPost.setPostTime(Utils.convertDatetoIST(formattedDate));
+				//forumPost.setPostTime(formattedDate);
 			}
 			else {
 				forumPost.setPostTime("");
@@ -80,7 +82,7 @@ public class ForumController {
 	@RequestMapping(value = "/forums/checkForAccess", method = RequestMethod.GET)
 	@ResponseBody
 	public Boolean checkForUserAccess( HttpServletRequest request ) {
-
+		boolean isLoggedIn = false;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		System.out.println("Auth : " + auth);
@@ -90,15 +92,16 @@ public class ForumController {
 		if(!(auth instanceof AnonymousAuthenticationToken))
 		{ 
 			System.out.println("Returning true from first if block");
-			return true ; 
+			isLoggedIn = true; 
 		}
-		boolean canAccess = Utils.showSignUpPage(request);
-		System.out.println("canAccess returned : " + canAccess);
-		if(canAccess) {
-			return true ;
-		} else {
-			return false ; 
-		}
+		return isLoggedIn;
+//		boolean canAccess = Utils.showSignUpPage(request);
+//		System.out.println("canAccess returned : " + canAccess);
+//		if(canAccess) {
+//			return true ;
+//		} else {
+//			return false ; 
+//		}
 	}
 
 	
