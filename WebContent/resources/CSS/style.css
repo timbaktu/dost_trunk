@@ -332,6 +332,9 @@
 	.counter a{
 		font-size:1.5em;
 	}
+	div.container_testimonal{
+		margin-top:0;
+	}
 	.testimonial p{
 		font-size:1.1em;
 	}

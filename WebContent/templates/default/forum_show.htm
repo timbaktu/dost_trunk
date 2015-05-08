@@ -115,7 +115,6 @@
 							<p class="discussion_summary " >
 								<#assign count = posts.get(topic.id)?size/>
 								<#if (count > 0) >
-
 									<#assign topicsize = posts.get(topic.id)[0].text?length/>
 									<#if (topicsize > 160) >
 										${posts.get(topic.id)[0].text.substring(0,160)}...

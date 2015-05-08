@@ -12,11 +12,11 @@ uri="http://www.springframework.org/security/tags"%>
 	<meta name="author" content="Your D.O.S.T.">
 	<title>Your D.O.S.T : An Emotional Support System</title>
 	<link rel="shortcut icon" href="http://yourdost.com/favicon.ico" />
-	<!-- <link rel="image_src" href="http://yourdost.com/resources/img/dostLogo.jpg" />
+	<link rel="image_src" href="http://yourdost.com/resources/img/dostLogo.jpg" />
 	<meta property="og:image" content="http://yourdost.com/resources/img/dostLogo.jpg"/>
 	<meta property="og:title" content="Your D.O.S.T - An Emotional Support System"/>
 	<meta property="og:image" content="Is something bothering you - career, relationships, family, work, education, parents? Your D.O.S.T is a your emotional support system where you can be complete anonymous and vent out your feelings to special friends consiting of compassionate psychologists and others. You can privately discuss all your problems with special friends through one to one chat, explore self help and engage with others going through tough times on discussion forums"/>
-	 -->
+	 
 </head>
 
 <jsp:include page="includes/commonHeader.jsp"></jsp:include>
