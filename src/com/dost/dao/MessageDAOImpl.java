@@ -1,6 +1,7 @@
 package com.dost.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -60,10 +61,10 @@ public class MessageDAOImpl implements MessageDAO {
 //		String hql = "from DbMessage where msgId in (select distinct m.msgId from DbMessage m inner join m.recipients r where r.recipient.userId = ? order by m." + sort + " " + order + ")";
 //		String hql = "select distinct m.msgId from DbMessage m inner join m.recipients r where r.recipient.userId = ? order by m.messageId desc";// + order;
 		
-		String hql = "select distinct m.msgId from DbMessage m where m.messageId in " +
-				"(select m.messageId from DbMessage m inner join m.recipients r where r.recipient.userId = ? order by m.messageId desc) order by m.messageId desc";// + order;
+//		String hql = "select distinct m.msgId from DbMessage m where m.messageId in " +
+//				"(select m.messageId from DbMessage m inner join m.recipients r where r.recipient.userId = ? order by m.messageId desc) order by m.messageId desc";// + order;
 		
-		
+		String hql = "select distinct m.msgId from DbMessage m inner join m.recipients r where r.recipient.userId = ? group by msgId order by max(m.messageId) desc";// + order;		
 		
 //		String hql = "select distinct m.msgId from DbMessage m where m.messageId in (select mr.message.messageId from DbMessageRecipient mr where mr.recipient.userId = ?) order by m.messageId desc";// + order;
 		Query query = session.createQuery(hql);
@@ -76,6 +77,7 @@ public class MessageDAOImpl implements MessageDAO {
         if(msgIdList == null) {
         	return new ArrayList<DbMessage>();
         }
+        msgIdList.addAll(new HashSet<Long>(msgIdList));
 //        Set<Long> msgIdSet = new LinkedHashSet<Long>(msgIdList);
 //        msgIdList = new ArrayList<Long>(msgIdSet);
 //        if(pageNo != null && per_page != null) {
