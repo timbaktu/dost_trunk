@@ -56,7 +56,7 @@
 		font-size:1.2em;
 	}
 	.patient_name{
-		padding-left: 20px;
+		//padding-left: 20px;
 	}
 	.ceac_patient .glyphicon{
 		top: 26px;
@@ -69,7 +69,10 @@
 		padding: 10px;
 	}
 	.user_actual_details span{
-		margin-right:20px;
+		margin-right: 4px;
+		background: #F8E9D4;
+		font-weight: bold;
+		padding: 4px;
 	}
 	.each_note {
 		margin-bottom: 20px;
@@ -90,6 +93,7 @@
 	}
 	.loading{
 		position: relative;
+		//z-index:999;
 	}
 	.loadingIndex>img,.loading>img, .secondloading>img {
 		position: absolute;
@@ -109,7 +113,9 @@
 		min-height:200px;
 	}
 	.conversation_History_details .post_details {
-		font-size:0.8em;
+		font-size:1em;
+		margin-left:5px;
+		color:#999;
 		
 	}
 	.conversation_History_details .categoryList{
@@ -1192,6 +1198,7 @@ div.most_popular_discussions{
 .categoryList li{
 	font-size: 1em;
 	line-height: 1.9em;
+	//border-bottom: 1px solid rgb(221, 221, 221);
 }
 .categoryList li a{
 	color : #666666;
