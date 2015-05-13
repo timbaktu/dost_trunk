@@ -43,6 +43,8 @@
 			//UrlForData = '/dost/api/user/'+userid+'/messages';
 			UrlForData = '/dost/api/user/'+userid+'/messages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
 			showDataMsg(UrlForData);
+			//UrlForData = '/dost/api/user/'+userid+'/sentmessages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
+			//showDataMsg(UrlForData);
 		});
 			
 	}
@@ -221,12 +223,17 @@
 		
 		/*Sent messages and inbox toggle active class*/
 		$(".sentItems").click(function(){
+			resetGlobal();
 			$(".active").removeClass("active");
 			$(this).addClass("active");
+			$(".loading").show();
 			UrlForData = '/dost/api/user/'+userid+'/sentmessages';
 			
+			console.log(1);
+			//UrlForData = '/dost/api/user/'+userid+'/sentmessages?page=1&per_page='+globalPerPage+'&sort=messageId&order=desc';
+			
 			showData(UrlForData);
-			resetGlobal();
+			//resetGlobal();
 		});
 		/**
 		$(".chats").click(function(){
@@ -270,13 +277,16 @@
 		
 		
 			
-		function showData(UrlForData){
+	function showData(UrlForData){
+			
 			$.getJSON(UrlForData, function(messages) {	
 				$(".loading").hide();
 			$(".conversationsUser").html("");
 			$(".conversationsCounselor").html("");
 			
 			if(messages.length>0){
+				 gloablFlag = true;
+		    	  gloablePage++;  
 					for (var i = 0 ; i < messages.length; i++) {
 						
 						var conversationDate = messages[i].sentDate ;
@@ -390,15 +400,17 @@
 				}
 				else{
 					$(".conversations").html('<div class="noConversationsText">There are no conversations <br/> <a class="leaveMessageLink">Leave a message</a></div>'); 
-				}
-				});
-		}
+			}
+				}); 
+		} 
 		
 		
 		$(".chats").click(function(){
 			resetGlobal();
 			$(".active").removeClass("active");
 			$(this).addClass("active");
+		
+			$(".loading").show();
 			var chatMessageLength = 0;
 			$.getJSON('/dost/api/chathistory/user/' + userid, function(messages) {	
 				$(".loading").hide();
@@ -581,24 +593,33 @@
 				{
 					text : "SEND",
 					click : function() {
-						debugger;
+						//debugger;
 							$(".error").html("");
 							$(".error").hide();
 							
 							var recipientsNames;
 							if($("#recipient").val()){
 								recipientsNames=$("#recipient").val().split(",");
+								recipientsNames.join();
+								
 							}
 							else{
 								recipientsNames=null;
 							}
 							$.ajax({
-				                url: "/dost/api/users/light",
+				               // url: "/dost/api/users/light",
+				               url: "/dost/api/users/"+recipientsNames+"/ids",
 				                dataType: "json",
 				                success: function(details) {
-				                	var selected_recipient;
+				                	
+				               //	var selected_recipient;
+				                var ids = [];
+				                for(var k in details) ids.push(details[k]);
+				                
+  								
 				                	if(recipientsNames){
-				                	recipientsNames.pop();
+				                		selected_recipient= ids.join();
+				                /*	recipientsNames.pop();
 		                        	var ids=[];
 		              		        $.each(details, function(j,key){
 		                    	        $.each(recipientsNames, function(i,name){
@@ -610,12 +631,16 @@
 		                    		});
 		                        	ids=ids.join();
 		                        	selected_recipient=ids;
+		                        	alert(selected_recipient) */
 				                	}
 				                	else{
 									 selected_recipient="";
 				                	}
 									if( selected_recipient == undefined || selected_recipient == '' || !selected_recipient ){
+									
+										
 										selected_recipient = "all" ;
+										alert(selected_recipient);
 									}							
 									var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+ selected_recipient +'&senderId=' + userid;
 		
@@ -834,7 +859,7 @@
             	
                 }
             }); */
-            debugger;
+           // debugger;
             $.ajax({
                 url: "/dost/api/users/light",
                 dataType: "json",
@@ -853,7 +878,7 @@
             		function extractLast( term ) {
             			return split( term ).pop();
             		}
-					debugger;
+					//debugger;
             		$( "#recipient" )
             			// don't navigate away from the field on tab when selecting an item
             			.bind( "keydown", function( event ) {
@@ -863,7 +888,7 @@
             				}
             			})
             			.autocomplete({
-            				minLength: 0,
+            				minLength: 3,
             				source: function( request, response ) {
             					// delegate back to autocomplete, but extract the last term
             					response( $.ui.autocomplete.filter(
@@ -882,11 +907,10 @@
             					var ids=$("#selected_recipient").val()+","+ui.item.name;
             					// add placeholder to get the comma-and-space at the end
             					terms.push( "" );
-            					this.value = terms.join( ", " );
-            					//$("#recipient").val( ui.item.label ) ;
+            					this.value = terms.join( "," );
+            					//$("#recipient").val( ui.item.name ) ;
             				      $("#selected_recipient").val( ids ) ;
-            				    //  alert($("#selected_recipient").val());
-            				     // debugger;
+            				     
             					return false;
             				} 
             				
