@@ -74,7 +74,7 @@ $.ajax({
 <#if moderator>
 	<script type="text/JavaScript" src="${JForumContext.encodeURL("/js/list/moderation")}"></script>
 </#if>
-<div class="container-fluid theme-default"> 
+<div class="container-fluid theme-default  discussionExpanded"> 
 	<div class="container row-fluid">
 		<div class="col-md-7">
 		
@@ -176,7 +176,7 @@ $.ajax({
 							<#else>
 								<#assign rowspan = "2"/>
 							</#if>
-							<div class="each_interaction media">
+							<div class="each_interaction media well">
 								<div class="clearfix"></div>
 								<#if canRemove>
 									<a class="pull-right"  href="${JForumContext.encodeURL("/jforum${extension}?module=${moduleName}&amp;action=delete&amp;post_id=${post.id}&amp;start=${start}","")}" id="delete${post.id}" onclick="return confirmDelete(${post.id});">Delete</a>
