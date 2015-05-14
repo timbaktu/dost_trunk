@@ -31,8 +31,12 @@
 	}
 	.insertBlock{
 		
-		padding-right:20px;
-		padding-top:13px;
+		//padding-right:20px;
+		//padding-top:13px;
+		  position: absolute;
+  z-index: 999;
+  right: 64px;
+   margin-top: 26px;
 	}
 	#subjectHeading{  
 		margin-top: 15px;

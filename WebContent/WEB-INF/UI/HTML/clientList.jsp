@@ -86,21 +86,22 @@
 									var html = "";
 									var mainStyle = "";
 									if (blocked == "0") {
-										html = '<button class="pull-right btn btn-large btn-primary" style="display:none;" type="button" onclick="blockUser(\''+user[i].username+'\',this)">Block User</button>';	
+										html = '<button  class="blockButton pull-right btn btn-large btn-primary" style="display:none;" type="button" onclick="blockUser(\''+user[i].username+'\',this);showStatus();">Block User</button>';	
 									} else {
 										html = '<p class="pull-right blockedText">( BLOCKED )</p>';
 										mainStyle = "style='background-color:#f7f7f7;'";
 									}
 									
 									$(".patient_list").append('<li '+mainStyle+' onmouseover="showButton(this);" onmouseout="hideButton(this);" class="media ceac_patient">'+
+											'<div class="insertBlock pull-right">'
+											+html+					
+										'</div>'+
 																'<a class="pull-left col-md-12" href="clientDetails?='+user[i].username+"+"+user[i].userId+'">'+
 																	'<img class="avatar" id='+user[i].avatar+' src="avatar/'+user[i].avatar+'.png" name='+user[i].avatar+'/>'+
 																	'<span class="patient_name">'+user[i].username+'</span>'+
 																	'<span title="View User Details" class="pull-right glyphicon glyphicon-chevron-right"></span>'+
 																
-																	'<div class="insertBlock pull-right">'
-																		+html+					
-																	'</div>'+
+																	
 																'</a>'+
 															'</li>');
 									
@@ -126,7 +127,12 @@
 					      }   
 					    }); 
 				}
-				
+				function showStatus(){
+					
+				//	$(".status").show().html("blocked");
+					$(".status").show().html("blocked").delay(5000).hide(200);
+					alert("blocked");
+				}
 				function loadingImage() {
 					$(".patient_list").append('<li class="secondloading"><img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" /></li>');
 				}
@@ -136,6 +142,7 @@
 	<body onscroll="triggerPagination();" class="theme-default theme-default-counselor" >
 		<jsp:include page="includes/header.jsp"></jsp:include>
 		<div class="container row-fluid">
+		<div class="status col-md-6" id="status"></div>
 			<div class="pageTop">
 					<h2 class="pull-left pageHeading">
 						Client History
@@ -156,5 +163,8 @@
 					
 		</div>
 		<jsp:include page="includes/commonFooter.jsp"></jsp:include>
+		<script> 
+		
+		</script>
 	</body>
 </html>

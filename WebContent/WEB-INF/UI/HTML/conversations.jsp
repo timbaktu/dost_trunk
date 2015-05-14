@@ -411,6 +411,7 @@
 			$(this).addClass("active");
 		
 			$(".loading").show();
+			console.log(2);
 			var chatMessageLength = 0;
 			$.getJSON('/dost/api/chathistory/user/' + userid, function(messages) {	
 				$(".loading").hide();
@@ -683,11 +684,11 @@
 			
 		
 		/*Sent messages and inbox toggle active class*/
-		$(".sentItems").click(function(){
+	/*	$(".sentItems").click(function(){
 			$(".active").removeClass("active");
 			$(this).addClass("active");
 			resetGlobal();
-		});
+		});*/
 		$(".Inbox").click(function(){
 			$(".active").removeClass("active");
 			$(this).addClass("active");
@@ -757,7 +758,7 @@
 					</ul>
 						
 				</div>
-				<div class="status col-md-11"></div>
+				<div class="status col-md-6"></div>
 			</div>
 		 </sec:authorize>
 		 
