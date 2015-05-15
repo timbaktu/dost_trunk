@@ -130,8 +130,8 @@
 				function showStatus(){
 					
 				//	$(".status").show().html("blocked");
-					$(".status").show().html("blocked").delay(5000).hide(200);
-					alert("blocked");
+					$(".status").show().html("Selected user is blocked").delay(5000).hide(200);
+					//alert("blocked");
 				}
 				function loadingImage() {
 					$(".patient_list").append('<li class="secondloading"><img src="${pageContext.request.contextPath}/resources/img/ajax-loader.gif" alt="Loader" /></li>');
