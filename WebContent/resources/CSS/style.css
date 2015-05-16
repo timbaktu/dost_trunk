@@ -1,7 +1,9 @@
 	body{
 		font-family: 'Open Sans', Arial,sans-serif;
 		font-size: 13px;
-	}
+		height:100%;
+		overflow:scroll;
+			}
 	footer{
 		text-align: center;
 		border-top: 1px solid #ddd;
@@ -61,6 +63,7 @@
 	}
 	.patient_name{
 		//padding-left: 20px;
+		float:left
 	}
 	.ceac_patient .glyphicon{
 		top: 26px;
@@ -118,9 +121,9 @@
 	}
 	.conversation_History_details .post_details {
 		font-size:1em;
-		margin-left:5px;
+		margin-left:8px;
 		color:#999;
-		
+		float:left
 	}
 	.conversation_History_details .categoryList{
 		margin-top:15px;
@@ -140,6 +143,7 @@
 	}
 	ul.conversations{
 		min-height: 400px;	
+		
 	}
 	.each_conversation{
 		padding:5px;
@@ -1415,4 +1419,9 @@ overflow-x: hidden;
  	#image-links{  display: inline-flex;} */
  	.each_conversation  h4+span>#welcome-message{height:88px;}
  	.conversation_topic:hover{color:#444;}
- 	
+ 	.searchMessage{  display: block;
+  width: 300px;
+  float: right;
+  margin-top: 20px;}
+  .conversationsCounselor{height:100%;overflow:auto;}
+ 
