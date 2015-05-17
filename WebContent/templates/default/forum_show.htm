@@ -18,7 +18,7 @@
 			var allCategory = '<ul>' ;
 			var numberOfForums = Forums.length;
 			for (var i = 0 ; i < numberOfForums; i++) {
-				allCategory += '<li><a href="/forums/show/'+ Forums[i].forumId +'.page">'+ Forums[i].forumName +'</a></li>' ;
+				allCategory += '<li><a href="/dost/forums/show/'+ Forums[i].forumId +'.page">'+ Forums[i].forumName +'</a></li>' ;
 			}
 			allCategory += "</ul>" ;
 
@@ -55,10 +55,11 @@ $.ajax({
 
 </#if>
 
-<div class="container-fluid theme-default"> 
-	<div class="container row-fluid">
 
-			<div class="col-md-7">
+<div class="container-fluid theme-default"> 
+	<div class="container row-fluid discussionListing">
+
+			<div class="col-md-8">
 				<div class="pageTop">
 					<h2 class="pull-left pageHeading">Discussions</h2>
 			
@@ -67,16 +68,16 @@ $.ajax({
 							<#if !readonly && !replyOnly>
 								<a class="pull_left icon_new_topic btn btn-primary btn-large login_btn" href="${JForumContext.encodeURL("/jforum${extension}?module=posts&amp;action=insert&amp;forum_id=${forum.id}", "")}" rel="nofollow" >Create New Discussion</a>
 							</#if>
-		
-							<div class=" pull_left " >
-				  				<#assign paginationData><@pagination.doPagination action, forum.id/></#assign>
-								${paginationData}
-							</div>
-						
 					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="clearfix"></div>
-			 
+			<div class="clearfix"></div>
+			
+			<div class=" pagination_container " >
+				  	<#assign paginationData><@pagination.doPagination action, forum.id/></#assign>
+					${paginationData}
+			</div>
+			<div class="clearfix"></div>
 			<div class="forumline allDiscussion_topic">
 				<!-- TOPICS LISTING -->
 				<#list topics as topic>
@@ -95,7 +96,7 @@ $.ajax({
 					<div class="bg_small_yellow discussion_topic ">
 						<div class=" well media">	
 							<a class="pull-left" href="${JForumContext.encodeURL("/posts/list/${topic.id}")}">
-								<img class="media-object profile_pic" src="http://yourdost.com/avatar/${topic.postedBy.avatar}">
+								<img class="media-object profile_pic" src="http://localhost:8800/dost/avatar/${topic.postedBy.avatar}">
 								<span class="owner_name">${topic.postedBy.username}</span>
 							</a>
 									
@@ -193,7 +194,7 @@ $.ajax({
 	</div>
 </div>
 
-	<div class="col-md-3" style="margin-top: 70px;">
+	<div class="col-md-4 well" style="margin-top: 82px;">
 		<div class="categoryList">
 		<h4>Categories</h4>
 		</div>

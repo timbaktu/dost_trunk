@@ -26,7 +26,7 @@
 								$("#"+inner[0].messageId).after("<ul></ul></div>");						
 								for(var k in inner) {
 									$("#"+ inner[0].messageId).siblings("ul").append('<li class=" media each_conversation">'+
-											'<div class="pull-left col-md-4">'+
+											'<div class="pull-left col-md-12">'+
 												'<span class="patient_name"><strong>'+inner[k].sender.username+'</strong></span>'+
 												'<span class="post_details">( '+ formatDate(inner[k].sentDate ) +' )</span>'+
 											'</div>' +
@@ -45,7 +45,7 @@
 								for(var k in inner.userChats) {
 									//debugger;
 									$("#"+ i+"_subject").siblings("ul").append('<li class=" media each_conversation">'+
-											'<div class="pull-left col-md-2">'+
+											'<div class="pull-left col-md-12">'+
 												'<div class="patient_name"><strong>'+ inner.userChats[k].toJIDResource +'</strong></div>'+
 												'<div class="post_details">'+timeConverter(inner.userChats[k].sentDate) +'</div>'+
 											'</div>' +

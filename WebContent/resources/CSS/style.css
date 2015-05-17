@@ -1,7 +1,9 @@
 	body{
 		font-family: 'Open Sans', Arial,sans-serif;
 		font-size: 13px;
-	}
+		height:100%;
+		overflow:scroll;
+			}
 	footer{
 		text-align: center;
 		border-top: 1px solid #ddd;
@@ -31,8 +33,12 @@
 	}
 	.insertBlock{
 		
-		padding-right:20px;
-		padding-top:13px;
+		//padding-right:20px;
+		//padding-top:13px;
+		  position: absolute;
+  z-index: 999;
+  right: 64px;
+   margin-top: 26px;
 	}
 	#subjectHeading{  
 		margin-top: 15px;
@@ -56,7 +62,8 @@
 		font-size:1.2em;
 	}
 	.patient_name{
-		padding-left: 20px;
+		//padding-left: 20px;
+		float:left
 	}
 	.ceac_patient .glyphicon{
 		top: 26px;
@@ -69,7 +76,10 @@
 		padding: 10px;
 	}
 	.user_actual_details span{
-		margin-right:20px;
+		margin-right: 4px;
+		background: #F8E9D4;
+		font-weight: bold;
+		padding: 4px;
 	}
 	.each_note {
 		margin-bottom: 20px;
@@ -90,6 +100,7 @@
 	}
 	.loading{
 		position: relative;
+		//z-index:999;
 	}
 	.loadingIndex>img,.loading>img, .secondloading>img {
 		position: absolute;
@@ -109,8 +120,10 @@
 		min-height:200px;
 	}
 	.conversation_History_details .post_details {
-		font-size:0.8em;
-		
+		font-size:1em;
+		margin-left:8px;
+		color:#999;
+		float:left
 	}
 	.conversation_History_details .categoryList{
 		margin-top:15px;
@@ -130,6 +143,7 @@
 	}
 	ul.conversations{
 		min-height: 400px;	
+		
 	}
 	.each_conversation{
 		padding:5px;
@@ -367,9 +381,16 @@
 	
 	
 	/*each card*/
+	.disclaimer_discussion{
+		  font-size: 0.8em;
+		  margin-top: 10px;
+		  font-style: italic;
+		  font-family: georgia;	
+	}
+	
 	.exploration_option{
 		margin-top: 10px;
-		height: 300px;
+		height: 340px;
 		border-top: 3px solid #FECA12;
 	}
 	.exploration_option:hover{
@@ -410,9 +431,12 @@
 	#discussions .details_box, #faqs .details_box, #quotes .details_box, #destressing .details_box, #articles  .details_box{
 		overflow: hidden;
 		line-height: 1.5;
-		max-height: 12em;
+		max-height: 15em;
 		position:relative;
 		padding-left:0;
+	}
+	#discussions .details_box{
+		max-height: 12em;
 	}
 	#discussions .details_box:after, #faqs .details_box:after, #quotes .details_box:after, #destressing .details_box:after, #articles  .details_box:after {
 			content:"...";
@@ -1195,6 +1219,7 @@ div.most_popular_discussions{
 .categoryList li{
 	font-size: 1em;
 	line-height: 1.9em;
+	//border-bottom: 1px solid rgb(221, 221, 221);
 }
 .categoryList li a{
 	color : #666666;
@@ -1397,4 +1422,9 @@ overflow-x: hidden;
  	#image-links{  display: inline-flex;} */
  	.each_conversation  h4+span>#welcome-message{height:88px;}
  	.conversation_topic:hover{color:#444;}
- 	
+ 	.searchMessage{  display: block;
+  width: 300px;
+  float: right;
+  margin-top: 20px;}
+  .conversationsCounselor{height:100%;overflow:auto;}
+ 

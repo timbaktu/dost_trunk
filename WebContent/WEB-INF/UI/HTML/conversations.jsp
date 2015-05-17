@@ -15,6 +15,7 @@
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.plugin.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/resources/JS/jquery.more.js" type="text/javascript"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
 	<script>
 	
 	var selected_recepient = "" ;
@@ -22,10 +23,14 @@
 	var gloablePage = 1;
 	var globalPerPage = 10;
 	var globalScroll = true;
-	function triggerPagination() {		
+	function triggerPagination() {	
+		console.log("pag pased");
 		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300 && globalScroll) {
-				if(gloablFlag && $(".inbox.active").length === 1) {
+			   var activeTab = $(".left_nav").find(".active")
+			   console.log("pag pased");
+				if(gloablFlag && activeTab.length === 1) {
 					gloablFlag = false;
+					
 					triggerPageLoadData();	
 				}		
 		   }
@@ -38,14 +43,154 @@
 	}
 	
 	function triggerPageLoadData() {
+		var activeTab = $(".left_nav").find(".active")
+		 console.log(activeTab);
 		$.getJSON("/dost/api/user/${pageContext.request.userPrincipal.name}", function(user) {
 			userid = user.userId;
+			if(activeTab.hasClass("inbox")){
 			//UrlForData = '/dost/api/user/'+userid+'/messages';
 			UrlForData = '/dost/api/user/'+userid+'/messages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
 			showDataMsg(UrlForData);
+			//UrlForData = '/dost/api/user/'+userid+'/sentmessages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
+			//showDataMsg(UrlForData);
+			}
+			else if(activeTab.hasClass("sentItems")){
+				UrlForData = '/dost/api/user/'+userid+'/sentmessages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
+				showData(UrlForData);
+			}
+			else if(activeTab.hasClass("chats")){
+			//	UrlForData = '/dost/api/chathistory/user/' + userid;
+				//showData(UrlForData);
+			}
 		});
 			
 	}
+	 function showData(UrlForData){
+			
+			$.getJSON(UrlForData, function(messages) {	
+				$(".loading").hide();
+			$(".conversationsUser").html("");
+			$(".conversationsCounselor").html("");
+			
+			if(messages.length>0){
+				 gloablFlag = true;
+		    	  gloablePage++;  
+					for (var i = 0 ; i < messages.length; i++) {
+						
+						var conversationDate = messages[i].sentDate ;
+						conversationDate = formatDate(conversationDate) ;
+
+						if( messages[i].recipients.length == 0 ) continue ;
+						
+						var ismessagenew = 0;
+					//	debugger;
+						if(messages[i].recipients == 'undefined') {
+							ismessagenew = 0;
+						}
+						else {
+							ismessagenew = messages[i].recipients[0].viewed;
+						}
+						var messageHeading = '';
+						
+						// 1 means viewed
+						if(ismessagenew == 0) {
+							messageHeading = '<h4 class="media-heading unread" style="font-weight:bold">'+messages[i].subject+'</h4>';
+						}
+						else {
+							messageHeading = '<h4>'+messages[i].subject+'</h4>';
+						}						
+						
+						$(".conversationsUser").append('<li class="well media conversation_topic">'+
+							'<div class="each_conversation" id="conversationsExpanded?='+messages[i].msgId+'">'+
+								'<div class="pull-left col-md-2" href="#">'+
+									'<div class="friend_name"><img class="avatar" id='+messages[i].sender.avatar+' src=avatar/'+messages[i].sender.avatar+'.png name='+messages[i].sender.avatar+ '/></div>'+
+									'<div class="friend_name">'+messages[i].sender.username+'</div>'+
+									'<div class="date_of_conversation">'+conversationDate+'</div>'+
+								'</div>'+
+								'<div class="media-body col-md-8">'+
+										messageHeading +
+										'<div style="white-space: nowrap">'+Linkify(messages[i].content)+'</div>'+
+								'</div>'+
+								'<div class="pull-right col-md-1">'+
+									'<div title="view complete conversation" href="conversationsExpanded?='+messages[i].msgId+'">View'+
+										'<span class="glyphicon glyphicon-chevron-right"></span>'+
+									'</div>'+
+								'</div>'+
+								'<div class="clearfix"></div>'+
+							'</div>'+
+						'</li>');
+						
+						//open the conversation detail for user -->
+						
+						$(".each_conversation").click(function(){
+							var link = $(this).attr("id");
+							window.open(link,"_self");
+						});
+						//end of click to open the conversation for user-->
+						
+					}
+			
+					for (var j = 0 ; j < messages.length; j++) {
+						
+						var conversationDate = messages[j].sentDate ;
+						conversationDate = formatDate(conversationDate) ;
+					
+						var ismessagenew = 0;
+						if(messages[j].recipients == 'undefined' || messages[j].recipients.length == 0) {
+							ismessagenew = 0;
+						}
+						else {
+							ismessagenew = messages[j].recipients[0].viewed;
+						}
+						var messageHeading = '';
+						
+						// 1 means viewed
+						if(ismessagenew == 0) {
+							messageHeading = '<h4 class="media-heading unread" style="font-weight:bold">'+messages[j].subject+'</h4>';
+						}
+						else {
+							messageHeading = '<h4>'+messages[j].subject+'</h4>';
+						}
+												
+						
+						$(".conversationsCounselor").append('<li class="well media conversation_topic">'+
+							'<div class="each_conversation" id="conversationsExpanded?='+messages[j].msgId+'">'+
+								'<div class="pull-left col-md-2" >'+
+									'<div class="friend_name"><img class="avatar" id='+messages[j].sender.avatar+' src=avatar/'+messages[j].sender.avatar+'.png name='+messages[j].sender.avatar+ '/></div>'+
+									'<div class="friend_name">'+messages[j].sender.username+'</div>'+
+								'</div>'+
+								'<div class="pull-left media-body col-md-7">'+
+								messageHeading + 
+									'<span style="white-space: nowrap;">'+Linkify(messages[j].content)+'</span>'+
+								'</div>'+
+								'<div class="pull-left">'+conversationDate+'</div>'+
+								'<div class="pull-right col-md-1">'+
+									'<div title="view complete conversation" href="conversationsExpanded?='+messages[j].msgId+'">'+
+										'<span class="glyphicon glyphicon-chevron-right"></span>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+							'<div class="clearfix"></div>'+
+						'</li>');
+//open the conversation detail for counsellor -->
+						
+						$(".each_conversation").click(function(){
+							var link = $(this).attr("id");
+							window.open(link,"_self");
+						});
+						//end of click to open the conversation for counseller-->
+					}
+					
+					/*for highlighting unread conversations*/
+					$(".unread").closest("li").addClass("unreadConversations");
+					
+					/*for highlighting unread conversations*/	
+				}
+				else{
+					$(".conversations").html('<div class="noConversationsText">There are no conversations <br/> <a class="leaveMessageLink">Leave a message</a></div>'); 
+			}
+				}); 
+		} 
 
 	function showDataMsg(UrlForData) {
 		$(".loading").hide();
@@ -221,12 +366,20 @@
 		
 		/*Sent messages and inbox toggle active class*/
 		$(".sentItems").click(function(){
+			//resetGlobal();
 			$(".active").removeClass("active");
 			$(this).addClass("active");
-			UrlForData = '/dost/api/user/'+userid+'/sentmessages';
-			
-			showData(UrlForData);
-			resetGlobal();
+			$(".loading").show();
+			//UrlForData = '/dost/api/user/'+userid+'/sentmessages';
+			$(".conversations").html("");
+			console.log(1);
+			//UrlForData = '/dost/api/user/'+userid+'/sentmessages?page=1&per_page='+globalPerPage+'&sort=messageId&order=desc';
+			gloablFlag  = true;
+		gloablePage = 1;
+		globalScroll = true;
+			//showData(UrlForData);
+			triggerPagination();
+			//resetGlobal();
 		});
 		/**
 		$(".chats").click(function(){
@@ -270,135 +423,16 @@
 		
 		
 			
-		function showData(UrlForData){
-			$.getJSON(UrlForData, function(messages) {	
-				$(".loading").hide();
-			$(".conversationsUser").html("");
-			$(".conversationsCounselor").html("");
-			
-			if(messages.length>0){
-					for (var i = 0 ; i < messages.length; i++) {
-						
-						var conversationDate = messages[i].sentDate ;
-						conversationDate = formatDate(conversationDate) ;
-
-						if( messages[i].recipients.length == 0 ) continue ;
-						
-						var ismessagenew = 0;
-					//	debugger;
-						if(messages[i].recipients == 'undefined') {
-							ismessagenew = 0;
-						}
-						else {
-							ismessagenew = messages[i].recipients[0].viewed;
-						}
-						var messageHeading = '';
-						
-						// 1 means viewed
-						if(ismessagenew == 0) {
-							messageHeading = '<h4 class="media-heading unread" style="font-weight:bold">'+messages[i].subject+'</h4>';
-						}
-						else {
-							messageHeading = '<h4>'+messages[i].subject+'</h4>';
-						}						
-						
-						$(".conversationsUser").append('<li class="well media conversation_topic">'+
-							'<div class="each_conversation" id="conversationsExpanded?='+messages[i].msgId+'">'+
-								'<div class="pull-left col-md-2" href="#">'+
-									'<div class="friend_name"><img class="avatar" id='+messages[i].sender.avatar+' src=avatar/'+messages[i].sender.avatar+'.png name='+messages[i].sender.avatar+ '/></div>'+
-									'<div class="friend_name">'+messages[i].sender.username+'</div>'+
-									'<div class="date_of_conversation">'+conversationDate+'</div>'+
-								'</div>'+
-								'<div class="media-body col-md-8">'+
-										messageHeading +
-										'<div style="white-space: nowrap">'+Linkify(messages[i].content)+'</div>'+
-								'</div>'+
-								'<div class="pull-right col-md-1">'+
-									'<div title="view complete conversation" href="conversationsExpanded?='+messages[i].msgId+'">View'+
-										'<span class="glyphicon glyphicon-chevron-right"></span>'+
-									'</div>'+
-								'</div>'+
-								'<div class="clearfix"></div>'+
-							'</div>'+
-						'</li>');
-						
-						//open the conversation detail for user -->
-						
-						$(".each_conversation").click(function(){
-							var link = $(this).attr("id");
-							window.open(link,"_self");
-						});
-						//end of click to open the conversation for user-->
-						
-					}
-			
-					for (var j = 0 ; j < messages.length; j++) {
-						
-						var conversationDate = messages[j].sentDate ;
-						conversationDate = formatDate(conversationDate) ;
-					
-						var ismessagenew = 0;
-						if(messages[j].recipients == 'undefined' || messages[j].recipients.length == 0) {
-							ismessagenew = 0;
-						}
-						else {
-							ismessagenew = messages[j].recipients[0].viewed;
-						}
-						var messageHeading = '';
-						
-						// 1 means viewed
-						if(ismessagenew == 0) {
-							messageHeading = '<h4 class="media-heading unread" style="font-weight:bold">'+messages[j].subject+'</h4>';
-						}
-						else {
-							messageHeading = '<h4>'+messages[j].subject+'</h4>';
-						}
-												
-						
-						$(".conversationsCounselor").append('<li class="well media conversation_topic">'+
-							'<div class="each_conversation" id="conversationsExpanded?='+messages[j].msgId+'">'+
-								'<div class="pull-left col-md-2" >'+
-									'<div class="friend_name"><img class="avatar" id='+messages[j].sender.avatar+' src=avatar/'+messages[j].sender.avatar+'.png name='+messages[j].sender.avatar+ '/></div>'+
-									'<div class="friend_name">'+messages[j].sender.username+'</div>'+
-								'</div>'+
-								'<div class="pull-left media-body col-md-7">'+
-								messageHeading + 
-									'<span style="white-space: nowrap;">'+Linkify(messages[j].content)+'</span>'+
-								'</div>'+
-								'<div class="pull-left">'+conversationDate+'</div>'+
-								'<div class="pull-right col-md-1">'+
-									'<div title="view complete conversation" href="conversationsExpanded?='+messages[j].msgId+'">'+
-										'<span class="glyphicon glyphicon-chevron-right"></span>'+
-									'</div>'+
-								'</div>'+
-							'</div>'+
-							'<div class="clearfix"></div>'+
-						'</li>');
-//open the conversation detail for counsellor -->
-						
-						$(".each_conversation").click(function(){
-							var link = $(this).attr("id");
-							window.open(link,"_self");
-						});
-						//end of click to open the conversation for counseller-->
-					}
-					
-					/*for highlighting unread conversations*/
-					$(".unread").closest("li").addClass("unreadConversations");
-					
-					/*for highlighting unread conversations*/	
-				}
-				else{
-					$(".conversations").html('<div class="noConversationsText">There are no conversations <br/> <a class="leaveMessageLink">Leave a message</a></div>'); 
-				}
-				});
-		}
+	
 		
 		
 		$(".chats").click(function(){
 			resetGlobal();
 			$(".active").removeClass("active");
 			$(this).addClass("active");
+		
+			$(".loading").show();
+			console.log(2);
 			var chatMessageLength = 0;
 			$.getJSON('/dost/api/chathistory/user/' + userid, function(messages) {	
 				$(".loading").hide();
@@ -580,25 +614,36 @@
 				}, 
 				{
 					text : "SEND",
+					"id": "sendButton",
 					click : function() {
-						debugger;
+						//debugger;
 							$(".error").html("");
 							$(".error").hide();
+							
 							
 							var recipientsNames;
 							if($("#recipient").val()){
 								recipientsNames=$("#recipient").val().split(",");
+								recipientsNames.join();
+								
 							}
 							else{
 								recipientsNames=null;
 							}
 							$.ajax({
-				                url: "/dost/api/users/light",
+				               // url: "/dost/api/users/light",
+				               url: "/dost/api/users/"+recipientsNames+"/ids",
 				                dataType: "json",
 				                success: function(details) {
-				                	var selected_recipient;
+				                	
+				               //	var selected_recipient;
+				                var ids = [];
+				                for(var k in details) ids.push(details[k]);
+				                
+  								
 				                	if(recipientsNames){
-				                	recipientsNames.pop();
+				                		selected_recipient= ids.join();
+				                /*	recipientsNames.pop();
 		                        	var ids=[];
 		              		        $.each(details, function(j,key){
 		                    	        $.each(recipientsNames, function(i,name){
@@ -610,15 +655,19 @@
 		                    		});
 		                        	ids=ids.join();
 		                        	selected_recipient=ids;
+		                        	alert(selected_recipient) */
 				                	}
 				                	else{
 									 selected_recipient="";
 				                	}
 									if( selected_recipient == undefined || selected_recipient == '' || !selected_recipient ){
+									
+										
 										selected_recipient = "all" ;
+										
 									}							
 									var datatosend = 'subject='+$("#subject").val()+'&content=' + $("#messageContent").val()+ '&recipients='+ selected_recipient +'&senderId=' + userid;
-		
+									
 									if( $("#userTags").val() ){
 										datatosend += '&counselorTag=' + $("#userTags").val() ;
 									}	
@@ -628,11 +677,28 @@
 									}
 									else{
 										
-										$.post('/dost/api/user/message', datatosend, function(response) {							
+							/*			$.post('/dost/api/user/message', datatosend, function(response) {							
 											if(response = ""){
 													$(".status").show().html("sending..");
+													$("#btnOk").html("sent");
+													console.log($("#btnOk").html());
 											}
-										});
+										}); */
+										$("#sendButton").html('<span class="ui-button-text">SENDING</span>');
+										$('#sendButton').prop('disabled', true);
+										$.ajax({
+											  type: "POST",
+											  url: '/dost/api/user/message',
+											  data:  datatosend,
+											  success: function(){
+												 
+												 $("#sendButton").html('<span class="ui-button-text">SEND</span>');
+												 $('#sendButton').prop('disabled', false);
+												  }
+														
+											  
+											//  dataType: dataType
+											});
 										
 										setTimeout(function(){
 											/*location.reload(function(){
@@ -658,17 +724,18 @@
 			
 		
 		/*Sent messages and inbox toggle active class*/
-		$(".sentItems").click(function(){
+	/*	$(".sentItems").click(function(){
 			$(".active").removeClass("active");
 			$(this).addClass("active");
 			resetGlobal();
-		});
+		});*/
 		$(".Inbox").click(function(){
 			$(".active").removeClass("active");
 			$(this).addClass("active");
 			resetGlobal();
 		});
 		/*End Of Sent messages and inbox toggle active class*/
+		
 		triggerPageLoadData()
 	});
 	/*End of manipulating json for messages*/	
@@ -700,6 +767,7 @@
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<div class="container">
 				<div class="col-md-11">
+				<div class="searchMessage"><label>Search messages <input id="messageSearch" onkeyup="searchPatient(event)" type="text"></label></div>
 					<div class="pageTop">
 						<h2 class="pull-left pageHeading"></h2>
 						<div class="pull-right">
@@ -732,7 +800,7 @@
 					</ul>
 						
 				</div>
-				<div class="status col-md-11"></div>
+				<div class="status col-md-6"></div>
 			</div>
 		 </sec:authorize>
 		 
@@ -834,7 +902,7 @@
             	
                 }
             }); */
-            debugger;
+           // debugger;
             $.ajax({
                 url: "/dost/api/users/light",
                 dataType: "json",
@@ -853,7 +921,7 @@
             		function extractLast( term ) {
             			return split( term ).pop();
             		}
-					debugger;
+					//debugger;
             		$( "#recipient" )
             			// don't navigate away from the field on tab when selecting an item
             			.bind( "keydown", function( event ) {
@@ -863,7 +931,7 @@
             				}
             			})
             			.autocomplete({
-            				minLength: 0,
+            				minLength: 3,
             				source: function( request, response ) {
             					// delegate back to autocomplete, but extract the last term
             					response( $.ui.autocomplete.filter(
@@ -882,11 +950,10 @@
             					var ids=$("#selected_recipient").val()+","+ui.item.name;
             					// add placeholder to get the comma-and-space at the end
             					terms.push( "" );
-            					this.value = terms.join( ", " );
-            					//$("#recipient").val( ui.item.label ) ;
+            					this.value = terms.join( "," );
+            					//$("#recipient").val( ui.item.name ) ;
             				      $("#selected_recipient").val( ids ) ;
-            				    //  alert($("#selected_recipient").val());
-            				     // debugger;
+            				     
             					return false;
             				} 
             				

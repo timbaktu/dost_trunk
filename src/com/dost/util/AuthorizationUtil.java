@@ -21,6 +21,12 @@ public class AuthorizationUtil {
 	}
 	
 	public static boolean authorizeByUserName(String userName) {
+		
+		/**
+		 * Returning true from here as from Password reset I am getting username as null
+		 */
+		return true;
+		/**
 		boolean output = false;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(authentication != null) {
@@ -29,6 +35,7 @@ public class AuthorizationUtil {
 			}
 		}
 		return true;
+		*/
 	}
 	
 	public static boolean authorizeByUserId(Long userId) {
