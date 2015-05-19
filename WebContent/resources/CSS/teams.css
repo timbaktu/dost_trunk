@@ -54,8 +54,11 @@
 		padding:7px 0 7px 47px;
 		text-align:left;
 	}
-	#Tarun, #Kishlay, #Namrata, #Vishnu, #Nabanita, #Aalap, #Shreya,#Namrta,#Sanskriti,#ParomitaLinkedin,#DivyaLinkedin,#Sushobhit,#Pradeep, #Angana, #Kannupriya, #Jancy, #Vaishnavi{
+	#Tarun, #Kishlay, #Namrata, #Vishnu, #Nabanita, #Aalap, #Shreya,#Namrta,#Sanskriti,#ParomitaLinkedin,#ChandrashekarLinkedin,#Chandrashekar,#SwekritiLinkedin,#SwekritiLinkedin,#DivyaLinkedin,#Sushobhit,#Pradeep,#Swekriti, #Shyamolima, #Angana, #Kannupriya, #Jancy, #Vaishnavi{
 		display:none;
+	}
+	.listFooter{  
+		min-height: 30px;
 	}
 	.pageMainContainer .listheading {
 		height: 21px;

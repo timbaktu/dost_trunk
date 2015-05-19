@@ -43,6 +43,7 @@
 					$(this_list_html).find(".linkedin a").attr("href", elem.linkedin ) ;
 					$(this_list_html).find(".twitter a").attr("href", elem.twitter ) ;
 					$(this_list_html).find(".twitter").attr("id", elem.name ) ;
+					$(this_list_html).find(".linkedin").attr("id", elem.name+"Linkedin" ) ;
 					var background_image= '#FFEDB5 url("resources/img/team/'+elem.image+'") no-repeat center center';
 					$(this_list_html).find(".listImage").css("background", background_image ) ;
 					
