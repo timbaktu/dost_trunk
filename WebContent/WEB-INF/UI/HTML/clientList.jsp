@@ -73,9 +73,12 @@
 					    	  loadingImage();
 					      },
 					      success: function(user){
+					    	 
 					    	  gloablFlag = true;
 					    	  if(isSearch) {
-					    		  gloablSearchPage++;
+					    		  if(user.length==globalPerPage){
+					    		  gloablSearchPage++;}
+					    		  console.log(gloablSearchPage);
 					    	  } else {
 					    		  gloablePage++;  
 					    	  }
