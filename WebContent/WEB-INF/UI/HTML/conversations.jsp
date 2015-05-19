@@ -23,14 +23,15 @@
 	var gloablePage = 1;
 	var globalPerPage = 10;
 	var globalScroll = true;
+	var searchIndicator =1;
+	var globalsearchString;
 	function triggerPagination() {	
-		console.log("pag pased");
+		
 		   if($(window).scrollTop() + $(window).height() > $(document).height() - 300 && globalScroll) {
 			   var activeTab = $(".left_nav").find(".active")
-			   console.log("pag pased");
-				if(gloablFlag && activeTab.length === 1) {
+			   
+			   	if(gloablFlag && activeTab.length === 1) {
 					gloablFlag = false;
-					
 					triggerPageLoadData();	
 				}		
 		   }
@@ -44,15 +45,21 @@
 	
 	function triggerPageLoadData() {
 		var activeTab = $(".left_nav").find(".active")
-		 console.log(activeTab);
+		console.log(searchIndicator);
 		$.getJSON("/dost/api/user/${pageContext.request.userPrincipal.name}", function(user) {
+			
 			userid = user.userId;
-			if(activeTab.hasClass("inbox")){
+			if(activeTab.hasClass("inbox") && searchIndicator==1){
 			//UrlForData = '/dost/api/user/'+userid+'/messages';
 			UrlForData = '/dost/api/user/'+userid+'/messages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
 			showDataMsg(UrlForData);
 			//UrlForData = '/dost/api/user/'+userid+'/sentmessages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
 			//showDataMsg(UrlForData);
+			}
+			else if(activeTab.hasClass("inbox") && searchIndicator==2){
+				console.log(globalsearchString);
+				UrlForData = '/dost/api/user/'+userid+'/messages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc&searchText='+globalsearchString;
+				showDataMsg(UrlForData);
 			}
 			else if(activeTab.hasClass("sentItems")){
 				UrlForData = '/dost/api/user/'+userid+'/sentmessages?page='+gloablePage+'&per_page='+globalPerPage+'&sort=messageId&order=desc';
@@ -327,6 +334,22 @@
 		    }); 
 	}	
 
+	function searchMessage(ele){
+		
+		if(event.keyCode == 13) {
+	       if(ele.value!="")  {
+	        $(".conversations").html("");
+	        searchIndicator= 2;
+	        globalsearchString=ele.value;
+	        triggerPagination();
+	        resetGlobal()
+	       }
+	       else{
+	    	   
+	       }
+	    }
+		
+	}
 	/*Manipulating json for messages*/
 	$( document ).ready(function() {
 		$(".loading").show();
@@ -367,6 +390,7 @@
 		/*Sent messages and inbox toggle active class*/
 		$(".sentItems").click(function(){
 			//resetGlobal();
+			
 			$(".active").removeClass("active");
 			$(this).addClass("active");
 			$(".loading").show();
@@ -394,6 +418,7 @@
 		
 		$(".inbox").click(function(){
 			resetGlobal();
+			 searchIndicator =1;
 			$(".active").removeClass("active");
 			$(this).addClass("active");
 			$(".conversationsUser").html("");
@@ -430,9 +455,9 @@
 			resetGlobal();
 			$(".active").removeClass("active");
 			$(this).addClass("active");
-		
+			
 			$(".loading").show();
-			console.log(2);
+			
 			var chatMessageLength = 0;
 			$.getJSON('/dost/api/chathistory/user/' + userid, function(messages) {	
 				$(".loading").hide();
@@ -767,7 +792,7 @@
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<div class="container">
 				<div class="col-md-11">
-				<div class="searchMessage"><label>Search messages <input id="messageSearch" onkeyup="searchPatient(event)" type="text"></label></div>
+				<div class="searchMessage"><label>Search messages <input id="messageSearch" onkeyup="searchMessage(this)" type="text"></label></div>
 					<div class="pageTop">
 						<h2 class="pull-left pageHeading"></h2>
 						<div class="pull-right">
