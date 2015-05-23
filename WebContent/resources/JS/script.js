@@ -195,7 +195,7 @@ function formatDate( date ){
 	date = date.replace(/-/g,"/");
 	dateObj = new Date( date ) ;
 	var utc = dateObj.getTime() + (dateObj.getTimezoneOffset() * 60000);
-	var istTime = new Date(utc + (3600000 * 1.5));
+	var istTime = new Date(utc + (3600000 * 11));
 	var options = {weekday: "long", year: "2-digit", 
 			month: "short",day: "numeric", hour: "2-digit", minute: "2-digit"} ;
 	
