@@ -288,6 +288,56 @@
 		border-radius:0px;
 		font-weight: 300;
 	}
+	
+/*end of banner homepage*/
+
+/*banner what we do*/
+.bannerCloud{
+	background: #FFFFFF url("../img/cloud.png") no-repeat right top;
+	margin-top: 50px;
+ 	padding: 30px 0;
+}
+.bannerCloud strong.quotesIcon{
+	font-size: 2em;
+	font-family: georgia, serif, "times new roman";
+}
+.messageWhatDoWeDo{
+  margin: 0 auto;
+  font-size: 2em;
+  color: #FFF;
+  text-align: center;
+  float: none;
+  text-shadow: 0px 2px 3px #444;
+  color: #fff;
+}
+div.about_yourdost{
+	margin-top:0px;
+	margin-bottom: 30px;
+}
+.message_what_we_do img{
+	height:300px;	
+}
+.message_what_we_do{
+	margin-bottom:40px;	
+}
+.what_we_are_not li, .what_we_are li {
+	list-style: circle;
+	font-size: 1.03em;
+	margin-top: 20px;
+	color:#333;
+}
+.what_we_are_not li li{
+	margin-top: 5px;
+}
+.what_we_are_not h1, .what_we_are h1{
+	font-size: 1.5em;
+	color:#000;
+}
+.message_what_we_do{
+	text-align:center;	
+}
+/*end of banner what we do*/
+
 /*banner large*/
 	.bannerLarge{
 		height:350px;
@@ -1366,7 +1416,9 @@ ul.ui-autocomplete{
 }
 
 div.medical_warning{
-      font-size: 0.94em;
+      font-size: 1em;
+      margin: 0 auto;
+      float:none;
 }
 
 .TOSContent li{
